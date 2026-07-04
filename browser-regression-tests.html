@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browser Regression Tests - Geolocation & Country Detection</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .test-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .test-section h2 {
+            color: #64b5f6;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .test-section h3 {
+            color: #81c784;
+            margin: 20px 0 10px 0;
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            color: white;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        button:disabled {
+            background: #555;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .status {
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin: 10px 0;
+            font-weight: 500;
+        }
+
+        .status.success {
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid #4caf50;
+            color: #81c784;
+        }
+
+        .status.error {
+            background: rgba(244, 67, 54, 0.2);
+            border: 1px solid #f44336;
+            color: #ef5350;
+        }
+
+        .status.warning {
+            background: rgba(255, 152, 0, 0.2);
+            border: 1px solid #ff9800;
+            color: #ffb74d;
+        }
+
+        .test-result {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 6px;
+            padding: 15px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            border-left: 4px solid #667eea;
+            overflow-x: auto;
+        }
+
+        .phone-input-demo {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 400px;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .phone-input-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        select, input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 6px;
+            padding: 12px;
+            color: white;
+            font-size: 16px;
+        }
+
+        select {
+            min-width: 150px;
+        }
+
+        input[type="tel"] {
+            flex: 1;
+        }
+
+        .validation-message {
+            margin-top: 5px;
+            padding: 8px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .validation-message.error {
+            background: rgba(244, 67, 54, 0.2);
+            color: #ef5350;
+            border: 1px solid rgba(244, 67, 54, 0.5);
+        }
+
+        .validation-message.success {
+            background: rgba(76, 175, 80, 0.2);
+            color: #81c784;
+            border: 1px solid rgba(76, 175, 80, 0.5);
+        }
+
+        .console-output {
+            background: #0a0a0a;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            height: 200px;
+            overflow-y: auto;
+            border: 1px solid #333;
+        }
+
+        .log-entry {
+            margin-bottom: 5px;
+        }
+
+        .log-entry.error {
+            color: #ef5350;
+        }
+
+        .log-entry.success {
+            color: #81c784;
+        }
+
+        .log-entry.warning {
+            color: #ffb74d;
+        }
+
+        .log-entry.info {
+            color: #64b5f6;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .metric {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #64b5f6;
+        }
+
+        .metric-label {
+            font-size: 14px;
+            color: #aaa;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌍 Browser Regression Tests - Geolocation & Country Detection</h1>
+        
+        <!-- Test Section 1: Ethiopia IP Simulation -->
+        <div class="test-section">
+            <h2>🇪🇹 Test 1: Ethiopia IP Simulation with Service Worker</h2>
+            <p>Simulate Ethiopia IP via mocked payload using Service Worker or window.fetch override</p>
+            
+            <div class="controls">
+                <button onclick="simulateEthiopiaIP()">Simulate Ethiopia IP (+251)</button>
+                <button onclick="resetGeolocation()">Reset to Real IP</button>
+                <button onclick="testServiceWorker()">Test Service Worker Override</button>
+            </div>
+            
+            <div class="phone-input-demo">
+                <div class="form-group">
+                    <div class="phone-input-container">
+                        <select id="testCountryCode" title="Select your country code">
+                            <option value="">Code</option>
+                            <option value="+93">🇦🇫 +93 (AF)</option>
+                            <option value="+355">🇦🇱 +355 (AL)</option>
+                            <option value="+213">🇩🇿 +213 (DZ)</option>
+                            <option value="+251">🇪🇹 +251 (ET)</option>
+                            <option value="+1">🇺🇸 +1 (US)</option>
+                            <option value="+44">🇬🇧 +44 (UK)</option>
+                            <option value="+49">🇩🇪 +49 (DE)</option>
+                            <option value="+33">🇫🇷 +33 (FR)</option>
+                        </select>
+                        <input type="tel" id="testPhoneNumber" placeholder="Enter phone number">
+                    </div>
+                    <div id="phoneValidationMessage"></div>
+                </div>
+            </div>
+            
+            <div id="ethiopiaTestResult" class="test-result"></div>
+        </div>
+
+        <!-- Test Section 2: UI Validation -->
+        <div class="test-section">
+            <h2>✅ Test 2: UI Shows +251 Immediately & Validation Rules</h2>
+            <p>Verify UI shows +251 immediately and validation rules follow Ethiopia settings</p>
+            
+            <div class="controls">
+                <button onclick="testUIDisplay()">Test UI Display</button>
+                <button onclick="testEthiopiaValidation()">Test Ethiopia Validation Rules</button>
+                <button onclick="testValidPhoneNumbers()">Test Valid Phone Numbers</button>
+                <button onclick="testInvalidPhoneNumbers()">Test Invalid Phone Numbers</button>
+            </div>
+            
+            <div id="uiTestResults" class="grid">
+                <div class="metric">
+                    <div class="metric-value" id="detectionTime">--</div>
+                    <div class="metric-label">Detection Time (ms)</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value" id="validationAccuracy">--</div>
+                    <div class="metric-label">Validation Accuracy (%)</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value" id="uiResponseTime">--</div>
+                    <div class="metric-label">UI Response Time (ms)</div>
+                </div>
+            </div>
+            
+            <div id="validationTestResult" class="test-result"></div>
+        </div>
+
+        <!-- Test Section 3: VPN Endpoint Testing -->
+        <div class="test-section">
+            <h2>🌐 Test 3: VPN Endpoints for Multiple Countries</h2>
+            <p>Test on VPN endpoints for several other countries</p>
+            
+            <div class="controls">
+                <button onclick="testVPNEndpoints()">Test Multiple VPN Endpoints</button>
+                <button onclick="testSpecificCountry('US')">Test US</button>
+                <button onclick="testSpecificCountry('GB')">Test UK</button>
+                <button onclick="testSpecificCountry('DE')">Test Germany</button>
+                <button onclick="testSpecificCountry('JP')">Test Japan</button>
+                <button onclick="testSpecificCountry('AU')">Test Australia</button>
+            </div>
+            
+            <h3>Country Test Results:</h3>
+            <div id="vpnTestResults" class="grid"></div>
+            
+            <div id="vpnConsoleOutput" class="console-output"></div>
+        </div>
+
+        <!-- Test Section 4: API Fallback Testing -->
+        <div class="test-section">
+            <h2>🔄 Test 4: Locale Fallback When API Fails</h2>
+            <p>Ensure locale fallback still works when API call fails</p>
+            
+            <div class="controls">
+                <button onclick="testAPIFailure()">Simulate API Failure</button>
+                <button onclick="testNetworkTimeout()">Test Network Timeout</button>
+                <button onclick="testInvalidResponse()">Test Invalid Response</button>
+                <button onclick="testBrowserLocales()">Test Browser Locales</button>
+                <button onclick="restoreAPIConnection()">Restore API Connection</button>
+            </div>
+            
+            <div id="fallbackTestResult" class="test-result"></div>
+            
+            <h3>Fallback Test Metrics:</h3>
+            <div class="grid">
+                <div class="metric">
+                    <div class="metric-value" id="fallbackTime">--</div>
+                    <div class="metric-label">Fallback Time (ms)</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value" id="successRate">--</div>
+                    <div class="metric-label">Success Rate (%)</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value" id="errorHandling">--</div>
+                    <div class="metric-label">Error Handling Score</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Section 5: Comprehensive Test Suite -->
+        <div class="test-section">
+            <h2>🧪 Test 5: Run All Tests</h2>
+            <p>Execute comprehensive regression test suite</p>
+            
+            <div class="controls">
+                <button onclick="runAllTests()" style="background: linear-gradient(135deg, #43a047, #66bb6a);">
+                    🚀 Run Complete Test Suite
+                </button>
+                <button onclick="clearAllLogs()">Clear Logs</button>
+                <button onclick="exportTestResults()">Export Results</button>
+            </div>
+            
+            <h3>Overall Test Console:</h3>
+            <div id="masterConsoleOutput" class="console-output"></div>
+            
+            <div id="overallTestMetrics" class="grid">
+                <div class="metric">
+                    <div class="metric-value" id="totalTests">0</div>
+                    <div class="metric-label">Total Tests</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value" id="passedTests">0</div>
+                    <div class="metric-label">Passed</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value" id="failedTests">0</div>
+                    <div class="metric-label">Failed</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value" id="testCoverage">0%</div>
+                    <div class="metric-label">Coverage</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="browser-regression-tests.js"></script>
+</body>
+</html>

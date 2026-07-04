@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Country Detection Dropdown Demo</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+        
+        .demo-container {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .country-dropdown {
+            width: 200px;
+            padding: 12px 16px;
+            font-size: 16px;
+            background: #2a2a2a;
+            border: 2px solid #444;
+            border-radius: 8px;
+            color: #ffffff;
+            cursor: pointer;
+            font-family: 'Noto Color Emoji', 'Segoe UI Emoji', 'Apple Color Emoji', sans-serif;
+        }
+        
+        .country-dropdown:focus {
+            border-color: #6366f1;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+        
+        .test-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+        
+        .test-btn {
+            background: #6366f1;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+        
+        .test-btn:hover {
+            background: #5145e5;
+        }
+        
+        .status {
+            margin: 1rem 0;
+            padding: 1rem;
+            background: #0f1419;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            font-size: 14px;
+        }
+        
+        .success {
+            border-left: 4px solid #10b981;
+        }
+        
+        .error {
+            border-left: 4px solid #ef4444;
+        }
+        
+        .info {
+            border-left: 4px solid #3b82f6;
+        }
+        
+        h1, h2 {
+            color: #6366f1;
+        }
+        
+        .result-display {
+            background: #1e293b;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🌍 Country Detection Dropdown Demo</h1>
+    <p>This demo simulates the country detection scenarios tested in our Node.js harness.</p>
+    
+    <div class="demo-container">
+        <h2>Country Code Dropdown</h2>
+        <select id="countryCode" class="country-dropdown">
+            <option value="">Select Country Code</option>
+            <option value="+1">🇺🇸 +1 (US/Canada)</option>
+            <option value="+44">🇬🇧 +44 (UK)</option>
+            <option value="+251">🇪🇹 +251 (Ethiopia)</option>
+            <option value="+49">🇩🇪 +49 (Germany)</option>
+            <option value="+33">🇫🇷 +33 (France)</option>
+            <option value="+81">🇯🇵 +81 (Japan)</option>
+            <option value="+86">🇨🇳 +86 (China)</option>
+            <option value="+91">🇮🇳 +91 (India)</option>
+        </select>
+        
+        <div id="status" class="status info">Ready to test country detection scenarios...</div>
+    </div>
+    
+    <div class="demo-container">
+        <h2>🧪 Test Scenarios</h2>
+        <div class="test-buttons">
+            <button class="test-btn" onclick="testScenario(1)">Test: +251 Ethiopia</button>
+            <button class="test-btn" onclick="testScenario(2)">Test: ET → +251</button>
+            <button class="test-btn" onclick="testScenario(3)">Test: GB → +44</button>
+            <button class="test-btn" onclick="testScenario(4)">Test: Empty (US fallback)</button>
+            <button class="test-btn" onclick="testScenario(5)">Test: Malformed</button>
+            <button class="test-btn" onclick="resetDropdown()">Reset</button>
+        </div>
+        
+        <div class="result-display">
+            <h3>📊 Test Results</h3>
+            <div id="results">
+                <div class="result-item">
+                    <span>Selected Value:</span>
+                    <span id="selectedValue">None</span>
+                </div>
+                <div class="result-item">
+                    <span>Selected Text:</span>
+                    <span id="selectedText">None</span>
+                </div>
+                <div class="result-item">
+                    <span>Last Test:</span>
+                    <span id="lastTest">None</span>
+                </div>
+                <div class="result-item">
+                    <span>Test Status:</span>
+                    <span id="testStatus">Ready</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="demo-container">
+        <h2>📋 Test Summary</h2>
+        <p>This visual demo simulates the same scenarios tested in our Node.js test harness:</p>
+        <ul>
+            <li>✅ <strong>Country Calling Code (+251)</strong>: Direct API response with calling code</li>
+            <li>✅ <strong>ISO Country Code (ET)</strong>: Maps ET to +251 for Ethiopia</li>
+            <li>✅ <strong>ISO Country Code (GB)</strong>: Maps GB to +44 for UK</li>
+            <li>✅ <strong>Empty Response</strong>: Falls back to US locale (+1)</li>
+            <li>✅ <strong>Malformed Response</strong>: Falls back to US locale (+1)</li>
+        </ul>
+        
+        <p><strong>Console Output:</strong> Check the browser console for detailed logs matching the Node.js test output.</p>
+    </div>
+
+    <script>
+        // Country code mapping (same as in test harness)
+        const countryCodeMap = {
+            'US': '+1',
+            'CA': '+1',
+            'GB': '+44',
+            'ET': '+251',
+            'DE': '+49',
+            'FR': '+33',
+            'IT': '+39',
+            'ES': '+34',
+            'AU': '+61',
+            'JP': '+81',
+            'CN': '+86',
+            'IN': '+91'
+        };
+
+        // Mock scenarios (same as test harness)
+        const testScenarios = [
+            {
+                id: 1,
+                name: 'Country Calling Code (+251) - Should set Ethiopia',
+                mockData: { country_calling_code: '+251' },
+                expectedCode: '+251'
+            },
+            {
+                id: 2,
+                name: 'Country Code ET - Should map to +251',
+                mockData: { country_code: 'ET' },
+                expectedCode: '+251'
+            },
+            {
+                id: 3,
+                name: 'Country Code GB - Should set +44',
+                mockData: { country_code: 'GB' },
+                expectedCode: '+44'
+            },
+            {
+                id: 4,
+                name: 'Empty response - Should fall back to locale',
+                mockData: {},
+                expectedCode: '+1'
+            },
+            {
+                id: 5,
+                name: 'Malformed response - Should fall back to locale',
+                mockData: null,
+                expectedCode: '+1'
+            }
+        ];
+
+        // Utility function to normalize calling code input
+        function normalizeCallingCode(raw) {
+            // Return null for falsy/empty/non-string input
+            if (!raw || typeof raw !== 'string') {
+                return null;
+            }
+            
+            // Trim whitespace
+            const trimmed = raw.trim();
+            if (!trimmed) {
+                return null;
+            }
+            
+            // If it already starts with + and the rest is digits, return as-is
+            if (trimmed.startsWith('+')) {
+                const withoutPlus = trimmed.substring(1);
+                if (/^\d+$/.test(withoutPlus)) {
+                    return trimmed;
+                }
+                // Reject if contains non-digits after stripping +
+                return null;
+            }
+            
+            // If it starts with 00, strip 00 and prepend +
+            if (trimmed.startsWith('00')) {
+                const withoutZeros = trimmed.substring(2);
+                if (/^\d+$/.test(withoutZeros)) {
+                    return '+' + withoutZeros;
+                }
+                // Reject if contains non-digits after stripping 00
+                return null;
+            }
+            
+            // If it is only digits, prepend + and return
+            if (/^\d+$/.test(trimmed)) {
+                return '+' + trimmed;
+            }
+            
+            // Reject anything that contains non-digits
+            return null;
+        }
+
+        // Country detection logic (extracted from work.js)
+        function detectCountryCode(data) {
+            console.log('🔍 Processing detection data:', data);
+            
+            let callingCode = null;
+            
+            // 1️⃣ Preferred: API field with dial prefix already present
+            const normalized = normalizeCallingCode(data && data.country_calling_code);
+            if (normalized) {
+                callingCode = normalized;
+                console.log('✅ Found calling code from API:', callingCode);
+                return callingCode;
+            }
+            
+            // 2️⃣ Fallback: ISO-alpha-2 code mapping
+            if (data) {
+                const possibleCountryCodeKeys = [
+                    'country_code', 'country_code_iso2', 'countryCode', 
+                    'country', 'iso2', 'country_iso', 'cc'
+                ];
+                
+                let countryIso = null;
+                for (const key of possibleCountryCodeKeys) {
+                    if (data[key] && typeof data[key] === 'string') {
+                        countryIso = data[key].trim().toUpperCase();
+                        console.log(`✅ Found country code from field '${key}':`, countryIso);
+                        break;
+                    }
+                }
+                
+                if (countryIso && countryCodeMap[countryIso]) {
+                    const rawCallingCode = countryCodeMap[countryIso];
+                    callingCode = normalizeCallingCode(rawCallingCode);
+                    if (callingCode) {
+                        console.log('✅ Mapped ISO code to calling code:', countryIso, '->', callingCode);
+                        return callingCode;
+                    }
+                }
+            }
+            
+            // 3️⃣ Last resort: Browser locale fallback
+            console.log('⚠️ No valid calling code found, falling back to locale');
+            const browserLocale = navigator.language || navigator.userLanguage || 'en-US';
+            let countryCode = browserLocale.split('-')[1] || browserLocale.split('_')[1] || 'US';
+            
+            if (countryCode && countryCodeMap[countryCode]) {
+                const rawCallingCode = countryCodeMap[countryCode];
+                callingCode = normalizeCallingCode(rawCallingCode);
+                if (callingCode) {
+                    console.log('✅ Setting country code from locale:', callingCode);
+                    return callingCode;
+                }
+            }
+            
+            console.log('⚠️ No country detected, setting default to US');
+            return normalizeCallingCode('+1') || '+1'; // Fallback to ensure valid output
+        }
+
+        // Set country code in dropdown
+        function setCountryCode(code) {
+            console.log(`🎯 Setting dropdown to: ${code}`);
+            
+            const countrySelect = document.getElementById('countryCode');
+            const options = countrySelect.querySelectorAll('option');
+            let found = false;
+            
+            for (let option of options) {
+                if (option.value === code) {
+                    countrySelect.value = code;
+                    found = true;
+                    console.log('✅ Successfully set country code to:', code);
+                    console.log('📱 Selected option text:', option.textContent);
+                    break;
+                }
+            }
+            
+            if (!found) {
+                console.warn('❌ Country code not found in dropdown options:', code);
+            }
+            
+            updateDisplay();
+            return found;
+        }
+
+        // Update display elements
+        function updateDisplay() {
+            const countrySelect = document.getElementById('countryCode');
+            const selectedOption = countrySelect.options[countrySelect.selectedIndex];
+            
+            document.getElementById('selectedValue').textContent = countrySelect.value || 'None';
+            document.getElementById('selectedText').textContent = selectedOption ? selectedOption.textContent : 'None';
+        }
+
+        // Test scenario function
+        function testScenario(scenarioId) {
+            const scenario = testScenarios.find(s => s.id === scenarioId);
+            if (!scenario) return;
+            
+            console.log(`\n📋 Test ${scenarioId}: ${scenario.name}`);
+            console.log('-'.repeat(50));
+            
+            // Update status
+            const statusDiv = document.getElementById('status');
+            statusDiv.className = 'status info';
+            statusDiv.textContent = `🔄 Running: ${scenario.name}`;
+            
+            // Simulate processing delay
+            setTimeout(() => {
+                // Process detection
+                const detectedCode = detectCountryCode(scenario.mockData);
+                const success = setCountryCode(detectedCode);
+                
+                // Update results
+                document.getElementById('lastTest').textContent = scenario.name;
+                
+                // Check if test passed
+                const testPassed = detectedCode === scenario.expectedCode;
+                
+                if (testPassed && success) {
+                    statusDiv.className = 'status success';
+                    statusDiv.textContent = `✅ TEST PASSED: ${scenario.name}\nDetected: ${detectedCode}\nExpected: ${scenario.expectedCode}`;
+                    document.getElementById('testStatus').textContent = '✅ PASSED';
+                    console.log('✅ TEST PASSED');
+                } else {
+                    statusDiv.className = 'status error';
+                    statusDiv.textContent = `❌ TEST FAILED: ${scenario.name}\nDetected: ${detectedCode}\nExpected: ${scenario.expectedCode}`;
+                    document.getElementById('testStatus').textContent = '❌ FAILED';
+                    console.log('❌ TEST FAILED');
+                }
+                
+                console.log('-'.repeat(50));
+            }, 200);
+        }
+
+        // Reset dropdown
+        function resetDropdown() {
+            document.getElementById('countryCode').value = '';
+            document.getElementById('status').className = 'status info';
+            document.getElementById('status').textContent = 'Ready to test country detection scenarios...';
+            document.getElementById('testStatus').textContent = 'Ready';
+            document.getElementById('lastTest').textContent = 'None';
+            updateDisplay();
+            console.log('🔄 Dropdown reset');
+        }
+
+        // Update display on dropdown change
+        document.getElementById('countryCode').addEventListener('change', updateDisplay);
+        
+        // Initialize display
+        updateDisplay();
+        
+        // Welcome message
+        console.log('🎬 Country Detection Visual Demo Started');
+        console.log('Click the test buttons to see the dropdown values change!');
+    </script>
+</body>
+</html>
