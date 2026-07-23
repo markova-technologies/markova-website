@@ -2041,6 +2041,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const waitlistForm = document.getElementById('waitlistForm');
     const openBtns = document.querySelectorAll('.open-waitlist-btn');
 
+    // Waitlist counter — load from localStorage
+    const waitlistCountEl = document.getElementById('waitlistCount');
+    let waitlistCount = parseInt(localStorage.getItem('markovaWaitlistCount') || '0', 10);
+    if (waitlistCountEl) waitlistCountEl.textContent = waitlistCount;
+
     if (waitlistModal && openBtns.length > 0) {
         openBtns.forEach(btn => {
             btn.addEventListener('click', (e) => {
@@ -2070,10 +2075,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (btn) btn.classList.remove('loading');
                     waitlistModal.classList.remove('active');
                     waitlistForm.reset();
+
+                    // Increment waitlist count
+                    waitlistCount++;
+                    localStorage.setItem('markovaWaitlistCount', waitlistCount.toString());
+                    if (waitlistCountEl) waitlistCountEl.textContent = waitlistCount;
                     
                     // Show success notification
                     if (window.showNotification) {
-                        window.showNotification('success', 'Success!', 'You have been added to the waitlist. We will contact you soon!');
+                        window.showNotification('success', 'You\'re on the list!', 'You have been added to the waitlist. We will contact you soon!');
                     } else {
                         alert('You have been added to the waitlist!');
                     }

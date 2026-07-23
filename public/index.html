@@ -122,7 +122,6 @@
                 <a href="#platform" class="nav-link" data-text="Platform">Platform</a>
                 <a href="#capabilities" class="nav-link" data-text="Capabilities">Capabilities</a>
                 <a href="#architecture" class="nav-link" data-text="Architecture">Architecture</a>
-                <a href="#workflows" class="nav-link" data-text="Workflows">Workflows</a>
                 <a href="#ecosystem" class="nav-link" data-text="Ecosystem">Ecosystem</a>
             </div>
             <div class="nav-cta">
@@ -183,6 +182,7 @@
                             <div class="btn-bg"></div>
                             <div class="btn-particles"></div>
                         </button>
+                        <a href="#capabilities" class="btn-link" style="margin-left: 15px; display: inline-flex; align-items: center; justify-content: center; padding: 12px 30px; font-weight: 600; color: #fff; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 50px; text-decoration: none; transition: all 0.3s ease;">See It in Action</a>
                     </div>
 
                     <div class="hero-stats">
@@ -287,7 +287,7 @@
                     <i class="fas fa-globe-africa"></i>
                     <span>System Architecture</span>
                 </div>
-                <h2 class="section-title">The 5 Pillars of Markova OS</h2>
+                <h2 class="section-title">The 3 Pillars of Markova</h2>
                 <p class="section-subtitle">The foundation for a digital workforce that thinks, collaborates, and acts like a team.</p>
             </div>
 
@@ -667,8 +667,8 @@
                 <p class="section-subtitle">Markova is also connected to independent initiatives applying intelligent technology to specialized industries.</p>
             </div>
             
-            <div class="partners-grid">
-                <div class="partner-card glass-panel">
+            <div class="partners-grid" style="grid-template-columns: 1fr 1fr; max-width: 100%;">
+                <div class="partner-card glass-panel" style="grid-column: 1 / 2;">
                     <div class="partner-logo">
                         <i class="fas fa-leaf" style="color: #2ecc71; font-size: 3rem;"></i>
                     </div>
@@ -679,6 +679,12 @@
                         <a href="https://nuracare.vercel.app" target="_blank" rel="noopener noreferrer" class="partner-link">
                             Learn More <i class="fas fa-external-link-alt"></i>
                         </a>
+                    </div>
+                </div>
+                <div class="partner-card glass-panel" style="grid-column: 2 / 3; display: flex; align-items: center; justify-content: center; opacity: 0.4; border-style: dashed;">
+                    <div style="text-align: center;">
+                        <i class="fas fa-plus-circle" style="color: #4facfe; font-size: 2.5rem; margin-bottom: 1rem;"></i>
+                        <p style="color: #a0aec0; font-size: 1rem;">More initiatives coming soon</p>
                     </div>
                 </div>
             </div>
@@ -702,7 +708,7 @@
                         <a href="#platform">AI Agents</a>
                         <a href="#capabilities">Capabilities</a>
                         <a href="#architecture">Architecture</a>
-                        <a href="#workflows">Workflows</a>
+                        <a href="#ecosystem">Ecosystem</a>
                     </div>
                     
                     <div class="footer-column">
@@ -710,7 +716,7 @@
                         <a href="#">About Markova</a>
                         <a href="#">Careers</a>
                         <a href="#">News</a>
-                        <a href="#ecosystem">Ecosystem</a>
+                        <a href="#contact">Contact</a>
                     </div>
                     
                     <div class="footer-column">
@@ -794,6 +800,10 @@
                 </div>
                 <h2>Join the Waitlist</h2>
                 <p>Be the first to know when Markova becomes available.</p>
+                <div class="waitlist-counter" style="margin-top: 12px; display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; background: rgba(79, 172, 254, 0.1); border: 1px solid rgba(79, 172, 254, 0.2); border-radius: 20px; font-size: 0.85rem; color: #4facfe;">
+                    <i class="fas fa-users"></i>
+                    <span id="waitlistCount">0</span> people on the waitlist
+                </div>
             </div>
             <form id="waitlistForm" class="waitlist-form">
                 <div class="form-group">
