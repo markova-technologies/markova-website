@@ -44,13 +44,13 @@ function normalizeCallingCode(raw) {
     if (!raw || typeof raw !== 'string') {
         return null;
     }
-
+    
     // Trim whitespace
     const trimmed = raw.trim();
     if (!trimmed) {
         return null;
     }
-
+    
     // If it already starts with + and the rest is digits, return as-is
     if (trimmed.startsWith('+')) {
         const withoutPlus = trimmed.substring(1);
@@ -60,7 +60,7 @@ function normalizeCallingCode(raw) {
         // Reject if contains non-digits after stripping +
         return null;
     }
-
+    
     // If it starts with 00, strip 00 and prepend +
     if (trimmed.startsWith('00')) {
         const withoutZeros = trimmed.substring(2);
@@ -70,33 +70,33 @@ function normalizeCallingCode(raw) {
         // Reject if contains non-digits after stripping 00
         return null;
     }
-
+    
     // If it is only digits, prepend + and return
     if (/^\d+$/.test(trimmed)) {
         return '+' + trimmed;
     }
-
+    
     // Reject anything that contains non-digits
     return null;
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-
+document.addEventListener('DOMContentLoaded', function() {
+    
     // Force emoji rendering for country flags
     function ensureEmojiRendering() {
         const countrySelect = document.getElementById('countryCode');
         if (countrySelect) {
             // Force re-render of emoji flags
             countrySelect.style.fontFamily = 'Noto Color Emoji, Segoe UI Emoji, Apple Color Emoji, sans-serif';
-
+            
             // Trigger a reflow to ensure emoji rendering
             countrySelect.offsetHeight;
-
+            
             // Add a small delay and reapply
             setTimeout(() => {
                 countrySelect.style.fontFamily = 'Noto Color Emoji, Segoe UI Emoji, Apple Color Emoji, Twemoji Mozilla, EmojiOne Color, Android Emoji, sans-serif';
             }, 100);
-
+            
             // Ensure the selected value is visible
             if (countrySelect.value) {
                 countrySelect.style.color = 'var(--text-primary)';
@@ -104,10 +104,10 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     }
-
+    
     // Call emoji rendering function
     ensureEmojiRendering();
-
+    
     // Ensure country code is visible on page load
     setTimeout(() => {
         const countrySelect = document.getElementById('countryCode');
@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function () {
             countrySelect.style.background = 'var(--bg-secondary)';
         }
     }, 100);
-
+    
     // Additional initialization to ensure proper styling
     setTimeout(() => {
         const countrySelect = document.getElementById('countryCode');
@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function () {
             countrySelect.style.fontFamily = 'Noto Color Emoji, Segoe UI Emoji, Apple Color Emoji, Twemoji Mozilla, EmojiOne Color, Android Emoji, sans-serif';
         }
     }, 300);
-
+    
     // Immediate styling application for better visibility
     setTimeout(() => {
         const countrySelect = document.getElementById('countryCode');
@@ -136,14 +136,14 @@ document.addEventListener('DOMContentLoaded', function () {
             countrySelect.style.color = 'var(--text-primary)';
             countrySelect.style.background = 'var(--bg-secondary)';
             countrySelect.style.fontFamily = 'Noto Color Emoji, Segoe UI Emoji, Apple Color Emoji, Twemoji Mozilla, EmojiOne Color, Android Emoji, sans-serif';
-
+            
             // Force the browser to re-render the element
             countrySelect.style.display = 'none';
             countrySelect.offsetHeight; // Trigger reflow
             countrySelect.style.display = '';
         }
     }, 50);
-
+    
     // Enhanced initialization for country code detection
     setTimeout(() => {
         const countrySelect = document.getElementById('countryCode');
@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     }, 200);
-
+    
     // Country code mapping for auto-detection
     const countryCodeMap = {
         'US': '+1',
@@ -564,40 +564,40 @@ document.addEventListener('DOMContentLoaded', function () {
     // Phone number validation function
     function validatePhoneNumber(phoneNumber, countryCode) {
         if (!phoneNumber || !countryCode) return { isValid: false, message: 'Please select a country code and enter a phone number.' };
-
+        
         // Check for invalid characters (letters, symbols except +, -, spaces, parentheses)
         const invalidCharPattern = /[^0-9+\-\(\)\s]/;
         if (invalidCharPattern.test(phoneNumber)) {
-            return {
-                isValid: false,
-                message: 'Phone number can only contain digits, spaces, hyphens, and parentheses.'
+            return { 
+                isValid: false, 
+                message: 'Phone number can only contain digits, spaces, hyphens, and parentheses.' 
             };
         }
-
+        
         // Remove all non-digit characters for length validation
         const cleanNumber = phoneNumber.replace(/\D/g, '');
-
+        
         // Get validation rules for the selected country from the countryCodeMap
         const rules = countryCodeMap[countryCode];
         if (!rules || typeof rules === 'string') return { isValid: false, message: 'Invalid country code selected.' };
-
+        
         const { min, max, name } = rules;
-
+        
         // Check length requirements
         if (cleanNumber.length < min) {
-            return {
-                isValid: false,
-                message: `${name} phone numbers must be at least ${min} digits long.`
+            return { 
+                isValid: false, 
+                message: `${name} phone numbers must be at least ${min} digits long.` 
             };
         }
-
+        
         if (cleanNumber.length > max) {
-            return {
-                isValid: false,
-                message: `${name} phone numbers cannot exceed ${max} digits.`
+            return { 
+                isValid: false, 
+                message: `${name} phone numbers cannot exceed ${max} digits.` 
             };
         }
-
+        
         // Country-specific validation rules with service provider prefixes
         const { prefixes } = rules;
         if (prefixes && prefixes.length > 0) {
@@ -610,16 +610,16 @@ document.addEventListener('DOMContentLoaded', function () {
                     return cleanNumber.startsWith(prefix);
                 }
             });
-
+            
             if (!hasValidPrefix) {
                 const prefixList = prefixes.join(', ');
-                return {
-                    isValid: false,
-                    message: `${name} mobile numbers must start with: ${prefixList}`
+                return { 
+                    isValid: false, 
+                    message: `${name} mobile numbers must start with: ${prefixList}` 
                 };
             }
         }
-
+        
         return { isValid: true, message: '' };
     }
 
@@ -627,7 +627,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function autoDetectCountryCode() {
         const phoneInput = document.getElementById('phone');
         const countrySelect = document.getElementById('countryCode');
-
+        
         if (!phoneInput || !countrySelect) return;
 
         // Track if detection has already been attempted
@@ -637,32 +637,32 @@ document.addEventListener('DOMContentLoaded', function () {
         function detectAndSetCountry() {
             if (detectionAttempted) return; // Prevent multiple attempts
             detectionAttempted = true;
-
+            
             console.log('Starting country detection...');
-
+            
             // Try IP geolocation first
             fetch('https://ipapi.co/json/')
                 .then(response => response.json())
                 .then(data => {
                     console.log('IP geolocation data:', data);
-
+                    
                     let callingCode = null;
-
+                    
                     // 1∩╕ÅΓâú Preferred: API field with dial prefix already present
                     const normalized = normalizeCallingCode(data.country_calling_code);
                     if (normalized) {
                         callingCode = normalized;
                         console.log('Found calling code from API:', callingCode);
                     }
-
+                    
                     // 2∩╕ÅΓâú Fallback: ISO-alpha-2 code mapping
                     if (!callingCode) {
                         // Support alternative field names for country code
                         const possibleCountryCodeKeys = [
-                            'country_code', 'country_code_iso2', 'countryCode',
+                            'country_code', 'country_code_iso2', 'countryCode', 
                             'country', 'iso2', 'country_iso', 'cc'
                         ];
-
+                        
                         let countryIso = null;
                         for (const key of possibleCountryCodeKeys) {
                             if (data[key] && typeof data[key] === 'string') {
@@ -671,22 +671,22 @@ document.addEventListener('DOMContentLoaded', function () {
                                 break;
                             }
                         }
-
+                        
                         if (countryIso && countryCodeMap[countryIso]) {
                             callingCode = countryCodeMap[countryIso];
                             console.log('Mapped ISO code to calling code:', countryIso, '->', callingCode);
                         }
                     }
-
+                    
                     // 3∩╕ÅΓâú Last resort: try generic 'country' field for country name lookup
                     if (!callingCode && data.country && typeof data.country === 'string') {
                         const countryName = data.country.trim().toLowerCase();
                         console.log('Attempting country name lookup for:', countryName);
-
+                        
                         // Simple country name to ISO mapping (could be expanded)
                         const countryNameToIso = {
                             'united states': 'US',
-                            'usa': 'US',
+                            'usa': 'US', 
                             'america': 'US',
                             'united kingdom': 'GB',
                             'uk': 'GB',
@@ -705,14 +705,14 @@ document.addEventListener('DOMContentLoaded', function () {
                             'brazil': 'BR',
                             'mexico': 'MX'
                         };
-
+                        
                         const isoFromName = countryNameToIso[countryName];
                         if (isoFromName && countryCodeMap[isoFromName]) {
                             callingCode = countryCodeMap[isoFromName];
                             console.log('Mapped country name to calling code:', countryName, '->', callingCode);
                         }
                     }
-
+                    
                     if (callingCode) {
                         console.log('Setting country code from IP geolocation:', callingCode);
                         setCountryCode(callingCode);
@@ -732,10 +732,10 @@ document.addEventListener('DOMContentLoaded', function () {
         function fallbackToBrowserLocale() {
             const browserLocale = navigator.language || navigator.userLanguage;
             console.log('Browser locale:', browserLocale);
-
+            
             let countryCode = browserLocale.split('-')[1] || browserLocale.split('_')[1];
             console.log('Detected country code from locale:', countryCode);
-
+            
             if (countryCode && countryCodeMap[countryCode]) {
                 const detectedCode = countryCodeMap[countryCode];
                 console.log('Setting country code from locale:', detectedCode);
@@ -750,17 +750,17 @@ document.addEventListener('DOMContentLoaded', function () {
         // Function to set the country code in the dropdown
         function setCountryCode(code) {
             console.log('Attempting to set country code:', code);
-
+            
             // Normalize the input code to ensure it has a "+" prefix
             let normalizedCode = code;
             if (code && !code.startsWith('+')) {
                 normalizedCode = '+' + code;
                 console.log('Normalized code (added + prefix):', normalizedCode);
             }
-
+            
             const options = countrySelect.querySelectorAll('option');
             let found = false;
-
+            
             // First try exact match with normalized code
             for (let option of options) {
                 if (option.value === normalizedCode) {
@@ -768,24 +768,24 @@ document.addEventListener('DOMContentLoaded', function () {
                     found = true;
                     console.log('Successfully set country code to:', normalizedCode);
                     console.log('Selected option text:', option.textContent);
-
+                    
                     // Force immediate styling to ensure visibility
                     countrySelect.style.color = 'var(--text-primary)';
                     countrySelect.style.background = 'var(--bg-secondary)';
                     countrySelect.style.fontFamily = 'Noto Color Emoji, Segoe UI Emoji, Apple Color Emoji, Twemoji Mozilla, EmojiOne Color, Android Emoji, sans-serif';
-
+                    
                     // Force a re-render by temporarily hiding and showing
                     countrySelect.style.opacity = '0.99';
                     setTimeout(() => {
                         countrySelect.style.opacity = '1';
                     }, 10);
-
+                    
                     // Trigger a change event to ensure proper rendering
                     countrySelect.dispatchEvent(new Event('change', { bubbles: true }));
                     break;
                 }
             }
-
+            
             // If not found with normalized code, try original input (for backward compatibility)
             if (!found && normalizedCode !== code) {
                 for (let option of options) {
@@ -794,35 +794,35 @@ document.addEventListener('DOMContentLoaded', function () {
                         found = true;
                         console.log('Successfully set country code to (fallback):', code);
                         console.log('Selected option text:', option.textContent);
-
+                        
                         // Force immediate styling to ensure visibility
                         countrySelect.style.color = 'var(--text-primary)';
                         countrySelect.style.background = 'var(--bg-secondary)';
                         countrySelect.style.fontFamily = 'Noto Color Emoji, Segoe UI Emoji, Apple Color Emoji, Twemoji Mozilla, EmojiOne Color, Android Emoji, sans-serif';
-
+                        
                         // Force a re-render by temporarily hiding and showing
                         countrySelect.style.opacity = '0.99';
                         setTimeout(() => {
                             countrySelect.style.opacity = '1';
                         }, 10);
-
+                        
                         // Trigger a change event to ensure proper rendering
                         countrySelect.dispatchEvent(new Event('change', { bubbles: true }));
                         break;
                     }
                 }
             }
-
+            
             if (!found) {
                 console.warn('ΓÜá∩╕Å Country code not found in dropdown options:', code);
                 console.warn('ΓÜá∩╕Å Tried normalized code:', normalizedCode);
                 console.warn('ΓÜá∩╕Å This may cause form validation issues.');
                 console.warn('ΓÜá∩╕Å Available options:', Array.from(options).slice(1, 11).map(opt => opt.value), '... and', (options.length - 11), 'more');
-
+                
                 // Try to find a close match for common codes
                 const commonAlternatives = {
                     '1': '+1',
-                    '44': '+44',
+                    '44': '+44', 
                     '49': '+49',
                     '33': '+33',
                     '34': '+34',
@@ -832,7 +832,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     '81': '+81',
                     '7': '+7'
                 };
-
+                
                 const originalWithoutPlus = code.startsWith('+') ? code.substring(1) : code;
                 if (commonAlternatives[originalWithoutPlus]) {
                     console.warn('ΓÜá∩╕Å Suggestion: Try using "' + commonAlternatives[originalWithoutPlus] + '" instead of "' + code + '"');
@@ -842,34 +842,34 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Start detection immediately on page load
         detectAndSetCountry();
-
+        
         // Also detect on focus if no country is selected
-        phoneInput.addEventListener('focus', function () {
+        phoneInput.addEventListener('focus', function() {
             if (!countrySelect.value || countrySelect.value === '') {
                 detectAndSetCountry();
             }
         });
     }
-
+    
     // Enhanced dropdown styling for country codes
     function enhanceCountryDropdown() {
         const countrySelect = document.getElementById('countryCode');
         const phoneInput = document.getElementById('phone');
-
+        
         if (countrySelect && phoneInput) {
             // Force white text color and proper spacing
-            countrySelect.addEventListener('focus', function () {
+            countrySelect.addEventListener('focus', function() {
                 this.style.color = 'var(--text-primary)';
                 this.style.background = 'var(--bg-secondary)';
             });
-
-            countrySelect.addEventListener('blur', function () {
+            
+            countrySelect.addEventListener('blur', function() {
                 this.style.color = 'var(--text-primary)';
                 this.style.background = 'var(--bg-secondary)';
             });
-
+            
             // Apply styling to options when dropdown opens
-            countrySelect.addEventListener('mousedown', function () {
+            countrySelect.addEventListener('mousedown', function() {
                 setTimeout(() => {
                     const options = this.querySelectorAll('option');
                     options.forEach(option => {
@@ -891,7 +891,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             // Also apply styling on change event
-            countrySelect.addEventListener('change', function () {
+            countrySelect.addEventListener('change', function() {
                 setTimeout(() => {
                     const options = this.querySelectorAll('option');
                     options.forEach(option => {
@@ -899,26 +899,26 @@ document.addEventListener('DOMContentLoaded', function () {
                         option.style.setProperty('background', '#1a1a1a', 'important');
                     });
                 }, 10);
-
+                
                 // Ensure selected value is visible
                 if (this.value) {
                     this.style.color = 'var(--text-primary)';
                     this.style.background = 'var(--bg-secondary)';
                 }
-
+                
                 // Validate phone number when country changes
                 validatePhoneInput();
             });
 
             // Real-time phone number validation with character limit
-            phoneInput.addEventListener('input', function (e) {
+            phoneInput.addEventListener('input', function(e) {
                 // Filter out invalid characters as they're typed
                 const invalidCharPattern = /[^0-9+\-\(\)\s]/;
                 if (invalidCharPattern.test(e.target.value)) {
                     // Remove invalid characters
                     e.target.value = e.target.value.replace(invalidCharPattern, '');
                 }
-
+                
                 // Apply character limit based on selected country
                 const countryCode = countrySelect.value;
                 if (countryCode && countryCode !== '') {
@@ -934,32 +934,32 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                     }
                 }
-
+                
                 validatePhoneInput();
             });
             phoneInput.addEventListener('blur', validatePhoneInput);
             phoneInput.addEventListener('focus', validatePhoneInput);
-
+            
             // Prevent invalid characters from being typed and enforce character limit
-            phoneInput.addEventListener('keydown', function (e) {
+            phoneInput.addEventListener('keydown', function(e) {
                 const allowedKeys = [
                     'Backspace', 'Delete', 'Tab', 'Escape', 'Enter',
                     'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown',
                     'Home', 'End'
                 ];
-
+                
                 // Allow control keys
                 if (allowedKeys.includes(e.key) || e.ctrlKey || e.metaKey) {
                     return;
                 }
-
+                
                 // Allow only digits, spaces, hyphens, parentheses, and plus sign
                 const allowedChars = /[0-9+\-\(\)\s]/;
                 if (!allowedChars.test(e.key)) {
                     e.preventDefault();
                     return;
                 }
-
+                
                 // Check character limit for digits only
                 const countryCode = countrySelect.value;
                 if (countryCode && countryCode !== '' && /[0-9]/.test(e.key)) {
@@ -972,9 +972,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 }
             });
-
+            
             // Handle paste events to limit characters
-            phoneInput.addEventListener('paste', function (e) {
+            phoneInput.addEventListener('paste', function(e) {
                 setTimeout(() => {
                     const countryCode = countrySelect.value;
                     if (countryCode && countryCode !== '') {
@@ -998,40 +998,40 @@ document.addEventListener('DOMContentLoaded', function () {
         const phoneInput = document.getElementById('phone');
         const countrySelect = document.getElementById('countryCode');
         const phoneGroup = document.querySelector('.phone-group');
-
+        
         if (!phoneInput || !countrySelect || !phoneGroup) return;
-
+        
         const phoneNumber = phoneInput.value;
         const countryCode = countrySelect.value;
-
+        
         // Remove existing validation messages
         const existingMessage = phoneGroup.querySelector('.validation-message');
         if (existingMessage) {
             existingMessage.remove();
         }
-
+        
         // Remove existing error styling
         phoneInput.classList.remove('error');
         phoneGroup.classList.remove('has-error');
-
+        
         // If no country code selected, don't validate yet
         if (!countryCode || countryCode === '') {
             return;
         }
-
+        
         // If phone number is empty, don't show error yet
         if (!phoneNumber.trim()) {
             return;
         }
-
+        
         // Validate the phone number
         const validation = validatePhoneNumber(phoneNumber, countryCode);
-
+        
         if (!validation.isValid) {
             // Add error styling
             phoneInput.classList.add('error');
             phoneGroup.classList.add('has-error');
-
+            
             // Create and show validation message
             const messageDiv = document.createElement('div');
             messageDiv.className = 'validation-message error-message';
@@ -1041,7 +1041,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // Add success styling
             phoneInput.classList.add('valid');
             phoneGroup.classList.add('has-success');
-
+            
             // Create and show success message
             const messageDiv = document.createElement('div');
             messageDiv.className = 'validation-message success-message';
@@ -1049,32 +1049,32 @@ document.addEventListener('DOMContentLoaded', function () {
             phoneGroup.appendChild(messageDiv);
         }
     }
-
+    
     // Call dropdown enhancement function
     enhanceCountryDropdown();
-
+    
     // Call auto-detect function
     autoDetectCountryCode();
+    
 
-
-
+    
     // Final styling check after all initialization
     setTimeout(() => {
         const countrySelect = document.getElementById('countryCode');
         const phoneInput = document.getElementById('phone');
-
+        
         if (countrySelect) {
             countrySelect.style.color = 'var(--text-primary)';
             countrySelect.style.background = 'var(--bg-secondary)';
             countrySelect.style.fontFamily = 'Noto Color Emoji, Segoe UI Emoji, Apple Color Emoji, Twemoji Mozilla, EmojiOne Color, Android Emoji, sans-serif';
         }
-
+        
         if (phoneInput) {
             phoneInput.style.color = 'var(--text-primary)';
             phoneInput.style.background = 'var(--bg-secondary)';
         }
     }, 500);
-
+    
     // Hide loading screen after page loads
     setTimeout(() => {
         const loadingScreen = document.getElementById('loadingScreen');
@@ -1082,7 +1082,7 @@ document.addEventListener('DOMContentLoaded', function () {
             loadingScreen.classList.add('hide');
             setTimeout(() => {
                 loadingScreen.style.display = 'none';
-
+                
                 // Show cursor only after loading screen is hidden (only on desktop)
                 if (window.showCursorAfterLoading) {
                     window.showCursorAfterLoading();
@@ -1098,16 +1098,16 @@ document.addEventListener('DOMContentLoaded', function () {
     if (cursor && cursorFollower && !isMobileDevice()) {
         // Hide default cursor completely
         document.body.style.cursor = 'none';
-
+        
         // Initialize cursor position to center of screen
         const centerX = window.innerWidth / 2;
         const centerY = window.innerHeight / 2;
-
+        
         // Initialize all cursor variables to center
         let mouseX = centerX, mouseY = centerY;
         let cursorX = centerX, cursorY = centerY;
         let followerX = centerX, followerY = centerY;
-
+        
         const initializeCursor = () => {
             cursor.style.left = centerX + 'px';
             cursor.style.top = centerY + 'px';
@@ -1117,7 +1117,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Initialize cursor position but keep completely hidden during loading
         initializeCursor();
-
+        
         // Keep cursor completely hidden during loading
         cursor.style.display = 'none';
         cursor.style.opacity = '0';
@@ -1125,22 +1125,22 @@ document.addEventListener('DOMContentLoaded', function () {
         cursorFollower.style.display = 'none';
         cursorFollower.style.opacity = '0';
         cursorFollower.style.pointerEvents = 'none';
-
+        
         // Smooth cursor movement with catch-up effect
         function updateCursor() {
             // Direct positioning for the white dot (cursor)
             cursorX = mouseX;
             cursorY = mouseY;
-
+            
             // Smooth interpolation for the purple circle (follower)
             followerX += (mouseX - followerX) * 0.15; // Slower follow
             followerY += (mouseY - followerY) * 0.15;
-
+            
             cursor.style.left = cursorX + 'px';
             cursor.style.top = cursorY + 'px';
             cursorFollower.style.left = (followerX - 15) + 'px';
             cursorFollower.style.top = (followerY - 15) + 'px';
-
+            
             requestAnimationFrame(updateCursor);
         }
 
@@ -1156,7 +1156,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 cursorFollower.style.opacity = '1';
                 cursorFollower.style.pointerEvents = 'none'; // Don't block interactions
             }
-
+            
             // Start cursor tracking only after loading
             updateCursor();
         };
@@ -1170,7 +1170,7 @@ document.addEventListener('DOMContentLoaded', function () {
         window.addEventListener('resize', () => {
             const newCenterX = window.innerWidth / 2;
             const newCenterY = window.innerHeight / 2;
-
+            
             // If cursor is roughly at center, update it
             if (Math.abs(cursorX - newCenterX) < 50 && Math.abs(cursorY - newCenterY) < 50) {
                 mouseX = newCenterX;
@@ -1211,23 +1211,23 @@ document.addEventListener('DOMContentLoaded', function () {
     // Enhanced Mobile menu toggle with better accessibility
     const mobileToggle = document.getElementById('mobileToggle');
     const navLinks = document.querySelector('.nav-links');
-
+    
     if (mobileToggle && navLinks) {
         // Add ARIA attributes for accessibility
         mobileToggle.setAttribute('aria-label', 'Toggle navigation menu');
         mobileToggle.setAttribute('aria-expanded', 'false');
         mobileToggle.setAttribute('role', 'button');
         mobileToggle.setAttribute('tabindex', '0');
-
+        
         function toggleMobileMenu() {
             const isActive = mobileToggle.classList.contains('active');
-
+            
             mobileToggle.classList.toggle('active');
             navLinks.classList.toggle('active');
-
+            
             // Update ARIA attributes
             mobileToggle.setAttribute('aria-expanded', !isActive);
-
+            
             // Prevent body scroll when menu is open
             if (!isActive) {
                 document.body.style.overflow = 'hidden';
@@ -1235,10 +1235,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.body.style.overflow = '';
             }
         }
-
+        
         // Click event
         mobileToggle.addEventListener('click', toggleMobileMenu);
-
+        
         // Keyboard support
         mobileToggle.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' || e.key === ' ') {
@@ -1246,7 +1246,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 toggleMobileMenu();
             }
         });
-
+        
         // Close menu when clicking on a link
         const mobileNavLinks = navLinks.querySelectorAll('.nav-link');
         mobileNavLinks.forEach(link => {
@@ -1257,7 +1257,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.body.style.overflow = '';
             });
         });
-
+        
         // Add navigation hover effects for desktop
         const navigationLinks = document.querySelectorAll('.nav-link');
         navigationLinks.forEach(link => {
@@ -1268,7 +1268,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     cursorFollower.style.transform = 'scale(1.1)';
                 }
             });
-
+            
             link.addEventListener('mouseleave', () => {
                 if (!isMobileDevice() && cursor && cursorFollower) {
                     cursor.style.transform = 'scale(1)';
@@ -1276,7 +1276,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
         });
-
+        
         // Close menu when clicking outside
         document.addEventListener('click', (e) => {
             if (!mobileToggle.contains(e.target) && !navLinks.contains(e.target)) {
@@ -1286,7 +1286,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.body.style.overflow = '';
             }
         });
-
+        
         // Close menu on escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && navLinks.classList.contains('active')) {
@@ -1305,7 +1305,7 @@ document.addEventListener('DOMContentLoaded', function () {
             e.preventDefault();
             const targetId = link.getAttribute('href');
             const targetSection = document.querySelector(targetId);
-
+            
             if (targetSection) {
                 targetSection.scrollIntoView({
                     behavior: 'smooth',
@@ -1319,11 +1319,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const animateCounter = (element, target, duration = 2000) => {
         let start = 0;
         const increment = target / (duration / 16);
-
+        
         const timer = setInterval(() => {
             start += increment;
             element.textContent = Math.floor(start);
-
+            
             if (start >= target) {
                 element.textContent = target;
                 clearInterval(timer);
@@ -1341,7 +1341,7 @@ document.addEventListener('DOMContentLoaded', function () {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('animated');
-
+                
                 // Animate counters when stats section is visible
                 if (entry.target.classList.contains('hero-stats')) {
                     const statNumbers = entry.target.querySelectorAll('.stat-number[data-count]');
@@ -1366,48 +1366,48 @@ document.addEventListener('DOMContentLoaded', function () {
     if (contactForm) {
         // Add submission guard to prevent multiple submissions
         let isSubmitting = false;
-
+        
         contactForm.addEventListener('submit', async (e) => {
             console.log('Form submission started');
             e.preventDefault();
             console.log('Form submission prevented');
-
+            
             // Prevent multiple submissions
             if (isSubmitting) {
                 console.log('Form already submitting, ignoring');
                 return;
             }
-
+            
             isSubmitting = true;
-
+            
             const submitBtn = contactForm.querySelector('.submit-btn');
             const btnText = submitBtn.querySelector('.btn-text');
             const btnLoader = submitBtn.querySelector('.btn-loader');
 
             // Show loading state
             submitBtn.classList.add('loading');
-
+  
             // Validate phone number
             const countryCode = document.getElementById('countryCode').value;
             const phoneNumber = document.getElementById('phone').value;
-
+            
             console.log('≡ƒöì Debug - Country Code:', countryCode);
             console.log('≡ƒöì Debug - Phone Number:', phoneNumber);
-
+            
             if (!countryCode || countryCode === 'Code') {
                 submitBtn.classList.remove('loading');
                 isSubmitting = false;
                 showNotification('error', 'Phone Number Required', 'Please select your country code.');
                 return;
             }
-
+            
             if (!phoneNumber || phoneNumber.trim() === '') {
                 submitBtn.classList.remove('loading');
                 isSubmitting = false;
                 showNotification('error', 'Phone Number Required', 'Please enter your phone number.');
                 return;
             }
-
+            
             // Validate phone number format
             const phoneValidation = validatePhoneNumber(phoneNumber, countryCode);
             if (!phoneValidation.isValid) {
@@ -1416,51 +1416,51 @@ document.addEventListener('DOMContentLoaded', function () {
                 showNotification('error', 'Invalid Phone Number', phoneValidation.message);
                 return;
             }
-
+            
             // Prepare form data
-            const formData = {
-                firstName: document.getElementById('firstName').value,
-                lastName: document.getElementById('lastName').value,
-                email: document.getElementById('email').value,
-                phone: countryCode + ' ' + phoneNumber,
-                company: document.getElementById('company').value,
-                whoYouAre: document.getElementById('whoYouAre').value,
-                service: document.getElementById('service').value,
-                message: document.getElementById('message').value
-            };
-
-            console.log('Form data prepared:', formData);
-            console.log('≡ƒöì Debug - Phone field in formData:', formData.phone);
-
-            try {
-                console.log('Sending fetch request to /api/contact');
-                const res = await fetch('/api/contact', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(formData)
-                });
-
-                console.log('Response received:', res.status);
-                const data = await res.json();
-                console.log('Response data:', data);
+  const formData = {
+    firstName: document.getElementById('firstName').value,
+    lastName: document.getElementById('lastName').value,
+    email: document.getElementById('email').value,
+    phone: countryCode + ' ' + phoneNumber,
+    company: document.getElementById('company').value,
+    whoYouAre: document.getElementById('whoYouAre').value,
+    service: document.getElementById('service').value,
+    message: document.getElementById('message').value
+  };
+  
+  console.log('Form data prepared:', formData);
+  console.log('≡ƒöì Debug - Phone field in formData:', formData.phone);
+  
+  try {
+    console.log('Sending fetch request to /api/contact');
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
+    });
+    
+    console.log('Response received:', res.status);
+    const data = await res.json();
+    console.log('Response data:', data);
 
                 // Remove loading state
                 submitBtn.classList.remove('loading');
                 isSubmitting = false;
-
-                if (data.success) {
+                
+                                if (data.success) {
                     console.log('Showing success notification');
                     // Show custom success notification
                     showNotification('success', 'Message Sent Successfully!', data.message || 'Thank you for your message! We\'ll get back to you soon.');
-                    contactForm.reset();
-
-                    // Reset floating labels
-                    const labels = contactForm.querySelectorAll('label');
-                    labels.forEach(label => {
-                        label.style.top = '1rem';
-                        label.style.fontSize = '1rem';
-                        label.style.color = 'var(--text-muted)';
-                    });
+                contactForm.reset();
+                
+                // Reset floating labels
+                const labels = contactForm.querySelectorAll('label');
+                labels.forEach(label => {
+                    label.style.top = '1rem';
+                    label.style.fontSize = '1rem';
+                    label.style.color = 'var(--text-muted)';
+                });
                 } else {
                     console.log('Showing error notification');
                     showNotification('error', 'Submission Failed', data.message || 'Something went wrong. Please try again.');
@@ -1477,7 +1477,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const formInputs = contactForm.querySelectorAll('input, select, textarea');
         formInputs.forEach(input => {
             const label = input.nextElementSibling;
-
+            
             // Ensure form inputs don't get cursor hover effects
             input.addEventListener('mouseenter', () => {
                 if (cursor && !isMobileDevice()) {
@@ -1489,7 +1489,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     cursorFollower.style.transition = 'transform 0.1s ease-out';
                 }
             });
-
+            
             input.addEventListener('focus', () => {
                 if (label && label.tagName === 'LABEL') {
                     label.style.top = '-0.5rem';
@@ -1512,7 +1512,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Social media fixed buttons and Voiceflow widget scroll behavior
     const socialMediaFixed = document.getElementById('socialMediaFixed');
-
+    
     // Function to find and apply show class to Voiceflow widget
     function applyShowToVoiceflowWidget() {
         const voiceflowSelectors = [
@@ -1523,7 +1523,7 @@ document.addEventListener('DOMContentLoaded', function () {
             '.voiceflow-widget-container',
             '.voiceflow-chat-bubble'
         ];
-
+        
         voiceflowSelectors.forEach(selector => {
             const elements = document.querySelectorAll(selector);
             elements.forEach(element => {
@@ -1531,7 +1531,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     }
-
+    
     // Function to remove show class from Voiceflow widget
     function removeShowFromVoiceflowWidget() {
         const voiceflowSelectors = [
@@ -1542,7 +1542,7 @@ document.addEventListener('DOMContentLoaded', function () {
             '.voiceflow-widget-container',
             '.voiceflow-chat-bubble'
         ];
-
+        
         voiceflowSelectors.forEach(selector => {
             const elements = document.querySelectorAll(selector);
             elements.forEach(element => {
@@ -1550,7 +1550,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     }
-
+    
     function handleScrollFixedButtons() {
         if (window.scrollY > 300) {
             // Show social media buttons
@@ -1601,7 +1601,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (button.tagName === 'INPUT' || button.tagName === 'TEXTAREA' || button.tagName === 'SELECT') {
             return;
         }
-
+        
         button.addEventListener('mouseenter', () => {
             if (cursor && !isMobileDevice()) {
                 cursor.style.transform = 'scale(1.3)';
@@ -1629,7 +1629,7 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('scroll', () => {
         const scrolled = window.pageYOffset;
         const shapes = document.querySelectorAll('.shape');
-
+        
         shapes.forEach((shape, index) => {
             const speed = 0.5 + (index * 0.1);
             shape.style.transform = `translateY(${scrolled * speed}px)`;
@@ -1660,17 +1660,17 @@ document.addEventListener('DOMContentLoaded', function () {
     if (neuralCanvas) {
         const ctx = neuralCanvas.getContext('2d');
         let animationId;
-
+        
         function resizeCanvas() {
             neuralCanvas.width = window.innerWidth;
             neuralCanvas.height = window.innerHeight;
         }
-
+        
         function drawNeuralNetwork() {
             ctx.clearRect(0, 0, neuralCanvas.width, neuralCanvas.height);
             ctx.strokeStyle = 'rgba(99, 102, 241, 0.1)';
             ctx.lineWidth = 1;
-
+            
             // Draw some connecting lines
             for (let i = 0; i < 5; i++) {
                 ctx.beginPath();
@@ -1678,13 +1678,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 ctx.lineTo(Math.random() * neuralCanvas.width, Math.random() * neuralCanvas.height);
                 ctx.stroke();
             }
-
+            
             animationId = requestAnimationFrame(drawNeuralNetwork);
         }
-
+        
         resizeCanvas();
         drawNeuralNetwork();
-
+        
         window.addEventListener('resize', resizeCanvas);
     }
 
@@ -1694,29 +1694,29 @@ document.addEventListener('DOMContentLoaded', function () {
         const ctx = performanceChart.getContext('2d');
         performanceChart.width = 400;
         performanceChart.height = 150;
-
+        
         // Simple line chart animation
         function drawChart() {
             ctx.clearRect(0, 0, 400, 150);
             ctx.strokeStyle = '#6366f1';
             ctx.lineWidth = 2;
             ctx.beginPath();
-
+            
             const points = [20, 40, 35, 60, 45, 80, 75, 90];
             points.forEach((point, index) => {
                 const x = (index / (points.length - 1)) * 380 + 10;
                 const y = 150 - (point * 1.3) - 10;
-
+                
                 if (index === 0) {
                     ctx.moveTo(x, y);
                 } else {
                     ctx.lineTo(x, y);
                 }
             });
-
+            
             ctx.stroke();
         }
-
+        
         setTimeout(drawChart, 1000);
     }
 
@@ -1751,19 +1751,19 @@ document.addEventListener('DOMContentLoaded', function () {
     let imageCache = new Map();
     let hoverTimeout = null;
     let isChangingImage = false;
-
+    
     // Debounce function for hover events
     function debounceHover(func, delay) {
-        return function (...args) {
+        return function(...args) {
             clearTimeout(hoverTimeout);
             hoverTimeout = setTimeout(() => func.apply(this, args), delay);
         };
     }
-
+    
     // Throttle function for rapid mouse movements
     function throttle(func, limit) {
         let inThrottle;
-        return function (...args) {
+        return function(...args) {
             if (!inThrottle) {
                 func.apply(this, args);
                 inThrottle = true;
@@ -1771,48 +1771,48 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         };
     }
-
+    
     // Optimized image preloading with better error handling
     function preloadServiceImages() {
         const imagePromises = [];
-
+        
         serviceHoverItems.forEach(item => {
             const imgSrc = item.getAttribute('data-img');
             if (imgSrc && !imageCache.has(imgSrc)) {
                 const promise = new Promise((resolve, reject) => {
-                    const img = new Image();
-                    img.onload = () => {
-                        imageCache.set(imgSrc, img);
+                const img = new Image();
+                img.onload = () => {
+                    imageCache.set(imgSrc, img);
                         resolve(img);
-                    };
-                    img.onerror = () => {
-                        console.warn('Failed to preload image:', imgSrc);
+                };
+                img.onerror = () => {
+                    console.warn('Failed to preload image:', imgSrc);
                         reject(new Error(`Failed to load ${imgSrc}`));
-                    };
-                    img.src = imgSrc;
+                };
+                img.src = imgSrc;
                 });
                 imagePromises.push(promise);
             }
         });
-
+        
         // Wait for all images to load
         Promise.allSettled(imagePromises).then(() => {
             console.log('Service images preloaded successfully');
         });
     }
-
+    
     // Start preloading immediately
     preloadServiceImages();
-
+    
     // Optimized hover handlers with debouncing and throttling
     function handleHoverEnter(item) {
         if (currentHoverItem === item || isChangingImage) return;
-
+        
         const img = item.getAttribute('data-img');
-        if (mainServiceImage && img && img !== mainServiceImage.src) {
+            if (mainServiceImage && img && img !== mainServiceImage.src) {
             isChangingImage = true;
             currentHoverItem = item;
-
+            
             // Use requestAnimationFrame for smooth transitions
             requestAnimationFrame(() => {
                 mainServiceImage.src = img;
@@ -1821,14 +1821,14 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
     }
-
+    
     function handleHoverLeave(item) {
         if (currentHoverItem !== item || isChangingImage) return;
-
-        currentHoverItem = null;
-        if (mainServiceImage && originalImg && mainServiceImage.src !== originalImg) {
+        
+                currentHoverItem = null;
+                if (mainServiceImage && originalImg && mainServiceImage.src !== originalImg) {
             isChangingImage = true;
-
+            
             requestAnimationFrame(() => {
                 mainServiceImage.src = originalImg;
                 servicesImageDisplay.classList.remove('img-glow-animate');
@@ -1836,11 +1836,11 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
     }
-
+    
     // Create debounced versions of hover handlers
     const debouncedHoverEnter = debounceHover(handleHoverEnter, 50);
     const debouncedHoverLeave = debounceHover(handleHoverLeave, 50);
-
+    
     // Add optimized event listeners with passive option for better performance
     serviceHoverItems.forEach(item => {
         // Use mouseenter/mouseleave for better performance than mouseover/mouseout
@@ -1848,42 +1848,40 @@ document.addEventListener('DOMContentLoaded', function () {
             e.stopPropagation();
             debouncedHoverEnter(item);
         }, { passive: true });
-
+        
         item.addEventListener('mouseleave', (e) => {
             e.stopPropagation();
             debouncedHoverLeave(item);
         }, { passive: true });
-
-        // Add touch support for mobile devices
+        
+        // Add touch support for mobile devices without blocking scroll/click
         item.addEventListener('touchstart', (e) => {
-            e.preventDefault();
             debouncedHoverEnter(item);
-        }, { passive: false });
-
+        }, { passive: true });
+        
         item.addEventListener('touchend', (e) => {
-            e.preventDefault();
             debouncedHoverLeave(item);
-        }, { passive: false });
+        }, { passive: true });
     });
 
     // Touch gesture support for mobile devices
     let touchStartX = 0;
     let touchStartY = 0;
-
+    
     document.addEventListener('touchstart', (e) => {
         touchStartX = e.touches[0].clientX;
         touchStartY = e.touches[0].clientY;
     });
-
+    
     document.addEventListener('touchend', (e) => {
         if (!touchStartX || !touchStartY) return;
-
+        
         const touchEndX = e.changedTouches[0].clientX;
         const touchEndY = e.changedTouches[0].clientY;
-
+        
         const diffX = touchStartX - touchEndX;
         const diffY = touchStartY - touchEndY;
-
+        
         // Swipe left to close mobile menu
         if (diffX > 50 && Math.abs(diffY) < 50 && navLinks.classList.contains('active')) {
             mobileToggle.classList.remove('active');
@@ -1891,11 +1889,11 @@ document.addEventListener('DOMContentLoaded', function () {
             mobileToggle.setAttribute('aria-expanded', 'false');
             document.body.style.overflow = '';
         }
-
+        
         touchStartX = 0;
         touchStartY = 0;
     });
-
+    
     // Enhanced form handling for mobile devices
     const formInputs = contactForm.querySelectorAll('input, select, textarea');
     formInputs.forEach(input => {
@@ -1905,35 +1903,35 @@ document.addEventListener('DOMContentLoaded', function () {
                 input.style.fontSize = '16px';
             }
         });
-
+        
         // Restore font size on blur
         input.addEventListener('blur', () => {
             if (window.innerWidth <= 768) {
                 input.style.fontSize = '';
             }
         });
-
+        
         // Better touch feedback for form elements
         input.addEventListener('touchstart', () => {
             input.style.transform = 'scale(0.98)';
         });
-
+        
         input.addEventListener('touchend', () => {
             input.style.transform = '';
         });
     });
-
+    
     // Improve country code dropdown on mobile
     const countrySelect = document.getElementById('countryCode');
     if (countrySelect) {
         countrySelect.addEventListener('touchstart', () => {
             countrySelect.style.transform = 'scale(0.98)';
         });
-
+        
         countrySelect.addEventListener('touchend', () => {
             countrySelect.style.transform = '';
         });
-
+        
         // Better mobile dropdown experience
         countrySelect.addEventListener('change', () => {
             // Add haptic feedback on mobile
@@ -1942,32 +1940,32 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
-
+    
     // Optimize scroll performance on mobile
     let ticking = false;
     function updateScroll() {
         // Update scroll-based animations
         const scrolled = window.pageYOffset;
         const shapes = document.querySelectorAll('.shape');
-
+        
         shapes.forEach((shape, index) => {
             const speed = 0.5 + (index * 0.1);
             shape.style.transform = `translateY(${scrolled * speed}px)`;
         });
-
+        
         ticking = false;
     }
-
+    
     function requestTick() {
         if (!ticking) {
             requestAnimationFrame(updateScroll);
             ticking = true;
         }
     }
-
+    
     // Use passive scroll listener for better performance
     window.addEventListener('scroll', requestTick, { passive: true });
-
+    
     // Optimize images for mobile
     const images = document.querySelectorAll('img');
     images.forEach(img => {
@@ -1975,13 +1973,13 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!img.hasAttribute('loading')) {
             img.setAttribute('loading', 'lazy');
         }
-
+        
         // Add error handling
         img.addEventListener('error', () => {
             img.style.display = 'none';
         });
     });
-
+    
     // Improve button interactions on mobile
     const mobileButtons = document.querySelectorAll('.btn, .service-btn, .cta-button, .submit-btn');
     mobileButtons.forEach(button => {
@@ -1989,11 +1987,11 @@ document.addEventListener('DOMContentLoaded', function () {
         button.addEventListener('touchstart', () => {
             button.style.transform = 'scale(0.95)';
         });
-
+        
         button.addEventListener('touchend', () => {
             button.style.transform = '';
         });
-
+        
         // Allow normal button interaction (removed preventDefault that was blocking form inputs)
     });
 
@@ -2001,70 +1999,8 @@ document.addEventListener('DOMContentLoaded', function () {
     function isMobileDevice() {
         return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
     }
-
-    // Hide pointer cursor on all interactive elements for desktop
-    if (!isMobileDevice()) {
-        // Set cursor: none on all interactive elements with !important
-        const interactiveElements = document.querySelectorAll(`
-            button, a, .nav-link, .cta-button, .primary-btn, .secondary-btn, 
-            .service-btn, .submit-btn, .view-case, 
-            .social-fixed-link, .carousel-arrow, .notification-btn,
-            .btn, .service-hover, [role="button"], [onclick]
-        `);
-
-        interactiveElements.forEach(element => {
-            element.style.setProperty('cursor', 'none', 'important');
-        });
-
-        // Keep text cursor for form inputs
-        const formInputs = document.querySelectorAll('input, textarea, select');
-        formInputs.forEach(input => {
-            input.style.setProperty('cursor', 'text', 'important');
-        });
-    }
-
-    // Additional mobile detection on window resize
-    window.addEventListener('resize', () => {
-        if (isMobileDevice()) {
-            const cursor = document.querySelector('.cursor');
-            const cursorFollower = document.querySelector('.cursor-follower');
-
-            if (cursor) cursor.style.display = 'none';
-            if (cursorFollower) cursorFollower.style.display = 'none';
-            document.body.style.cursor = 'auto';
-
-            // Restore pointer cursor on mobile for interactive elements
-            const interactiveElements = document.querySelectorAll(`
-                button, a, .nav-link, .cta-button, .primary-btn, .secondary-btn, 
-                .service-btn, .submit-btn, .view-case, 
-                .social-fixed-link, .carousel-arrow, .notification-btn,
-                .btn, .service-hover, [role="button"], [onclick]
-            `);
-            interactiveElements.forEach(element => {
-                element.style.cursor = 'pointer';
-            });
-        } else {
-            // Desktop behavior when resizing - hide all cursors except custom
-            document.body.style.cursor = 'none';
-
-            // Hide pointer cursor on all interactive elements with !important
-            const interactiveElements = document.querySelectorAll(`
-                button, a, .nav-link, .cta-button, .primary-btn, .secondary-btn, 
-                .service-btn, .submit-btn, .view-case, 
-                .social-fixed-link, .carousel-arrow, .notification-btn,
-                .btn, .service-hover, [role="button"], [onclick]
-            `);
-            interactiveElements.forEach(element => {
-                element.style.setProperty('cursor', 'none', 'important');
-            });
-
-            // Keep text cursor for form inputs
-            const formInputs = document.querySelectorAll('input, textarea, select');
-            formInputs.forEach(input => {
-                input.style.setProperty('cursor', 'text', 'important');
-            });
-        }
-    });
+    
+    // Cursor pointer override logic removed
 });
 
 // Add some utility functions
@@ -2083,11 +2019,11 @@ function debounce(func, wait) {
 // Smooth reveal animation for sections
 function revealOnScroll() {
     const reveals = document.querySelectorAll('.animate-on-scroll:not(.animated)');
-
+    
     reveals.forEach(element => {
         const elementTop = element.getBoundingClientRect().top;
         const elementVisible = 150;
-
+        
         if (elementTop < window.innerHeight - elementVisible) {
             element.classList.add('animated');
         }
@@ -2096,28 +2032,79 @@ function revealOnScroll() {
 
 window.addEventListener('scroll', debounce(revealOnScroll, 20));
 
+window.showNotification = showNotification;
+
+// Waitlist Modal Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const waitlistModal = document.getElementById('waitlistModal');
+    const waitlistClose = document.getElementById('waitlistClose');
+    const waitlistForm = document.getElementById('waitlistForm');
+    const openBtns = document.querySelectorAll('.open-waitlist-btn');
+
+    if (waitlistModal && openBtns.length > 0) {
+        openBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                waitlistModal.classList.add('active');
+            });
+        });
+
+        waitlistClose.addEventListener('click', () => {
+            waitlistModal.classList.remove('active');
+        });
+
+        waitlistModal.addEventListener('click', (e) => {
+            if (e.target === waitlistModal) {
+                waitlistModal.classList.remove('active');
+            }
+        });
+
+        if (waitlistForm) {
+            waitlistForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const btn = waitlistForm.querySelector('button[type="submit"]');
+                if (btn) btn.classList.add('loading');
+                
+                // Simulate network request
+                setTimeout(() => {
+                    if (btn) btn.classList.remove('loading');
+                    waitlistModal.classList.remove('active');
+                    waitlistForm.reset();
+                    
+                    // Show success notification
+                    if (window.showNotification) {
+                        window.showNotification('success', 'Success!', 'You have been added to the waitlist. We will contact you soon!');
+                    } else {
+                        alert('You have been added to the waitlist!');
+                    }
+                }, 1500);
+            });
+        }
+    }
+});
+
 // Custom Notification System
 function showNotification(type, title, message) {
     const modal = document.getElementById('notificationModal');
     const modalTitle = modal.querySelector('.notification-title');
     const modalMessage = modal.querySelector('.notification-message');
     const modalIcon = modal.querySelector('.notification-icon');
-
+    
     // Set content
     modalTitle.textContent = title;
     modalMessage.textContent = message;
-
+    
     // Set type (success, error, info)
     modal.className = `notification-modal ${type}`;
-
+    
     // Show modal
     modal.classList.add('show');
-
+    
     // Ensure cursor is visible and working (only on desktop)
     if (window.showCursorAfterLoading) {
         window.showCursorAfterLoading();
     }
-
+    
     // Auto-hide after 4 seconds
     setTimeout(() => {
         hideNotification();
@@ -2127,7 +2114,7 @@ function showNotification(type, title, message) {
 function hideNotification() {
     const modal = document.getElementById('notificationModal');
     modal.classList.remove('show');
-
+    
     // Ensure cursor is still visible after hiding notification (only on desktop)
     if (window.showCursorAfterLoading) {
         window.showCursorAfterLoading();
@@ -2135,16 +2122,16 @@ function hideNotification() {
 }
 
 // Close notification when button is clicked
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function() {
     const closeBtn = document.getElementById('notificationClose');
     if (closeBtn) {
         closeBtn.addEventListener('click', hideNotification);
     }
-
+    
     // Close notification when clicking outside
     const modal = document.getElementById('notificationModal');
     if (modal) {
-        modal.addEventListener('click', function (e) {
+        modal.addEventListener('click', function(e) {
             if (e.target === modal) {
                 hideNotification();
             }
