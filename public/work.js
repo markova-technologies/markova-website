@@ -2148,3 +2148,115 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// Workforce Visualization Logic
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Tooltips
+    const nodes = document.querySelectorAll('.viz-node[data-tooltip]');
+    const tooltip = document.getElementById('vizTooltip');
+    
+    if (nodes.length > 0 && tooltip) {
+        nodes.forEach(node => {
+            node.addEventListener('mouseenter', (e) => {
+                const text = node.getAttribute('data-tooltip');
+                tooltip.textContent = text;
+                tooltip.classList.add('show');
+            });
+            node.addEventListener('mousemove', (e) => {
+                tooltip.style.left = e.clientX + 15 + 'px';
+                tooltip.style.top = e.clientY + 15 + 'px';
+            });
+            node.addEventListener('mouseleave', () => {
+                tooltip.classList.remove('show');
+            });
+        });
+    }
+
+    // 2. Scenario Cycling
+    const scenarios = [
+        {
+            objective: "Customer wants to book an appointment",
+            commander: "Routing request...",
+            sales: "Checking CRM...",
+            support: "Idle",
+            ops: "Idle",
+            systems: "Finding available time...",
+            outcome: "Appointment confirmed"
+        },
+        {
+            objective: "Customer asks about an order status",
+            commander: "Analyzing query...",
+            sales: "Idle",
+            support: "Locating order #8492...",
+            ops: "Checking warehouse system...",
+            systems: "Retrieving shipping data...",
+            outcome: "Status update sent"
+        },
+        {
+            objective: "Lead wants a product demo",
+            commander: "Qualifying lead...",
+            sales: "Preparing demo pitch...",
+            support: "Idle",
+            ops: "Idle",
+            systems: "Scheduling calendar event...",
+            outcome: "Demo scheduled"
+        },
+        {
+            objective: "Business needs a weekly internal report",
+            commander: "Initiating report sequence...",
+            sales: "Idle",
+            support: "Idle",
+            ops: "Aggregating metrics...",
+            systems: "Querying database...",
+            outcome: "Report generated & sent"
+        }
+    ];
+
+    let currentScenarioIndex = 0;
+    const scenarioObjective = document.getElementById('scenarioObjective');
+    const statusCommander = document.getElementById('statusCommander');
+    const statusSales = document.getElementById('statusSales');
+    const statusSupport = document.getElementById('statusSupport');
+    const statusOps = document.getElementById('statusOps');
+    const statusSystems = document.getElementById('statusSystems');
+    const statusOutcome = document.getElementById('statusOutcome');
+
+    function updateScenario() {
+        if (!scenarioObjective) return;
+        
+        // Fade out slightly
+        scenarioObjective.style.opacity = 0;
+        
+        setTimeout(() => {
+            currentScenarioIndex = (currentScenarioIndex + 1) % scenarios.length;
+            const s = scenarios[currentScenarioIndex];
+            
+            scenarioObjective.textContent = s.objective;
+            statusCommander.textContent = s.commander;
+            statusSales.textContent = s.sales;
+            statusSupport.textContent = s.support;
+            statusOps.textContent = s.ops;
+            statusSystems.textContent = s.systems;
+            statusOutcome.textContent = s.outcome;
+            
+            // Set active states
+            statusCommander.className = 'node-status ' + (s.commander !== 'Idle' ? 'active-text' : '');
+            statusSales.className = 'node-status ' + (s.sales !== 'Idle' ? 'active-text' : '');
+            statusSupport.className = 'node-status ' + (s.support !== 'Idle' ? 'active-text' : '');
+            statusOps.className = 'node-status ' + (s.ops !== 'Idle' ? 'active-text' : '');
+            statusSystems.className = 'node-status ' + (s.systems !== 'Idle' ? 'active-text' : '');
+            
+            // Update indicator dots
+            document.querySelector('.node-commander .status-indicator').classList.toggle('active', s.commander !== 'Idle');
+            document.querySelectorAll('.node-agent')[0].querySelector('.status-indicator').classList.toggle('active', s.sales !== 'Idle');
+            document.querySelectorAll('.node-agent')[1].querySelector('.status-indicator').classList.toggle('active', s.support !== 'Idle');
+            document.querySelectorAll('.node-agent')[2].querySelector('.status-indicator').classList.toggle('active', s.ops !== 'Idle');
+            
+            scenarioObjective.style.opacity = 1;
+        }, 500);
+    }
+
+    if (scenarioObjective) {
+        setInterval(updateScenario, 6000);
+    }
+});
