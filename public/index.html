@@ -95,9 +95,7 @@
   </script>
 </head>
 <body>
-    <!-- Cursor Effect -->
-    <div class="cursor"></div>
-    <div class="cursor-follower"></div>
+    <!-- Cursor Effect Removed -->
 
     <!-- Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
@@ -127,9 +125,9 @@
                 <a href="#portfolio" class="nav-link" data-text="Why Markova">Why Markova</a>
             </div>
             <div class="nav-cta">
-                <a href="http://localhost:5173/signup" target="_blank">
+                <a href="#waitlist" class="open-waitlist-btn">
                   <button class="cta-button" style="background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2);">
-                      <span>Sign Up</span>
+                      <span>Waitlist</span>
                   </button>
                 </a>
             </div>
@@ -183,7 +181,7 @@
                             <div class="btn-bg"></div>
                             <div class="btn-particles"></div>
                         </button>
-                        <a href="http://localhost:5173/signup" target="_blank" style="margin-left: 15px; display: inline-flex; align-items: center; justify-content: center; padding: 12px 30px; font-weight: 600; color: #fff; background: var(--primary-color); border-radius: 50px; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(58, 134, 255, 0.4);">Sign Up Free</a>
+                        <a href="#waitlist" class="open-waitlist-btn" style="margin-left: 15px; display: inline-flex; align-items: center; justify-content: center; padding: 12px 30px; font-weight: 600; color: #fff; background: var(--primary-color); border-radius: 50px; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(58, 134, 255, 0.4);">Join Waitlist</a>
                     </div>
 
                     <div class="hero-stats">
@@ -220,15 +218,11 @@
             <div class="details-carousel-wrapper">
                 <button class="carousel-arrow carousel-arrow-left" id="carouselLeft" aria-label="Scroll left"><i class="fas fa-chevron-left"></i></button>
                 <div class="details-carousel" id="detailsCarousel">
-                    <div class="detail-card">
-                        <h3><i class="fas fa-leaf" style="color: #2ecc71; margin-right: 10px;"></i>NuraCare (HealthTech)</h3>
-                        <p>AI-powered healthcare platform designed to improve accessibility through intelligent guidance, patient support, medication reminders, and multilingual assistance.</p>
-                        <a href="https://nuracare.vercel.app" target="_blank" rel="noopener noreferrer" style="display: inline-block; margin-top: 15px; color: #2ecc71; font-weight: 500; text-decoration: none;">Visit NuraCare <i class="fas fa-external-link-alt" style="font-size: 0.8em; margin-left: 3px;"></i></a>
-                    </div>
+
                     <div class="detail-card">
                         <h3><i class="fas fa-microphone" style="color: #a18cd1; margin-right: 10px;"></i>MARKOVA Voice</h3>
                         <p>AI call center platform enabling businesses to automate inbound and outbound communication using intelligent, multi-lingual voice agents.</p>
-                        <a href="http://localhost:5173/signup" target="_blank" style="display: inline-block; margin-top: 15px; color: #a18cd1; font-weight: 500; text-decoration: none;">Open Dashboard <i class="fas fa-arrow-right"></i></a>
+                        <a href="#waitlist" class="open-waitlist-btn" style="display: inline-block; margin-top: 15px; color: #a18cd1; font-weight: 500; text-decoration: none;">Join Waitlist <i class="fas fa-arrow-right"></i></a>
                     </div>
                     <div class="detail-card">
                         <h3><i class="fas fa-robot" style="color: #fbc2eb; margin-right: 10px;"></i>Custom AI Agents</h3>
@@ -650,6 +644,36 @@
         </div>
     </section>
 
+    <!-- Partners Section -->
+    <section id="partners" class="partners-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i class="fas fa-handshake"></i>
+                    <span>Our Partners</span>
+                </div>
+                <h2 class="section-title">Strategic Partnerships</h2>
+                <p class="section-subtitle">Collaborating with industry leaders to bring intelligent systems to everyone.</p>
+            </div>
+            
+            <div class="partners-grid">
+                <div class="partner-card glass-panel">
+                    <div class="partner-logo">
+                        <i class="fas fa-leaf" style="color: #2ecc71; font-size: 3rem;"></i>
+                    </div>
+                    <div class="partner-info">
+                        <h3>NuraCare</h3>
+                        <span class="partner-category">HealthTech</span>
+                        <p>AI-powered healthcare platform designed to improve accessibility through intelligent guidance, patient support, medication reminders, and multilingual assistance.</p>
+                        <a href="https://nuracare.vercel.app" target="_blank" rel="noopener noreferrer" class="partner-link">
+                            Visit NuraCare <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -664,7 +688,6 @@
                 <div class="footer-links">
                     <div class="footer-column">
                         <h4>Products</h4>
-                        <a href="#about">NuraCare</a>
                         <a href="#about">Markova Voice</a>
                         <a href="#services">Custom AI Agents</a>
                         <a href="#contact">Book a Demo</a>
@@ -748,5 +771,52 @@
       v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
   })(document, 'script');
 </script>
+    <!-- Waitlist Modal -->
+    <div class="waitlist-modal" id="waitlistModal">
+        <div class="waitlist-content glass-panel">
+            <span class="waitlist-close" id="waitlistClose">&times;</span>
+            <div class="waitlist-header">
+                <div class="section-badge">
+                    <i class="fas fa-star"></i>
+                    <span>Exclusive Access</span>
+                </div>
+                <h2>Join the Waitlist</h2>
+                <p>Be the first to know when Markova Voice becomes available.</p>
+            </div>
+            <form id="waitlistForm" class="waitlist-form">
+                <div class="form-group">
+                    <input type="text" id="waitlistName" required placeholder=" ">
+                    <label for="waitlistName">Full Name</label>
+                    <div class="form-highlight"></div>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="waitlistEmail" required placeholder=" ">
+                    <label for="waitlistEmail">Work Email</label>
+                    <div class="form-highlight"></div>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="waitlistCompany" required placeholder=" ">
+                    <label for="waitlistCompany">Company Name</label>
+                    <div class="form-highlight"></div>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="waitlistRole" required placeholder=" ">
+                    <label for="waitlistRole">Your Role</label>
+                    <div class="form-highlight"></div>
+                </div>
+                <button type="submit" class="submit-btn primary-btn">
+                    <span class="btn-text">Join Now</span>
+                    <div class="btn-bg"></div>
+                    <div class="btn-loader">
+                        <div class="loader-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

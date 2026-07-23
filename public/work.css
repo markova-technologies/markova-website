@@ -640,10 +640,6 @@ section {
     margin-bottom: 5rem;
 }
 
-.section-header {
-
-}
-
 .section-badge {
     display: inline-flex;
     align-items: center;
@@ -2121,4 +2117,141 @@ strong {
     .services-image-text-grid {
         gap: 1.5rem;
     }
+}
+
+/* --- Waitlist Modal Styles --- */
+.waitlist-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 10, 15, 0.85);
+    backdrop-filter: blur(8px);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+.waitlist-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+.waitlist-content {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 2.5rem;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    transform: translateY(20px);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+.waitlist-modal.active .waitlist-content {
+    transform: translateY(0);
+}
+.waitlist-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 1.8rem;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+.waitlist-close:hover {
+    color: #fff;
+}
+.waitlist-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.waitlist-header h2 {
+    font-size: 2rem;
+    margin: 10px 0;
+    background: linear-gradient(135deg, #fff 0%, #a18cd1 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.waitlist-header p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+.waitlist-form .form-group {
+    margin-bottom: 1.5rem;
+}
+.waitlist-form .form-group input {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+.waitlist-form .submit-btn {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+/* --- Partners Section Styles --- */
+.partners-section {
+    padding: 5rem 0;
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(circle at 50% 0%, rgba(58, 134, 255, 0.05) 0%, transparent 70%);
+}
+.partners-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+.partner-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 2.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+.partner-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+.partner-logo {
+    margin-bottom: 1.5rem;
+}
+.partner-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+.partner-category {
+    display: inline-block;
+    padding: 4px 12px;
+    background: rgba(46, 204, 113, 0.1);
+    color: #2ecc71;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+.partner-info p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+.partner-link {
+    color: #2ecc71;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+.partner-link:hover {
+    color: #fff;
 }

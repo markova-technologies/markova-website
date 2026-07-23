@@ -1,4 +1,4 @@
-﻿// Enhanced JavaScript for Markova Website
+// Enhanced JavaScript for Markova Website
 
 /**
  * CALLING CODE NORMALIZATION HELPER
@@ -1854,16 +1854,14 @@ document.addEventListener('DOMContentLoaded', function() {
             debouncedHoverLeave(item);
         }, { passive: true });
         
-        // Add touch support for mobile devices
+        // Add touch support for mobile devices without blocking scroll/click
         item.addEventListener('touchstart', (e) => {
-            e.preventDefault();
             debouncedHoverEnter(item);
-        }, { passive: false });
+        }, { passive: true });
         
         item.addEventListener('touchend', (e) => {
-            e.preventDefault();
             debouncedHoverLeave(item);
-        }, { passive: false });
+        }, { passive: true });
     });
 
     // Touch gesture support for mobile devices
@@ -2002,69 +2000,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
     }
     
-    // Hide pointer cursor on all interactive elements for desktop
-    if (!isMobileDevice()) {
-        // Set cursor: none on all interactive elements with !important
-        const interactiveElements = document.querySelectorAll(`
-            button, a, .nav-link, .cta-button, .primary-btn, .secondary-btn, 
-            .service-btn, .submit-btn, .view-case, 
-            .social-fixed-link, .carousel-arrow, .notification-btn,
-            .btn, .service-hover, [role="button"], [onclick]
-        `);
-        
-        interactiveElements.forEach(element => {
-            element.style.setProperty('cursor', 'none', 'important');
-        });
-        
-        // Keep text cursor for form inputs
-        const formInputs = document.querySelectorAll('input, textarea, select');
-        formInputs.forEach(input => {
-            input.style.setProperty('cursor', 'text', 'important');
-        });
-    }
-    
-    // Additional mobile detection on window resize
-    window.addEventListener('resize', () => {
-        if (isMobileDevice()) {
-            const cursor = document.querySelector('.cursor');
-            const cursorFollower = document.querySelector('.cursor-follower');
-            
-            if (cursor) cursor.style.display = 'none';
-            if (cursorFollower) cursorFollower.style.display = 'none';
-            document.body.style.cursor = 'auto';
-            
-            // Restore pointer cursor on mobile for interactive elements
-            const interactiveElements = document.querySelectorAll(`
-                button, a, .nav-link, .cta-button, .primary-btn, .secondary-btn, 
-                .service-btn, .submit-btn, .view-case, 
-                .social-fixed-link, .carousel-arrow, .notification-btn,
-                .btn, .service-hover, [role="button"], [onclick]
-            `);
-            interactiveElements.forEach(element => {
-                element.style.cursor = 'pointer';
-            });
-        } else {
-            // Desktop behavior when resizing - hide all cursors except custom
-            document.body.style.cursor = 'none';
-            
-            // Hide pointer cursor on all interactive elements with !important
-            const interactiveElements = document.querySelectorAll(`
-                button, a, .nav-link, .cta-button, .primary-btn, .secondary-btn, 
-                .service-btn, .submit-btn, .view-case, 
-                .social-fixed-link, .carousel-arrow, .notification-btn,
-                .btn, .service-hover, [role="button"], [onclick]
-            `);
-            interactiveElements.forEach(element => {
-                element.style.setProperty('cursor', 'none', 'important');
-            });
-            
-            // Keep text cursor for form inputs
-            const formInputs = document.querySelectorAll('input, textarea, select');
-            formInputs.forEach(input => {
-                input.style.setProperty('cursor', 'text', 'important');
-            });
-        }
-    });
+    // Cursor pointer override logic removed
 });
 
 // Add some utility functions
@@ -2095,6 +2031,57 @@ function revealOnScroll() {
 }
 
 window.addEventListener('scroll', debounce(revealOnScroll, 20));
+
+window.showNotification = showNotification;
+
+// Waitlist Modal Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const waitlistModal = document.getElementById('waitlistModal');
+    const waitlistClose = document.getElementById('waitlistClose');
+    const waitlistForm = document.getElementById('waitlistForm');
+    const openBtns = document.querySelectorAll('.open-waitlist-btn');
+
+    if (waitlistModal && openBtns.length > 0) {
+        openBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                waitlistModal.classList.add('active');
+            });
+        });
+
+        waitlistClose.addEventListener('click', () => {
+            waitlistModal.classList.remove('active');
+        });
+
+        waitlistModal.addEventListener('click', (e) => {
+            if (e.target === waitlistModal) {
+                waitlistModal.classList.remove('active');
+            }
+        });
+
+        if (waitlistForm) {
+            waitlistForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const btn = waitlistForm.querySelector('button[type="submit"]');
+                if (btn) btn.classList.add('loading');
+                
+                // Simulate network request
+                setTimeout(() => {
+                    if (btn) btn.classList.remove('loading');
+                    waitlistModal.classList.remove('active');
+                    waitlistForm.reset();
+                    
+                    // Show success notification
+                    if (window.showNotification) {
+                        window.showNotification('success', 'Success!', 'You have been added to the waitlist. We will contact you soon!');
+                    } else {
+                        alert('You have been added to the waitlist!');
+                    }
+                }, 1500);
+            });
+        }
+    }
+});
 
 // Custom Notification System
 function showNotification(type, title, message) {
