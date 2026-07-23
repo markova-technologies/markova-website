@@ -2325,24 +2325,178 @@ strong {
     margin-top: 3rem;
 }
 
-/* --- Living Workforce Visualization --- */
-.workforce-section {
+/* --- The Markova Operating Model Section --- */
+.operating-model-section {
     position: relative;
-    padding: 6rem 0;
+    padding: 8rem 0;
     overflow: hidden;
     background: #0a0a0f;
 }
 
-.ambient-glow {
+/* Global Ambient Glows */
+.ambient-glow-green, .ambient-glow-blue {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     width: 80vw;
     height: 80vh;
-    background: radial-gradient(circle, rgba(13, 107, 61, 0.08) 0%, rgba(26, 58, 107, 0.05) 40%, transparent 70%);
     pointer-events: none;
     z-index: 1;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.15;
+}
+
+.ambient-glow-green {
+    top: -20%;
+    left: -10%;
+    background: radial-gradient(circle, rgba(13, 107, 61, 0.8) 0%, transparent 70%);
+}
+
+.ambient-glow-blue {
+    bottom: -20%;
+    right: -10%;
+    background: radial-gradient(circle, rgba(26, 58, 107, 0.8) 0%, transparent 70%);
+}
+
+/* Pipeline Layout */
+.op-model-pipeline {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.pipeline-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 40px;
+    width: 2px;
+    background: linear-gradient(to bottom, transparent, rgba(79, 172, 254, 0.3) 10%, rgba(46, 204, 113, 0.3) 90%, transparent);
+    z-index: 2;
+}
+
+.op-stage {
+    position: relative;
+    margin-bottom: 5rem;
+    padding-left: 100px;
+    z-index: 3;
+}
+
+.op-stage:last-child {
+    margin-bottom: 0;
+}
+
+.stage-number {
+    position: absolute;
+    left: 16px;
+    top: 0;
+    width: 50px;
+    height: 50px;
+    background: rgba(10, 10, 15, 0.9);
+    border: 2px solid rgba(79, 172, 254, 0.5);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: #4facfe;
+    box-shadow: 0 0 20px rgba(79, 172, 254, 0.2);
+    z-index: 4;
+}
+
+.op-stage.right-align .stage-number { border-color: #a18cd1; color: #a18cd1; box-shadow: 0 0 20px rgba(161, 140, 209, 0.2); }
+.op-stage:nth-child(5) .stage-number { border-color: #2ecc71; color: #2ecc71; box-shadow: 0 0 20px rgba(46, 204, 113, 0.2); }
+
+.stage-content {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 2.5rem;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.stage-content:hover {
+    transform: translateX(5px);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.stage-content h3 {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 0.5rem;
+}
+
+.stage-content h4 {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.stage-content p {
+    color: #a0aec0;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.stage-example {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-left: 3px solid #2ecc71;
+    border-radius: 0 8px 8px 0;
+}
+
+.example-label {
+    display: inline-block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #2ecc71;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.stage-example p {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+}
+.stage-example p:last-child {
+    margin-bottom: 0;
+}
+
+/* Adjust layout for full width stages (Stage 04 & 05) */
+.op-stage.full-width, .op-stage.center-align {
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.op-stage.full-width .stage-number, .op-stage.center-align .stage-number {
+    position: relative;
+    left: auto;
+    top: auto;
+    margin-bottom: 2rem;
+}
+
+.op-stage.full-width .stage-content, .op-stage.center-align .stage-content {
+    width: 100%;
+}
+
+.op-stage.center-align .stage-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .pipeline-line { left: 20px; }
+    .stage-number { left: -5px; width: 40px; height: 40px; font-size: 0.9rem; }
+    .op-stage { padding-left: 60px; margin-bottom: 3rem; }
 }
 
 .scenario-display {
