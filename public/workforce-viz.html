@@ -113,9 +113,11 @@
             background: rgba(255,255,255,.015);
             border: 1px solid rgba(255,255,255,.06);
             border-radius: 28px;
-            padding: 3rem 2rem;
+            padding: 1.5rem 1rem;
             position: relative;
             overflow: hidden;
+            transform: scale(0.9);
+            transform-origin: top center;
         }
         .workforce-viz-full::before {
             content: '';
@@ -125,55 +127,8 @@
             pointer-events: none;
         }
 
-        /* Explainer below */
-        .viz-explainer {
-            margin-top: 3rem;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-        }
-        .viz-explain-card {
-            background: rgba(255,255,255,.02);
-            border: 1px solid rgba(255,255,255,.05);
-            border-radius: 16px;
-            padding: 1.5rem;
-        }
-        .viz-explain-card h5 {
-            font-size: .85rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: rgba(255,255,255,.4);
-            margin-bottom: .6rem;
-        }
-        .viz-explain-card p {
-            color: rgba(255,255,255,.55);
-            font-size: .9rem;
-            line-height: 1.6;
-        }
-
-        /* Nav links */
-        .viz-stage-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 4rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,.06);
-        }
-        .viz-stage-nav a {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: rgba(255,255,255,.4);
-            text-decoration: none;
-            font-size: .9rem;
-            font-weight: 500;
-            transition: color .3s;
-        }
-        .viz-stage-nav a:hover { color: #fff; }
-
         @media (max-width: 768px) {
-            .viz-explainer { grid-template-columns: 1fr; }
+            .workforce-viz-full { transform: scale(1); }
         }
     </style>
 </head>
@@ -192,14 +147,18 @@
             <div class="nav-links">
                 <a href="index.html#platform" class="nav-link" data-text="Platform">Platform</a>
                 <a href="index.html#capabilities" class="nav-link" data-text="Capabilities">Capabilities</a>
-                <a href="workforce.html" class="nav-link" data-text="Workforce">Workforce</a>
+                <div class="nav-dropdown">
+                    <a href="workforce.html" class="nav-link" data-text="Workforce">Workforce <i class="fas fa-chevron-down nav-chevron"></i></a>
+                    <div class="nav-dropdown-menu">
+                        <a href="workforce-viz.html" class="nav-dropdown-item"><i class="fas fa-network-wired"></i> Visual Operation</a>
+                    </div>
+                </div>
                 <a href="index.html#ecosystem" class="nav-link" data-text="Ecosystem">Ecosystem</a>
-                <a href="workforce-viz.html" class="nav-link nav-link-accent nav-link-active" data-text="Visual Operation">Visual Operation</a>
             </div>
             <div class="nav-cta">
-                <a href="index.html#waitlist" class="open-waitlist-btn">
+                <a href="index.html#contact">
                     <button class="cta-button" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;">
-                        <span>Explore Markova</span>
+                        <span>Contact Us</span>
                     </button>
                 </a>
             </div>
@@ -212,32 +171,13 @@
     <!-- Hero -->
     <div class="viz-hero">
         <div class="container">
-            <a href="workforce.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Operating Model</a>
-            <div class="section-badge" style="background: rgba(161,140,209,.1); border-color: rgba(161,140,209,.2);">
-                <i class="fas fa-network-wired" style="color: #a18cd1;"></i>
-                <span style="color: #a18cd1;">Stage 04 · Live Visualization</span>
-            </div>
             <h1>One business.<br><span>A workforce of AI specialists.</span></h1>
             <p>Watch in real time as the Commander AI receives a business objective and coordinates specialized agents to complete the work — no human intervention required.</p>
-            <div class="stage-breadcrumb">
-                <a href="workforce.html#stage-03"><i class="fas fa-chevron-left"></i> 03 · Act</a>
-                <span>·</span>
-                <span class="current">04 · Work Together</span>
-                <span>·</span>
-                <a href="workforce.html#stage-05">05 · Stay Accountable <i class="fas fa-chevron-right"></i></a>
-            </div>
         </div>
     </div>
 
     <!-- Main viz content -->
     <div class="viz-page-wrapper">
-
-        <!-- Scenario switcher -->
-        <div class="scenario-switcher">
-            <button class="scenario-btn active" data-scenario="appointment">Book an Appointment</button>
-            <button class="scenario-btn" data-scenario="support">Resolve a Support Ticket</button>
-            <button class="scenario-btn" data-scenario="order">Check an Order Status</button>
-        </div>
 
         <!-- Live Visualization -->
         <div class="workforce-viz-full">
@@ -345,28 +285,8 @@
             <div id="vizTooltip" class="viz-tooltip">Tooltip text</div>
         </div>
 
-        <!-- Explainer cards -->
-        <div class="viz-explainer">
-            <div class="viz-explain-card">
-                <h5>Commander</h5>
-                <p>The central intelligence. Receives any business objective, reasons about which agents are needed, and delegates the work.</p>
-            </div>
-            <div class="viz-explain-card">
-                <h5>Specialist Agents</h5>
-                <p>Purpose-built AI workers for Sales, Support, and Operations. Each one knows its domain and the business context deeply.</p>
-            </div>
-            <div class="viz-explain-card">
-                <h5>Knowledge &amp; Tools</h5>
-                <p>The agents' access layer — your CRM, calendar, ERP, email, and internal documents, all connected and actionable.</p>
-            </div>
-        </div>
 
-        <!-- Stage navigation -->
-        <div class="viz-stage-nav">
-            <a href="workforce.html#stage-03"><i class="fas fa-arrow-left"></i> 03 · Act</a>
-            <a href="workforce.html">View Full Operating Model</a>
-            <a href="workforce.html#stage-05">05 · Stay Accountable <i class="fas fa-arrow-right"></i></a>
-        </div>
+
 
     </div>
 
