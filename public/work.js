@@ -2249,6 +2249,201 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.node-agent')[0].querySelector('.status-indicator').classList.toggle('active', s.sales !== 'Idle');
             document.querySelectorAll('.node-agent')[1].querySelector('.status-indicator').classList.toggle('active', s.support !== 'Idle');
             document.querySelectorAll('.node-agent')[2].querySelector('.status-indicator').classList.toggle('active', s.ops !== 'Idle');
+        });
+
+        waitlistModal.addEventListener('click', (e) => {
+            if (e.target === waitlistModal) {
+                waitlistModal.classList.remove('active');
+            }
+        });
+
+        if (waitlistForm) {
+            waitlistForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const btn = waitlistForm.querySelector('button[type="submit"]');
+                if (btn) btn.classList.add('loading');
+                
+                // Simulate network request
+                setTimeout(() => {
+                    if (btn) btn.classList.remove('loading');
+                    waitlistModal.classList.remove('active');
+                    waitlistForm.reset();
+
+                    // Increment waitlist count
+                    waitlistCount++;
+                    localStorage.setItem('markovaWaitlistCount', waitlistCount.toString());
+                    if (waitlistCountEl) waitlistCountEl.textContent = waitlistCount;
+                    
+                    // Show success notification
+                    if (window.showNotification) {
+                        window.showNotification('success', 'You\'re on the list!', 'You have been added to the waitlist. We will contact you soon!');
+                    } else {
+                        alert('You have been added to the waitlist!');
+                    }
+                }, 1500);
+            });
+        }
+    }
+});
+
+// Custom Notification System
+function showNotification(type, title, message) {
+    const modal = document.getElementById('notificationModal');
+    const modalTitle = modal.querySelector('.notification-title');
+    const modalMessage = modal.querySelector('.notification-message');
+    const modalIcon = modal.querySelector('.notification-icon');
+    
+    // Set content
+    modalTitle.textContent = title;
+    modalMessage.textContent = message;
+    
+    // Set type (success, error, info)
+    modal.className = `notification-modal ${type}`;
+    
+    // Show modal
+    modal.classList.add('show');
+    
+    // Ensure cursor is visible and working (only on desktop)
+    if (window.showCursorAfterLoading) {
+        window.showCursorAfterLoading();
+    }
+    
+    // Auto-hide after 4 seconds
+    setTimeout(() => {
+        hideNotification();
+    }, 4000);
+}
+
+function hideNotification() {
+    const modal = document.getElementById('notificationModal');
+    modal.classList.remove('show');
+    
+    // Ensure cursor is still visible after hiding notification (only on desktop)
+    if (window.showCursorAfterLoading) {
+        window.showCursorAfterLoading();
+    }
+}
+
+// Close notification when button is clicked
+document.addEventListener('DOMContentLoaded', function() {
+    const closeBtn = document.getElementById('notificationClose');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', hideNotification);
+    }
+    
+    // Close notification when clicking outside
+    const modal = document.getElementById('notificationModal');
+    if (modal) {
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                hideNotification();
+            }
+        });
+    }
+});
+
+// Workforce Visualization Logic
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Tooltips
+    const nodes = document.querySelectorAll('.viz-node[data-tooltip]');
+    const tooltip = document.getElementById('vizTooltip');
+    
+    if (nodes.length > 0 && tooltip) {
+        nodes.forEach(node => {
+            node.addEventListener('mouseenter', (e) => {
+                const text = node.getAttribute('data-tooltip');
+                tooltip.textContent = text;
+                tooltip.classList.add('show');
+            });
+            node.addEventListener('mousemove', (e) => {
+                tooltip.style.left = e.clientX + 15 + 'px';
+                tooltip.style.top = e.clientY + 15 + 'px';
+            });
+            node.addEventListener('mouseleave', () => {
+                tooltip.classList.remove('show');
+            });
+        });
+    }
+
+    // 2. Scenario Cycling
+    const scenarios = [
+        {
+            objective: "Customer wants to book an appointment",
+            commander: "Routing request...",
+            sales: "Checking CRM...",
+            support: "Idle",
+            ops: "Idle",
+            systems: "Finding available time...",
+            outcome: "Appointment confirmed"
+        },
+        {
+            objective: "Customer asks about an order status",
+            commander: "Analyzing query...",
+            sales: "Idle",
+            support: "Locating order #8492...",
+            ops: "Checking warehouse system...",
+            systems: "Retrieving shipping data...",
+            outcome: "Status update sent"
+        },
+        {
+            objective: "Lead wants a product demo",
+            commander: "Qualifying lead...",
+            sales: "Preparing demo pitch...",
+            support: "Idle",
+            ops: "Idle",
+            systems: "Scheduling calendar event...",
+            outcome: "Demo scheduled"
+        },
+        {
+            objective: "Business needs a weekly internal report",
+            commander: "Initiating report sequence...",
+            sales: "Idle",
+            support: "Idle",
+            ops: "Aggregating metrics...",
+            systems: "Querying database...",
+            outcome: "Report generated & sent"
+        }
+    ];
+
+    let currentScenarioIndex = 0;
+    const scenarioObjective = document.getElementById('scenarioObjective');
+    const statusCommander = document.getElementById('statusCommander');
+    const statusSales = document.getElementById('statusSales');
+    const statusSupport = document.getElementById('statusSupport');
+    const statusOps = document.getElementById('statusOps');
+    const statusSystems = document.getElementById('statusSystems');
+    const statusOutcome = document.getElementById('statusOutcome');
+
+    function updateScenario() {
+        if (!scenarioObjective) return;
+        
+        // Fade out slightly
+        scenarioObjective.style.opacity = 0;
+        
+        setTimeout(() => {
+            currentScenarioIndex = (currentScenarioIndex + 1) % scenarios.length;
+            const s = scenarios[currentScenarioIndex];
+            
+            scenarioObjective.textContent = s.objective;
+            statusCommander.textContent = s.commander;
+            statusSales.textContent = s.sales;
+            statusSupport.textContent = s.support;
+            statusOps.textContent = s.ops;
+            statusSystems.textContent = s.systems;
+            statusOutcome.textContent = s.outcome;
+            
+            // Set active states
+            statusCommander.className = 'node-status ' + (s.commander !== 'Idle' ? 'active-text' : '');
+            statusSales.className = 'node-status ' + (s.sales !== 'Idle' ? 'active-text' : '');
+            statusSupport.className = 'node-status ' + (s.support !== 'Idle' ? 'active-text' : '');
+            statusOps.className = 'node-status ' + (s.ops !== 'Idle' ? 'active-text' : '');
+            statusSystems.className = 'node-status ' + (s.systems !== 'Idle' ? 'active-text' : '');
+            
+            // Update indicator dots
+            document.querySelector('.node-commander .status-indicator').classList.toggle('active', s.commander !== 'Idle');
+            document.querySelectorAll('.node-agent')[0].querySelector('.status-indicator').classList.toggle('active', s.sales !== 'Idle');
+            document.querySelectorAll('.node-agent')[1].querySelector('.status-indicator').classList.toggle('active', s.support !== 'Idle');
+            document.querySelectorAll('.node-agent')[2].querySelector('.status-indicator').classList.toggle('active', s.ops !== 'Idle');
             
             scenarioObjective.style.opacity = 1;
         }, 500);
@@ -2256,5 +2451,79 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (scenarioObjective) {
         setInterval(updateScenario, 6000);
+    }
+
+    /* --- Operating Model Advanced Animations --- */
+    
+    // 1. Reveal on Scroll
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.15
+    };
+    
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target); // Only animate once
+            }
+        });
+    }, observerOptions);
+    
+    document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+        revealObserver.observe(el);
+    });
+
+    // 2. Spotlight Hover Effect for Cards
+    const stageContents = document.querySelectorAll('.stage-content');
+    stageContents.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--x', `${x}px`);
+            card.style.setProperty('--y', `${y}px`);
+        });
+    });
+
+    // 3. Pipeline Scroll Progress
+    const pipelineSection = document.getElementById('opModelPipeline');
+    const pipelineFill = document.getElementById('pipelineFill');
+    const stages = document.querySelectorAll('.op-stage');
+    
+    if (pipelineSection && pipelineFill) {
+        window.addEventListener('scroll', () => {
+            const rect = pipelineSection.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            
+            // Start filling when the top of the pipeline hits the middle of the screen
+            const startOffset = windowHeight / 2;
+            let progress = 0;
+            
+            if (rect.top < startOffset) {
+                const totalHeight = rect.height;
+                const scrolledDistance = startOffset - rect.top;
+                // Add a little buffer so it fills all the way
+                progress = Math.max(0, Math.min(100, (scrolledDistance / (totalHeight - 100)) * 100));
+            }
+            
+            pipelineFill.style.height = `${progress}%`;
+            
+            // Activate stages based on pipeline progress
+            stages.forEach((stage) => {
+                const stageRect = stage.getBoundingClientRect();
+                
+                // If the "fill" passes the stage number circle (approx top + 50px)
+                if (startOffset > stageRect.top + 25) {
+                    stage.classList.add('is-active');
+                } else {
+                    stage.classList.remove('is-active');
+                }
+            });
+        });
+        
+        // Trigger once on load in case user refreshed partway down
+        window.dispatchEvent(new Event('scroll'));
     }
 });
