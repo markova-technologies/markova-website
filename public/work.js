@@ -1816,7 +1816,6 @@ document.addEventListener('DOMContentLoaded', function() {
             // Use requestAnimationFrame for smooth transitions
             requestAnimationFrame(() => {
                 mainServiceImage.src = img;
-                servicesImageDisplay.classList.add('img-glow-animate');
                 isChangingImage = false;
             });
         }
@@ -1831,7 +1830,6 @@ document.addEventListener('DOMContentLoaded', function() {
             
             requestAnimationFrame(() => {
                 mainServiceImage.src = originalImg;
-                servicesImageDisplay.classList.remove('img-glow-animate');
                 isChangingImage = false;
             });
         }

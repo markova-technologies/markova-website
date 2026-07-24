@@ -2072,19 +2072,6 @@ strong {
     text-align: center;
 }
 
-.services-image.img-glow-animate img,
-#servicesImageDisplay.img-glow-animate img {
-    box-shadow: 0 0 40px 10px var(--accent), 0 0 80px 20px var(--primary);
-    filter: brightness(1.1) saturate(1.2);
-    transform: scale(1.05) rotate(-2deg);
-    transition: box-shadow 0.4s, filter 0.4s, transform 0.4s;
-    animation: imgPulse 1.2s infinite alternate;
-}
-@keyframes imgPulse {
-    0% { box-shadow: 0 0 40px 10px var(--accent), 0 0 80px 20px var(--primary); }
-    100% { box-shadow: 0 0 60px 20px var(--accent), 0 0 100px 30px var(--primary); }
-}
-
 @media (max-width: 1000px) {
     .services-image-text-grid {
         grid-template-columns: 1fr;
