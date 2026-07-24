@@ -1,0 +1,28 @@
+# Markova - AI Workforce Operating System
+
+## Company Overview
+Markova is an AI-powered agency and technology company that builds intelligent systems and AI workforces to solve real-world business problems. Unlike traditional chatbots that merely answer questions, Markova develops AI agents that understand business context, execute tasks across connected systems, and collaborate with human teams.
+
+## Key Products
+
+### Markova Operating System
+The Markova OS is an AI Workforce Operating System that allows businesses to deploy specialized AI agents. It consists of 5 core stages:
+1. Understand: AI ingests unstructured data and context.
+2. Think: AI reasons through the best path to accomplish an objective.
+3. Act: AI uses tools and integrations to perform work.
+4. Work Together: Multiple AI agents collaborate.
+5. Stay Accountable: Human-in-the-loop oversight and reporting.
+
+### NuraCare
+An AI-powered wellness intelligence and multilingual health support system designed as an independent ecosystem initiative.
+
+### Markova Voice
+An AI voice agent solution capable of handling complex inbound and outbound calls with natural conversational abilities.
+
+## Core Capabilities
+Markova enables businesses to automate call centers, digital marketing, CRM updates, data analytics, and workflow automation without relying on simple conversational scripts. Markova agents access live company knowledge, operate software tools, and act as autonomous employees.
+
+## Contact Information
+- Location: Addis Ababa, Ethiopia
+- Email: officialmarkova.d@gmail.com
+- Phone: +251920002789 / +251717288117

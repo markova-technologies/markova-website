@@ -2527,3 +2527,68 @@ document.addEventListener('DOMContentLoaded', () => {
         window.dispatchEvent(new Event('scroll'));
     }
 });
+
+// Interactive Ask AI Demo Logic
+const demoQueries = {
+    'order': {
+        chat: "Please log in to your customer portal to view your order status.",
+        work: "Looks up the order in Shopify, checks fulfillment status in logistics software, and replies: 'Your order #1234 ships tomorrow � I've also flagged the 1-day delay to Operations.'"
+    },
+    'booking': {
+        chat: "You can book an appointment by visiting our booking page on the website.",
+        work: "Checks the team's Google Calendar, cross-references your CRM record, and replies: 'I see you're an enterprise client. I've booked you with our senior rep for Tuesday at 2 PM. Invite sent.'"
+    },
+    'refund': {
+        chat: "Our refund policy allows returns within 30 days. Please contact support for more details.",
+        work: "Verifies the purchase date in Stripe, confirms it's within the 30-day window, initiates the refund API call, and replies: 'I've processed your refund. It will appear in 3-5 days.'"
+    }
+};
+
+const defaultDemo = {
+    chat: "I am a virtual assistant. Please contact human support for help with this.",
+    work: "Analyzes the request intent, queries the internal knowledge base, routes a ticket to the appropriate human department with full context, and confirms receipt."
+};
+
+window.runDemo = function(type) {
+    const input = document.getElementById('demoInput');
+    if (type === 'order') input.value = "Is my order ready?";
+    else if (type === 'booking') input.value = "I need to book an appointment.";
+    else if (type === 'refund') input.value = "Can I get a refund on my last purchase?";
+    submitDemo(type);
+};
+
+window.submitDemo = function(typeOverride) {
+    const inputEl = document.getElementById('demoInput');
+    const input = inputEl ? inputEl.value.toLowerCase() : '';
+    let data = defaultDemo;
+    
+    if (typeof typeOverride === 'string' && demoQueries[typeOverride]) {
+        data = demoQueries[typeOverride];
+    } else {
+        if (input.includes('order')) data = demoQueries['order'];
+        else if (input.includes('book') || input.includes('appointment')) data = demoQueries['booking'];
+        else if (input.includes('refund') || input.includes('return')) data = demoQueries['refund'];
+    }
+
+    const resultsEl = document.getElementById('demoResults');
+    if (resultsEl) {
+        resultsEl.style.display = 'flex';
+        // Reset animation
+        resultsEl.style.animation = 'none';
+        resultsEl.offsetHeight; /* trigger reflow */
+        resultsEl.style.animation = null; 
+        
+        document.getElementById('demoChatbotText').innerText = data.chat;
+        document.getElementById('demoWorkforceText').innerText = data.work;
+    }
+};
+
+// Add Enter key listener to input
+document.addEventListener('DOMContentLoaded', () => {
+    const demoInput = document.getElementById('demoInput');
+    if (demoInput) {
+        demoInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') submitDemo();
+        });
+    }
+});
