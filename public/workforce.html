@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Markova Works — The Operating Model</title>
+    <meta name="description" content="Understand, Think, Act, Work Together, Stay Accountable — the 5 stages of the Markova AI Workforce Operating Model.">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="work.css">
+    <style>
+        /* ── Page-level overrides ── */
+        body { background: #0a0a0a; }
+
+        .wf-hero {
+            padding: 160px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .wf-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(79,172,254,.12), transparent 70%);
+            pointer-events: none;
+        }
+        .wf-hero .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255,255,255,.5);
+            text-decoration: none;
+            font-size: .9rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-bottom: 2.5rem;
+            transition: color .3s;
+        }
+        .wf-hero .back-link:hover { color: #fff; }
+        .wf-hero .section-badge { margin: 0 auto 1.5rem; }
+        .wf-hero h1 {
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 1.2rem;
+        }
+        .wf-hero h1 span { color: var(--primary-color, #4facfe); }
+        .wf-hero p {
+            font-size: 1.15rem;
+            color: rgba(255,255,255,.55);
+            max-width: 640px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Stage nav pills */
+        .stage-nav {
+            display: flex;
+            justify-content: center;
+            gap: .6rem;
+            flex-wrap: wrap;
+            margin: 3rem 0;
+        }
+        .stage-pill {
+            padding: 6px 18px;
+            border-radius: 50px;
+            border: 1px solid rgba(255,255,255,.1);
+            background: rgba(255,255,255,.04);
+            color: rgba(255,255,255,.5);
+            font-size: .82rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: all .3s;
+        }
+        .stage-pill:hover,
+        .stage-pill.active {
+            border-color: rgba(79,172,254,.5);
+            background: rgba(79,172,254,.1);
+            color: #fff;
+        }
+
+        /* No-glass stage cards */
+        .stage-content {
+            background: transparent !important;
+            border: none !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            border-radius: 0 !important;
+            padding: 0 !important;
+            box-shadow: none !important;
+        }
+        .stage-content::before { display: none !important; }
+
+        /* Stage wrapper */
+        .wf-stages { position: relative; padding-bottom: 6rem; }
+
+        /* Stage 04 CTA card */
+        .stage-04-cta {
+            margin: 0 auto;
+            max-width: 780px;
+            border: 1px solid rgba(255,255,255,.07);
+            border-radius: 24px;
+            padding: 3.5rem 4rem;
+            background: rgba(255,255,255,.02);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: border-color .4s, box-shadow .4s;
+        }
+        .stage-04-cta:hover {
+            border-color: rgba(79,172,254,.3);
+            box-shadow: 0 0 60px rgba(79,172,254,.07);
+        }
+        .stage-04-cta::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 70% 70% at 50% 0%, rgba(79,172,254,.06), transparent);
+            pointer-events: none;
+        }
+        .stage-04-cta .stage-number {
+            position: relative;
+            display: inline-flex;
+            margin-bottom: 1.5rem;
+        }
+        .stage-04-cta h3 {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: rgba(255,255,255,.4);
+            margin-bottom: .5rem;
+        }
+        .stage-04-cta h4 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+        .stage-04-cta p {
+            color: rgba(255,255,255,.55);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+        .stage-04-cta a {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 36px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: #000;
+            font-weight: 700;
+            font-size: .95rem;
+            text-decoration: none;
+            transition: opacity .3s, transform .3s;
+        }
+        .stage-04-cta a:hover { opacity: .88; transform: translateY(-2px); }
+
+        /* Vertical connecting line */
+        .wf-stages .pipeline-line {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="index.html" style="text-decoration:none;">
+                    <div class="brand-logo">
+                        <span class="brand-text">MARKOVA</span>
+                    </div>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html#platform" class="nav-link" data-text="Platform">Platform</a>
+                <a href="index.html#capabilities" class="nav-link" data-text="Capabilities">Capabilities</a>
+                <a href="workforce.html" class="nav-link" data-text="Workforce">Workforce</a>
+                <a href="index.html#ecosystem" class="nav-link" data-text="Ecosystem">Ecosystem</a>
+            </div>
+            <div class="nav-cta">
+                <a href="index.html#waitlist" class="open-waitlist-btn">
+                    <button class="cta-button" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;">
+                        <span>Explore Markova</span>
+                    </button>
+                </a>
+            </div>
+            <div class="mobile-menu-toggle" id="mobileToggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <div class="wf-hero">
+        <div class="container">
+            <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Markova</a>
+            <div class="section-badge">
+                <i class="fas fa-sitemap"></i>
+                <span>The Markova Operating Model</span>
+            </div>
+            <h1>AI that understands the business,<br><span>not just the conversation.</span></h1>
+            <p>A normal AI assistant answers questions. Markova understands business context, reasons about what needs to happen, acts inside business systems, coordinates AI workers, and remains accountable to humans.</p>
+        </div>
+
+        <!-- Stage nav pills -->
+        <div class="stage-nav">
+            <a href="#stage-01" class="stage-pill">01 · Understand</a>
+            <a href="#stage-02" class="stage-pill">02 · Think</a>
+            <a href="#stage-03" class="stage-pill">03 · Act</a>
+            <a href="workforce-viz.html" class="stage-pill">04 · Work Together</a>
+            <a href="#stage-05" class="stage-pill">05 · Stay Accountable</a>
+        </div>
+    </div>
+
+    <!-- Operating Model Stages -->
+    <section class="operating-model-section wf-stages" style="padding-top: 2rem;">
+        <div class="ambient-glow-green"></div>
+        <div class="ambient-glow-blue"></div>
+
+        <div class="container">
+            <div class="op-model-pipeline" id="opModelPipeline">
+                <div class="pipeline-line">
+                    <div class="pipeline-fill" id="pipelineFill"></div>
+                </div>
+
+                <!-- Stage 01 -->
+                <div id="stage-01" class="op-stage reveal-on-scroll">
+                    <div class="horizontal-connector"></div>
+                    <div class="stage-number">01</div>
+                    <div class="stage-content">
+                        <h3>UNDERSTAND</h3>
+                        <h4>Markova learns how the business works.</h4>
+                        <p>Markova connects to the company's knowledge, CRM, calendar, and internal systems. The AI does not only hear what a customer says—it understands the business context behind the conversation.</p>
+                        <div class="stage-example">
+                            <span class="example-label">Example</span>
+                            <p><strong>Customer:</strong> "I want to know if my order is ready."</p>
+                            <p><strong>Markova understands:</strong> Who the customer is, which order they refer to, the order status, the policy, and what action should happen next.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stage 02 -->
+                <div id="stage-02" class="op-stage right-align reveal-on-scroll">
+                    <div class="horizontal-connector"></div>
+                    <div class="stage-number">02</div>
+                    <div class="stage-content">
+                        <h3>THINK</h3>
+                        <h4>Markova decides what should happen next.</h4>
+                        <p>Markova does not rely on one generic AI agent for everything. A Commander can reason about the situation and route work to the right AI specialist (Sales, Support, Operations, Finance, Scheduling).</p>
+                    </div>
+                </div>
+
+                <!-- Stage 03 -->
+                <div id="stage-03" class="op-stage reveal-on-scroll">
+                    <div class="horizontal-connector"></div>
+                    <div class="stage-number">03</div>
+                    <div class="stage-content">
+                        <h3>ACT</h3>
+                        <h4>Markova does more than answer.</h4>
+                        <p>The conversation is only the beginning. The work happens after understanding. Markova can take real business actions like booking appointments, checking availability, updating CRM records, and creating tickets.</p>
+                    </div>
+                </div>
+
+                <!-- Stage 04 — links to its own page -->
+                <div id="stage-04" class="op-stage full-width reveal-on-scroll" style="margin-top: 4rem;">
+                    <div class="horizontal-connector vertical-connector"></div>
+                    <div class="stage-04-cta">
+                        <div class="stage-number">04</div>
+                        <h3>WORK TOGETHER</h3>
+                        <h4>One business. A workforce of AI specialists.</h4>
+                        <p>This stage is a live, interactive experience. Watch the Commander AI coordinate Sales, Support, and Operations agents in real time across a real business scenario.</p>
+                        <a href="workforce-viz.html">
+                            Launch Live Visualization <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Stage 05 -->
+                <div id="stage-05" class="op-stage center-align reveal-on-scroll" style="margin-top: 4rem;">
+                    <div class="horizontal-connector vertical-connector"></div>
+                    <div class="stage-number">05</div>
+                    <div class="stage-content" style="max-width: 600px; text-align: center;">
+                        <h3>STAY ACCOUNTABLE</h3>
+                        <h4>AI that works with humans, not around them.</h4>
+                        <p>Autonomous when it can be. Accountable when it matters. Businesses need visibility and control. Humans can monitor live AI activity, review conversations, approve sensitive actions, and intervene when necessary.</p>
+                        <div style="margin-top: 2rem; color: var(--primary-color); font-weight: 600; font-size: 1.1rem;">
+                            <i class="fas fa-shield-alt" style="margin-right: 8px;"></i>
+                            The Markova Difference.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" style="margin-top: 6rem;">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="brand-logo">
+                        <span class="brand-text">MARKOVA</span>
+                    </div>
+                    <p class="brand-description">AI workers that do real work for your business.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Model Stages</h4>
+                        <a href="#stage-01">01 · Understand</a>
+                        <a href="#stage-02">02 · Think</a>
+                        <a href="#stage-03">03 · Act</a>
+                        <a href="workforce-viz.html">04 · Work Together</a>
+                        <a href="#stage-05">05 · Stay Accountable</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Markova</h4>
+                        <a href="index.html">Home</a>
+                        <a href="index.html#contact">Book a Demo</a>
+                        <a href="index.html#ecosystem">Ecosystem</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2026 MARKOVA. All rights reserved.</p>
+                    <div class="footer-legal">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="social-media-fixed" id="socialMediaFixed">
+        <a href="https://t.me/officialmarkova" target="_blank" rel="noopener" class="social-fixed-link"><i class="fa-brands fa-telegram"></i></a>
+        <a href="https://x.com/0fficialmarkova" target="_blank" rel="noopener" class="social-fixed-link"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="https://www.facebook.com/share/1H5nKXCg1V/" target="_blank" rel="noopener" class="social-fixed-link"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/official_markova/" target="_blank" rel="noopener" class="social-fixed-link"><i class="fab fa-instagram"></i></a>
+    </div>
+
+    <script src="work.js"></script>
+</body>
+</html>

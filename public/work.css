@@ -2406,14 +2406,15 @@ strong {
 .op-stage:nth-child(5) .stage-number { border-color: #2ecc71; color: #2ecc71; box-shadow: 0 0 20px rgba(46, 204, 113, 0.2); }
 
 .stage-content {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 16px;
-    padding: 2.5rem;
-    backdrop-filter: blur(10px);
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.4s ease, box-shadow 0.4s ease;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 2rem 0;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
-    overflow: hidden;
+    overflow: visible;
 }
 
 /* Spotlight Hover Effect */
@@ -2781,5 +2782,120 @@ strong {
     .viz-node {
         width: 100%;
         max-width: 320px;
+    }
+}
+
+/* -- Workforce Teaser Strip (homepage) -- */
+.wf-teaser-strip {
+    display: flex;
+    align-items: stretch;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+}
+.wf-teaser-stage {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.8rem 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.3s ease;
+    position: relative;
+}
+.wf-teaser-stage:hover {
+    background: rgba(255,255,255,0.04);
+}
+.wf-stage-highlight {
+    background: rgba(79,172,254,0.05) !important;
+    border-left: 1px solid rgba(79,172,254,0.15);
+    border-right: 1px solid rgba(79,172,254,0.15);
+}
+.wf-stage-highlight:hover {
+    background: rgba(79,172,254,0.1) !important;
+}
+.wf-stage-highlight .wf-stage-num {
+    color: #4facfe;
+    border-color: rgba(79,172,254,0.4);
+}
+.wf-stage-highlight .wf-stage-label {
+    color: #4facfe;
+}
+.wf-stage-highlight .wf-stage-arrow {
+    color: #4facfe;
+}
+.wf-stage-num {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    letter-spacing: -1px;
+    transition: all 0.3s;
+}
+.wf-teaser-stage:hover .wf-stage-num {
+    color: rgba(255,255,255,0.7);
+    border-color: rgba(255,255,255,0.2);
+}
+.wf-stage-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    flex: 1;
+    min-width: 0;
+}
+.wf-stage-label {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.7);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.wf-stage-hint {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.3);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.wf-stage-arrow {
+    color: rgba(255,255,255,0.2);
+    font-size: 0.8rem;
+    transition: transform 0.3s, color 0.3s;
+}
+.wf-teaser-stage:hover .wf-stage-arrow {
+    transform: translateX(3px);
+    color: rgba(255,255,255,0.5);
+}
+.wf-strip-divider {
+    width: 1px;
+    background: rgba(255,255,255,0.05);
+    flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+    .wf-teaser-strip {
+        flex-direction: column;
+    }
+    .wf-strip-divider {
+        width: auto;
+        height: 1px;
+    }
+    .wf-stage-highlight {
+        border-left: none;
+        border-right: none;
+        border-top: 1px solid rgba(79,172,254,0.15);
+        border-bottom: 1px solid rgba(79,172,254,0.15);
     }
 }
