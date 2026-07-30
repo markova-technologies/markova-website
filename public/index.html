@@ -119,14 +119,14 @@
             <div class="nav-links">
                 <a href="#platform" class="nav-link" data-text="Platform">Platform</a>
                 <a href="#capabilities" class="nav-link" data-text="Capabilities">Capabilities</a>
+                <a href="#docs" class="nav-link" data-text="Documentation">Documentation</a>
+                <a href="#pricing" class="nav-link" data-text="Pricing">Pricing</a>
                 <a href="workforce.html" class="nav-link" data-text="Workforce">Workforce</a>
-                <a href="#visual-operation" class="nav-link" data-text="Visual Operation">Visual Operation</a>
-                <a href="#ecosystem" class="nav-link" data-text="Ecosystem">Ecosystem</a>
             </div>
-            <div class="nav-cta">
-                <a href="#contact">
-                    <button class="cta-button" style="background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: #ffffff;">
-                        <span>Contact Us</span>
+            <div class="nav-cta" style="display: flex; gap: 10px; align-items: center;">
+                <a href="https://app.markova.tech/login" target="_blank" rel="noopener noreferrer">
+                    <button class="cta-button" style="background: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.4); color: #ffffff;">
+                        <span>Sign In</span>
                     </button>
                 </a>
             </div>
@@ -176,12 +176,14 @@
                     </p>
                     
                     <div class="hero-actions">
-                        <button class="primary-btn open-waitlist-btn">
-                            <span class="btn-text">See Markova in action</span>
-                            <div class="btn-bg"></div>
-                            <div class="btn-particles"></div>
-                        </button>
-                        <a href="#capabilities" class="btn-link" style="margin-left: 15px; display: inline-flex; align-items: center; justify-content: center; padding: 12px 30px; font-weight: 600; color: #fff; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 50px; text-decoration: none; transition: all 0.3s ease;">See Demo</a>
+                        <a href="https://app.markova.tech/signup" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
+                            <button class="primary-btn">
+                                <span class="btn-text">See Markova in action</span>
+                                <div class="btn-bg"></div>
+                                <div class="btn-particles"></div>
+                            </button>
+                        </a>
+                        <a href="#docs" class="btn-link" style="margin-left: 15px; display: inline-flex; align-items: center; justify-content: center; padding: 12px 30px; font-weight: 600; color: #fff; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 50px; text-decoration: none; transition: all 0.3s ease;">Documentation</a>
                     </div>
 
                     <div class="hero-stats">
@@ -501,10 +503,152 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Documentation Section -->
+    <section id="docs" class="services" style="padding: 100px 0; background: rgba(10, 10, 15, 0.9); border-top: 1px solid rgba(255, 255, 255, 0.05);">
+        <div class="container">
+            <div class="section-header" style="text-align: center; margin-bottom: 50px;">
+                <div class="section-badge" style="display: inline-flex; align-items: center; gap: 8px; background: rgba(59, 130, 246, 0.15); color: #60a5fa; padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(59, 130, 246, 0.3);">
+                    <i class="fas fa-book"></i>
+                    <span>DEVELOPER DOCUMENTATION</span>
+                </div>
+                <h2 class="section-title" style="font-size: 2.5rem; margin-top: 15px; color: #fff;">Documentation & Integration Specs</h2>
+                <p class="section-subtitle" style="color: #94a3b8; max-width: 650px; margin: 10px auto 0;">Explore how to build, deploy, and scale Amharic & multilingual voice AI agents on Markova OS.</p>
+            </div>
 
-    <!-- Contact Section -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
+                <!-- Doc Card 1: Quickstart -->
+                <div style="background: rgba(20, 20, 28, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 30px; backdrop-filter: blur(10px); transition: transform 0.3s ease;">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(59, 130, 246, 0.2); color: #60a5fa; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 20px;">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3 style="color: #fff; font-size: 1.3rem; margin-bottom: 10px;">Voice Agent Quickstart</h3>
+                    <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px;">Provision sandbox keys (<code style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px; color: #60a5fa;">mk_test_</code>), set system prompts, and attach Ethio Telecom telephony trunks in minutes.</p>
+                    <a href="https://app.markova.tech/docs" target="_blank" rel="noopener noreferrer" style="color: #60a5fa; font-weight: 600; font-size: 0.9rem; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">View Quickstart Guide <i class="fas fa-arrow-right"></i></a>
+                </div>
 
+                <!-- Doc Card 2: Voice & STT/TTS APIs -->
+                <div style="background: rgba(20, 20, 28, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 30px; backdrop-filter: blur(10px); transition: transform 0.3s ease;">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(168, 85, 247, 0.2); color: #c084fc; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 20px;">
+                        <i class="fas fa-microphone-alt"></i>
+                    </div>
+                    <h3 style="color: #fff; font-size: 1.3rem; margin-bottom: 10px;">Amharic Voice API</h3>
+                    <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px;">Native WebSocket streaming for Amharic, Afaan Oromo, Tigrinya, and English with ultra-low &lt;120ms latency.</p>
+                    <a href="https://app.markova.tech/docs" target="_blank" rel="noopener noreferrer" style="color: #c084fc; font-weight: 600; font-size: 0.9rem; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">Explore API References <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- Doc Card 3: RAG Knowledge Vector Memory -->
+                <div style="background: rgba(20, 20, 28, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 30px; backdrop-filter: blur(10px); transition: transform 0.3s ease;">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(34, 197, 94, 0.2); color: #4ade80; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 20px;">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3 style="color: #fff; font-size: 1.3rem; margin-bottom: 10px;">RAG Knowledge Memory</h3>
+                    <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px;">Upload PDF guidelines, FAQs, and database schemas. Agents query real-time vector indices without hallucinating.</p>
+                    <a href="https://app.markova.tech/docs" target="_blank" rel="noopener noreferrer" style="color: #4ade80; font-weight: 600; font-size: 0.9rem; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">Knowledge Indexing Guide <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- Doc Card 4: AI Governance & Guardrails -->
+                <div style="background: rgba(20, 20, 28, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 30px; backdrop-filter: blur(10px); transition: transform 0.3s ease;">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(245, 158, 11, 0.2); color: #fbbf24; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 20px;">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 style="color: #fff; font-size: 1.3rem; margin-bottom: 10px;">AI Safety & Guardrails</h3>
+                    <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px;">Configure PII redaction filters, toxicity shields, and human approval thresholds for high-value transactions.</p>
+                    <a href="https://app.markova.tech/docs" target="_blank" rel="noopener noreferrer" style="color: #fbbf24; font-weight: 600; font-size: 0.9rem; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">Read Governance Docs <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="services" style="padding: 100px 0; background: rgba(14, 14, 20, 0.95); border-top: 1px solid rgba(255, 255, 255, 0.05);">
+        <div class="container">
+            <div class="section-header" style="text-align: center; margin-bottom: 50px;">
+                <div class="section-badge" style="display: inline-flex; align-items: center; gap: 8px; background: rgba(232, 163, 61, 0.15); color: #e8a33d; padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(232, 163, 61, 0.3);">
+                    <i class="fas fa-tags"></i>
+                    <span>TRANSPARENT PRICING</span>
+                </div>
+                <h2 class="section-title" style="font-size: 2.5rem; margin-top: 15px; color: #fff;">Simple, Predictable Plans</h2>
+                <p class="section-subtitle" style="color: #94a3b8; max-width: 650px; margin: 10px auto 0;">Start in sandbox for free with <code style="color: #e8a33d;">mk_test_</code> keys. Upgrade when you are ready to answer live calls.</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <!-- Plan 1: Basic -->
+                <div style="background: rgba(20, 20, 28, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 35px; backdrop-filter: blur(10px); display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <span style="font-size: 0.8rem; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px;">Basic Tier</span>
+                        <h3 style="color: #fff; font-size: 1.8rem; margin: 10px 0 5px 0;">Basic</h3>
+                        <p style="color: #94a3b8; font-size: 0.88rem; margin-bottom: 20px;">Ideal for local businesses deploying an automated inbound receptionist.</p>
+
+                        <div style="margin-bottom: 25px;">
+                            <span style="font-size: 2.5rem; font-weight: 800; color: #fff;">4,999 ETB</span>
+                            <span style="color: #94a3b8; font-size: 0.9rem;"> / month</span>
+                        </div>
+
+                        <ul style="list-style: none; padding: 0; margin: 0 0 30px 0; color: #cbd5e1; font-size: 0.92rem; display: flex; flex-direction: column; gap: 12px;">
+                            <li><i class="fas fa-check-circle" style="color: #4ade80; margin-right: 10px;"></i> <strong>900 included minutes</strong> per month</li>
+                            <li><i class="fas fa-check-circle" style="color: #4ade80; margin-right: 10px;"></i> Amharic & English Voice STT/TTS</li>
+                            <li><i class="fas fa-check-circle" style="color: #4ade80; margin-right: 10px;"></i> Full Transcription & Sentiment Logs</li>
+                            <li><i class="fas fa-check-circle" style="color: #4ade80; margin-right: 10px;"></i> Ethiopian Phone Trunk Support</li>
+                        </ul>
+                    </div>
+
+                    <a href="https://app.markova.tech/signup" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
+                        <button style="width: 100%; padding: 14px; border-radius: 12px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); color: #fff; font-weight: 600; cursor: pointer; transition: all 0.2s ease;">Get Started</button>
+                    </a>
+                </div>
+
+                <!-- Plan 2: Plus (Featured) -->
+                <div style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(18, 19, 24, 0.95)); border: 2px solid #3b82f6; border-radius: 20px; padding: 35px; backdrop-filter: blur(10px); display: flex; flex-direction: column; justify-content: space-between; position: relative; box-shadow: 0 10px 40px rgba(59, 130, 246, 0.25);">
+                    <div style="position: absolute; top: -14px; right: 25px; background: #3b82f6; color: #fff; padding: 4px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Most Popular</div>
+                    <div>
+                        <span style="font-size: 0.8rem; font-weight: 700; color: #60a5fa; text-transform: uppercase; letter-spacing: 1px;">Plus Tier</span>
+                        <h3 style="color: #fff; font-size: 1.8rem; margin: 10px 0 5px 0;">Plus</h3>
+                        <p style="color: #94a3b8; font-size: 0.88rem; margin-bottom: 20px;">AI Workforce agents that execute system actions & CRM integrations.</p>
+
+                        <div style="margin-bottom: 25px;">
+                            <span style="font-size: 2.5rem; font-weight: 800; color: #fff;">15,000 ETB</span>
+                            <span style="color: #94a3b8; font-size: 0.9rem;"> / month</span>
+                        </div>
+
+                        <ul style="list-style: none; padding: 0; margin: 0 0 30px 0; color: #cbd5e1; font-size: 0.92rem; display: flex; flex-direction: column; gap: 12px;">
+                            <li><i class="fas fa-check-circle" style="color: #60a5fa; margin-right: 10px;"></i> <strong>2,500 included minutes</strong> per month</li>
+                            <li><i class="fas fa-check-circle" style="color: #60a5fa; margin-right: 10px;"></i> Full AI Workforce (Autonomous Actions)</li>
+                            <li><i class="fas fa-check-circle" style="color: #60a5fa; margin-right: 10px;"></i> Custom CRM & API Webhooks Integration</li>
+                            <li><i class="fas fa-check-circle" style="color: #60a5fa; margin-right: 10px;"></i> Real-time AI Governance & Guardrails</li>
+                        </ul>
+                    </div>
+
+                    <a href="https://app.markova.tech/signup" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
+                        <button style="width: 100%; padding: 14px; border-radius: 12px; background: #3b82f6; border: none; color: #fff; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);">Start Free Trial</button>
+                    </a>
+                </div>
+
+                <!-- Plan 3: Enterprise -->
+                <div style="background: rgba(20, 20, 28, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 35px; backdrop-filter: blur(10px); display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <span style="font-size: 0.8rem; font-weight: 700; color: #c084fc; text-transform: uppercase; letter-spacing: 1px;">Enterprise</span>
+                        <h3 style="color: #fff; font-size: 1.8rem; margin: 10px 0 5px 0;">Enterprise Pro</h3>
+                        <p style="color: #94a3b8; font-size: 0.88rem; margin-bottom: 20px;">Dedicated infrastructure, unlimited minutes, and custom AI fine-tuning.</p>
+
+                        <div style="margin-bottom: 25px;">
+                            <span style="font-size: 2.2rem; font-weight: 800; color: #fff;">Custom Volume</span>
+                        </div>
+
+                        <ul style="list-style: none; padding: 0; margin: 0 0 30px 0; color: #cbd5e1; font-size: 0.92rem; display: flex; flex-direction: column; gap: 12px;">
+                            <li><i class="fas fa-check-circle" style="color: #c084fc; margin-right: 10px;"></i> Dedicated Voice Server Instances</li>
+                            <li><i class="fas fa-check-circle" style="color: #c084fc; margin-right: 10px;"></i> 99.99% Uptime SLA Guarantees</li>
+                            <li><i class="fas fa-check-circle" style="color: #c084fc; margin-right: 10px;"></i> On-Premise / Private Cloud Option</li>
+                            <li><i class="fas fa-check-circle" style="color: #c084fc; margin-right: 10px;"></i> Dedicated Account Manager & Support</li>
+                        </ul>
+                    </div>
+
+                    <a href="#contact" style="text-decoration: none;">
+                        <button style="width: 100%; padding: 14px; border-radius: 12px; background: rgba(192, 132, 252, 0.15); border: 1px solid rgba(192, 132, 252, 0.3); color: #c084fc; font-weight: 600; cursor: pointer; transition: all 0.2s ease;">Contact Sales</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Contact Section -->
     <section id="contact" class="contact">
