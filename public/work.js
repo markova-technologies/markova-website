@@ -2594,6 +2594,40 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initTextAnimations() {
+    const animationObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                if (entry.target.hasAttribute('data-flip-text')) {
+                    entry.target.classList.remove('flip-animated');
+                    void entry.target.offsetWidth; // trigger reflow
+                    entry.target.classList.add('flip-animated');
+                }
+                
+                if (entry.target.hasAttribute('data-stagger-text')) {
+                    const words = entry.target.querySelectorAll('.stagger-word');
+                    // Reset visibility
+                    words.forEach(w => w.classList.remove('is-visible'));
+                    void entry.target.offsetWidth;
+                    // Trigger stagger
+                    words.forEach((w, idx) => {
+                        setTimeout(() => {
+                            w.classList.add('is-visible');
+                        }, idx * 60);
+                    });
+                }
+            } else {
+                // Optional: remove classes when out of view so they replay smoothly
+                if (entry.target.hasAttribute('data-flip-text')) {
+                    entry.target.classList.remove('flip-animated');
+                }
+                if (entry.target.hasAttribute('data-stagger-text')) {
+                    const words = entry.target.querySelectorAll('.stagger-word');
+                    words.forEach(w => w.classList.remove('is-visible'));
+                }
+            }
+        });
+    }, { threshold: 0.1 });
+
     // Flip Text Initialization
     const flipElements = document.querySelectorAll('[data-flip-text]:not(.flip-initialized)');
     flipElements.forEach(el => {
@@ -2622,7 +2656,6 @@ function initTextAnimations() {
 
                 charSpan.style.setProperty('--flip-duration', `${duration}s`);
                 charSpan.style.setProperty('--flip-delay', `${calculatedDelay}s`);
-                charSpan.style.setProperty('--flip-iteration', 'infinite');
 
                 wordSpan.appendChild(charSpan);
                 globalIndex++;
@@ -2638,47 +2671,33 @@ function initTextAnimations() {
                 globalIndex++;
             }
         });
+        
+        animationObserver.observe(el);
     });
 
-    // Stagger Text Initialization with Intersection Observer
+    // Stagger Text Initialization
     const staggerElements = document.querySelectorAll('[data-stagger-text]:not(.stagger-initialized)');
-    if (staggerElements.length > 0) {
-        const staggerObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const words = entry.target.querySelectorAll('.stagger-word');
-                    words.forEach((w, idx) => {
-                        setTimeout(() => {
-                            w.classList.add('is-visible');
-                        }, idx * 60);
-                    });
-                    staggerObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.05 });
+    staggerElements.forEach(el => {
+        el.classList.add('stagger-initialized');
+        const text = el.getAttribute('data-stagger-text') || el.textContent.trim();
+        const words = text.split(' ');
+        el.innerHTML = '';
 
-        staggerElements.forEach(el => {
-            el.classList.add('stagger-initialized');
-            const text = el.getAttribute('data-stagger-text') || el.textContent.trim();
-            const words = text.split(' ');
-            el.innerHTML = '';
+        words.forEach((word, wIdx) => {
+            const wrap = document.createElement('span');
+            wrap.className = 'stagger-word-wrap';
+            
+            const inner = document.createElement('span');
+            inner.className = 'stagger-word';
+            inner.textContent = word + (wIdx < words.length - 1 ? '\u00A0' : '');
 
-            words.forEach((word, wIdx) => {
-                const wrap = document.createElement('span');
-                wrap.className = 'stagger-word-wrap';
-                
-                const inner = document.createElement('span');
-                inner.className = 'stagger-word';
-                inner.textContent = word + (wIdx < words.length - 1 ? '\u00A0' : '');
-
-                wrap.appendChild(inner);
-                el.appendChild(wrap);
-            });
-
-            el.classList.add('stagger-text-ready');
-            staggerObserver.observe(el);
+            wrap.appendChild(inner);
+            el.appendChild(wrap);
         });
-    }
+
+        el.classList.add('stagger-text-ready');
+        animationObserver.observe(el);
+    });
 }
 
 if (document.readyState === 'loading') {

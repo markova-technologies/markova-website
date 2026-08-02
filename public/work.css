@@ -260,7 +260,10 @@ body {
     backface-visibility: hidden;
     color: #fff;
     -webkit-text-fill-color: #fff;
-    animation: flipCharAnim var(--flip-duration, 2.2s) ease-in-out var(--flip-delay, 0s) var(--flip-iteration, infinite);
+}
+
+.flip-animated .flip-char {
+    animation: flipCharAnim var(--flip-duration, 2.2s) ease-in-out var(--flip-delay, 0s) 1 forwards;
 }
 
 @keyframes flipCharAnim {
