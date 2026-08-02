@@ -1224,6 +1224,8 @@ document.addEventListener('DOMContentLoaded', function() {
             
             mobileToggle.classList.toggle('active');
             navLinks.classList.toggle('active');
+            navLinks.classList.toggle('mobile-open');
+            document.body.classList.toggle('mobile-nav-open');
             
             // Update ARIA attributes
             mobileToggle.setAttribute('aria-expanded', !isActive);
@@ -1253,6 +1255,8 @@ document.addEventListener('DOMContentLoaded', function() {
             link.addEventListener('click', () => {
                 mobileToggle.classList.remove('active');
                 navLinks.classList.remove('active');
+                navLinks.classList.remove('mobile-open');
+                document.body.classList.remove('mobile-nav-open');
                 mobileToggle.setAttribute('aria-expanded', 'false');
                 document.body.style.overflow = '';
             });
@@ -1282,6 +1286,8 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!mobileToggle.contains(e.target) && !navLinks.contains(e.target)) {
                 mobileToggle.classList.remove('active');
                 navLinks.classList.remove('active');
+                navLinks.classList.remove('mobile-open');
+                document.body.classList.remove('mobile-nav-open');
                 mobileToggle.setAttribute('aria-expanded', 'false');
                 document.body.style.overflow = '';
             }
