@@ -122,7 +122,7 @@
             </div>
             <div class="nav-cta" style="display: flex; gap: 10px; align-items: center;">
                 <a href="#contact">
-                    <button class="cta-button" style="background: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.4); color: #ffffff;">
+                    <button class="cta-button" style="background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: #ffffff;">
                         <span>Contact Us</span>
                     </button>
                 </a>
@@ -200,130 +200,10 @@
         </div>
     </section>
 
-    <!-- Live Demonstration Section -->
-    <section id="visual-operation" class="viz-hero" style="padding-top: 4rem; padding-bottom: 5rem; background: #0a0a0a; position: relative; z-index: 10;">
-        <div class="container">
-            <div class="section-header" style="text-align: center; margin-bottom: 3rem;">
-                <div class="section-badge" style="background: rgba(161,140,209,.1); border-color: rgba(161,140,209,.2);">
-                    <i class="fas fa-network-wired" style="color: #a18cd1;"></i>
-                    <span style="color: #a18cd1;">Live Demonstration</span>
-                </div>
-                <h2 class="section-title">Autonomous Execution Engine</h2>
-                <p class="section-subtitle">Watch in real time as the Commander AI receives a business objective and coordinates specialized agents across business systems.</p>
-            </div>
-            
-            <div class="viz-page-wrapper">
-                <div class="workforce-viz-full">
-                    <!-- The Scenario Header -->
-                    <div class="scenario-display">
-                        <div class="scenario-label">Business Objective:</div>
-                        <div class="scenario-text" id="scenarioObjective">Customer wants to book an appointment</div>
-                    </div>
-
-                    <!-- Level 1: Commander -->
-                    <div class="viz-level level-commander">
-                        <div class="viz-node node-commander" data-tooltip="Understands the objective and coordinates the workforce.">
-                            <div class="node-icon"><i class="fas fa-brain"></i></div>
-                            <div class="node-content">
-                                <div class="node-title">Commander</div>
-                                <div class="node-status" id="statusCommander">Routing request...</div>
-                            </div>
-                            <div class="status-indicator active"></div>
-                        </div>
-                    </div>
-
-                    <!-- Connection Lines -->
-                    <div class="viz-connections">
-                        <svg viewBox="0 0 600 100" preserveAspectRatio="none">
-                            <path d="M 300 0 C 300 50, 100 50, 100 100" class="conn-line" />
-                            <path d="M 300 0 L 300 100" class="conn-line" />
-                            <path d="M 300 0 C 300 50, 500 50, 500 100" class="conn-line" />
-                            <circle cx="0" cy="0" r="4" class="pulse pulse-left"><animateMotion dur="2s" repeatCount="indefinite" path="M 300 0 C 300 50, 100 50, 100 100" /></circle>
-                            <circle cx="0" cy="0" r="4" class="pulse pulse-center"><animateMotion dur="2.5s" repeatCount="indefinite" path="M 300 0 L 300 100" /></circle>
-                            <circle cx="0" cy="0" r="4" class="pulse pulse-right"><animateMotion dur="3s" repeatCount="indefinite" path="M 300 0 C 300 50, 500 50, 500 100" /></circle>
-                        </svg>
-                    </div>
-
-                    <!-- Level 2: Agents -->
-                    <div class="viz-level level-agents">
-                        <div class="viz-node node-agent" data-tooltip="Handles leads, qualification, and revenue opportunities.">
-                            <div class="node-icon"><i class="fas fa-bullhorn"></i></div>
-                            <div class="node-content">
-                                <div class="node-title">Sales Agent</div>
-                                <div class="node-status" id="statusSales">Checking CRM...</div>
-                            </div>
-                            <div class="status-indicator"></div>
-                        </div>
-                        <div class="viz-node node-agent" data-tooltip="Resolves customer questions and support requests.">
-                            <div class="node-icon"><i class="fas fa-headset"></i></div>
-                            <div class="node-content">
-                                <div class="node-title">Support Agent</div>
-                                <div class="node-status" id="statusSupport">Idle</div>
-                            </div>
-                            <div class="status-indicator"></div>
-                        </div>
-                        <div class="viz-node node-agent" data-tooltip="Executes internal business processes.">
-                            <div class="node-icon"><i class="fas fa-cogs"></i></div>
-                            <div class="node-content">
-                                <div class="node-title">Operations Agent</div>
-                                <div class="node-status" id="statusOps">Idle</div>
-                            </div>
-                            <div class="status-indicator"></div>
-                        </div>
-                    </div>
-
-                    <!-- Connection Lines -->
-                    <div class="viz-connections">
-                        <svg viewBox="0 0 600 100" preserveAspectRatio="none">
-                            <path d="M 100 0 C 100 50, 300 50, 300 100" class="conn-line" />
-                            <path d="M 300 0 L 300 100" class="conn-line" />
-                            <path d="M 500 0 C 500 50, 300 50, 300 100" class="conn-line" />
-                            <circle cx="0" cy="0" r="4" class="pulse pulse-left-down"><animateMotion dur="2.2s" repeatCount="indefinite" path="M 100 0 C 100 50, 300 50, 300 100" /></circle>
-                            <circle cx="0" cy="0" r="4" class="pulse pulse-center-down"><animateMotion dur="2.7s" repeatCount="indefinite" path="M 300 0 L 300 100" /></circle>
-                            <circle cx="0" cy="0" r="4" class="pulse pulse-right-down"><animateMotion dur="3.1s" repeatCount="indefinite" path="M 500 0 C 500 50, 300 50, 300 100" /></circle>
-                        </svg>
-                    </div>
-
-                    <!-- Level 3: Systems -->
-                    <div class="viz-level level-systems">
-                        <div class="viz-node node-systems" data-tooltip="Your company's information, tools, and connected software.">
-                            <div class="node-icon"><i class="fas fa-database"></i></div>
-                            <div class="node-content">
-                                <div class="node-title">Knowledge &amp; Tools</div>
-                                <div class="node-status" id="statusSystems">Finding available time...</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Connection Lines -->
-                    <div class="viz-connections short-conn">
-                        <svg viewBox="0 0 600 50" preserveAspectRatio="none">
-                            <path d="M 300 0 L 300 50" class="conn-line" />
-                            <circle cx="0" cy="0" r="4" class="pulse pulse-final"><animateMotion dur="1.5s" repeatCount="indefinite" path="M 300 0 L 300 50" /></circle>
-                        </svg>
-                    </div>
-
-                    <!-- Level 4: Outcome -->
-                    <div class="viz-level level-outcome">
-                        <div class="viz-node node-outcome">
-                            <div class="node-icon"><i class="fas fa-check-circle"></i></div>
-                            <div class="node-content">
-                                <div class="node-title">Business Outcome</div>
-                                <div class="node-status success-text" id="statusOutcome">Appointment confirmed</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="vizTooltip" class="viz-tooltip">Tooltip text</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- About Markova (Purpose Section) -->
     <section id="about" class="about details-carousel-section" style="padding-top: 6rem; padding-bottom: 6rem; background-color: #000;">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header reveal-fade">
                 <div class="section-badge">
                     <i class="fas fa-compass"></i>
                     <span>About Markova</span>
@@ -337,9 +217,9 @@
                 <p>Our goal is to help organizations of every size adopt AI without forcing them to replace their existing systems or completely change the way they work.</p>
                 <p>Whether a business relies on modern cloud platforms, legacy software, spreadsheets, or manual processes, Markova helps bridge the gap between today's operations and tomorrow's intelligent workforce.</p>
                 
-                <div style="margin: 1.5rem 0; padding: 2rem; background: rgba(59, 130, 246, 0.05); border-radius: 12px; border: 1px solid rgba(59, 130, 246, 0.1);">
+                <div style="margin: 1.5rem 0; padding: 2rem; background: rgba(255, 255, 255, 0.03); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.08);">
                     <p style="font-weight: 600; color: #fff; margin-bottom: 0.5rem;">Every product we build is guided by one belief:</p>
-                    <p style="font-size: 1.35rem; color: #3b82f6; font-style: italic; line-height: 1.6;">"Technology should simplify work, unlock human potential, and create opportunities for businesses to grow."</p>
+                    <p style="font-size: 1.35rem; color: #ffffff; font-style: italic; line-height: 1.6;">"Technology should simplify work, unlock human potential, and create opportunities for businesses to grow."</p>
                 </div>
 
                 <div class="core-values" style="margin-top: 1rem;">
@@ -357,12 +237,10 @@
         </div>
     </section>
 
-
-
     <!-- Vision Section -->
     <section id="vision" class="about details-carousel-section" style="padding-top: 6rem; padding-bottom: 6rem; background-color: #000;">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header reveal-fade">
                 <div class="section-badge">
                     <i class="fas fa-eye"></i>
                     <span>Vision</span>
@@ -381,80 +259,78 @@
                 <p>Markova OS is one part of that ecosystem.</p>
                 <p>The ecosystem itself is our destination.</p>
 
-                <div style="margin: 2rem 0; padding: 2.5rem; background: rgba(162, 89, 247, 0.05); border-radius: 12px; border: 1px solid rgba(162, 89, 247, 0.1);">
+                <div style="margin: 2rem 0; padding: 2.5rem; background: rgba(255, 255, 255, 0.03); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.08);">
                     <p style="font-weight: 600; color: #fff; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem;">Vision Statement</p>
-                    <p style="font-size: 1.5rem; color: #a259f7; font-weight: 500; line-height: 1.5;">"To build the infrastructure that powers the world's next generation of intelligent organizations."</p>
+                    <p style="font-size: 1.5rem; color: #ffffff; font-weight: 500; line-height: 1.5;">"To build the infrastructure that powers the world's next generation of intelligent organizations."</p>
                 </div>
             </div>
         </div>
     </section>
 
-    
     <!-- Solutions Section -->
-    <section id="solutions" class="about" style="padding-top: 6rem; padding-bottom: 6rem; background-color: #000; overflow: hidden;">
+    <section id="solutions" class="about solutions-section" style="padding-top: 6rem; padding-bottom: 6rem; background-color: #000; overflow: hidden;">
         <div class="container">
-            <div class="section-header" style="text-align: center;">
-                <div class="section-badge">
-                    <i class="fas fa-layer-group"></i> Solutions
+            <div class="section-header reveal-fade" style="text-align: center;">
+                <div class="section-badge" style="background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.15);">
+                    <i class="fas fa-layer-group" style="color: #ffffff;"></i> <span style="color: #ffffff;">Solutions</span>
                 </div>
-                <h2 class="section-title stagger-text" data-stagger-text="Intelligent Automation At Scale" style="margin-bottom: 1.5rem;">Intelligent Automation At Scale</h2>
-                <p class="section-subtitle" style="margin: 0 auto;">
+                <h2 class="section-title stagger-text" data-stagger-text="Intelligent Automation At Scale" style="margin-bottom: 1.5rem; color: #ffffff;">Intelligent Automation At Scale</h2>
+                <p class="section-subtitle" style="margin: 0 auto; color: #a1a1aa;">
                     Our comprehensive suite of AI solutions designed to transform enterprise operations.
                 </p>
             </div>
 
-            <!-- Perspective Carousel -->
-            <div class="perspective-carousel-wrapper" style="position: relative; width: 100%; height: 500px; margin-top: 4rem;">
-                <div class="perspective-carousel-viewport" style="position: absolute; inset: 0; overflow: hidden; perspective: 1200px;">
-                    <div class="perspective-carousel-track" style="position: absolute; left: 50%; top: 50%; display: flex; width: max-content; transform: translateY(-50%); transition: transform 0.9s cubic-bezier(0.14, 1, 0.34, 1); will-change: transform;">
-                        
-                        <!-- Slides will be injected here by JS, but we provide the raw data in a script tag or hidden div for JS to pick up -->
-                        
+            <div class="solutions-cards-grid">
+                <div class="solution-card stagger-child">
+                    <div class="solution-card-bg" style="background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=600&auto=format&fit=crop');"></div>
+                    <div class="solution-card-overlay"></div>
+                    <div class="solution-card-content">
+                        <div class="solution-icon"><i class="fas fa-network-wired"></i></div>
+                        <h3>Agentic Orchestration</h3>
+                        <p>Multi-agent systems working in parallel to orchestrate workflows.</p>
                     </div>
                 </div>
-                
-                <!-- Controls -->
-                <div class="perspective-carousel-controls" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 10; display: flex; align-items: center; justify-content: center; gap: 12px; background: rgba(20,20,30,0.7); border: 1px solid rgba(255,255,255,0.1); border-radius: 999px; padding: 8px 16px; backdrop-filter: blur(8px);">
-                    <button class="carousel-prev" aria-label="Previous" style="width: 36px; height: 36px; border-radius: 50%; border: none; background: transparent; color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s;">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <div class="carousel-dots" style="display: flex; gap: 8px; align-items: center;"></div>
-                    <button class="carousel-next" aria-label="Next" style="width: 36px; height: 36px; border-radius: 50%; border: none; background: transparent; color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s;">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
+
+                <div class="solution-card stagger-child">
+                    <div class="solution-card-bg" style="background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=600&auto=format&fit=crop');"></div>
+                    <div class="solution-card-overlay"></div>
+                    <div class="solution-card-content">
+                        <div class="solution-icon"><i class="fas fa-microphone-lines"></i></div>
+                        <h3>Voice Intelligence</h3>
+                        <p>Real-time AI voice agents for enterprise client support.</p>
+                    </div>
+                </div>
+
+                <div class="solution-card stagger-child">
+                    <div class="solution-card-bg" style="background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=600&auto=format&fit=crop');"></div>
+                    <div class="solution-card-overlay"></div>
+                    <div class="solution-card-content">
+                        <div class="solution-icon"><i class="fas fa-brain"></i></div>
+                        <h3>Knowledge Graph</h3>
+                        <p>Connect your data ecosystem through shared context.</p>
+                    </div>
+                </div>
+
+                <div class="solution-card stagger-child">
+                    <div class="solution-card-bg" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop');"></div>
+                    <div class="solution-card-overlay"></div>
+                    <div class="solution-card-content">
+                        <div class="solution-icon"><i class="fas fa-bolt"></i></div>
+                        <h3>Automated Workflows</h3>
+                        <p>Trigger dynamic business workflows automatically.</p>
+                    </div>
+                </div>
+
+                <div class="solution-card stagger-child">
+                    <div class="solution-card-bg" style="background-image: url('https://images.unsplash.com/photo-1633412802994-5c058f151b66?q=80&w=600&auto=format&fit=crop');"></div>
+                    <div class="solution-card-overlay"></div>
+                    <div class="solution-card-content">
+                        <div class="solution-icon"><i class="fas fa-shield-halved"></i></div>
+                        <h3>Enterprise Security</h3>
+                        <p>Bank-grade encryption, isolated runtimes, and access controls.</p>
+                    </div>
                 </div>
             </div>
-
-            <!-- Data for the carousel -->
-            <script type="application/json" id="carousel-data">
-                [
-                    {
-                        "src": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=600&auto=format&fit=crop",
-                        "title": "Agentic Orchestration",
-                        "description": "Multi-agent systems working in parallel."
-                    },
-                    {
-                        "src": "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=600&auto=format&fit=crop",
-                        "title": "Voice Intelligence",
-                        "description": "Real-time AI voice agents for enterprise."
-                    },
-                    {
-                        "src": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=600&auto=format&fit=crop",
-                        "title": "Knowledge Graph",
-                        "description": "Connect your entire data ecosystem."
-                    },
-                    {
-                        "src": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop",
-                        "title": "Automated Workflows",
-                        "description": "Trigger dynamic workflows automatically."
-                    },
-                    {
-                        "src": "https://images.unsplash.com/photo-1633412802994-5c058f151b66?q=80&w=600&auto=format&fit=crop",
-                        "title": "Enterprise Security",
-                        "description": "Bank-grade encryption and access controls."
-                    }
-                ]
-            </script>
         </div>
     </section>
 
@@ -462,10 +338,10 @@
     <!-- Technology Section -->
     <section id="technology" class="operating-model-section" style="padding-top: 6rem; padding-bottom: 6rem; background-color: #000;">
         <div class="container">
-            <div class="section-header" style="text-align: center;">
-                <div class="section-badge" style="background: rgba(59,130,246,.1); border-color: rgba(59,130,246,.2);">
-                    <i class="fas fa-microchip" style="color: #3b82f6;"></i>
-                    <span style="color: #3b82f6;">Technology</span>
+            <div class="section-header reveal-fade" style="text-align: center;">
+                <div class="section-badge" style="background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.15);">
+                    <i class="fas fa-microchip" style="color: #ffffff;"></i>
+                    <span style="color: #ffffff;">Technology</span>
                 </div>
                 <h2 class="section-title">Technology Built for Enterprise Intelligence</h2>
                 
@@ -479,53 +355,53 @@
             <div class="tech-grid" style="margin-top: 4rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
                 
                 <!-- 1 -->
-                <div class="detail-card" style="padding: 2.5rem; background: rgba(20,20,30,0.8); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px;">
-                    <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: #fff;"><i class="fas fa-network-wired" style="color: #3b82f6; margin-right: 12px;"></i>AI Workforce Runtime</h3>
+                <div class="detail-card reveal-fade stagger-child" style="padding: 2.5rem; background: rgba(20,20,30,0.8); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px;">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: #fff;"><i class="fas fa-network-wired" style="color: #ffffff; margin-right: 12px;"></i>AI Workforce Runtime</h3>
                     <p style="color: var(--text-secondary); line-height: 1.6;">Coordinate multiple intelligent AI agents that collaborate to complete business operations instead of acting independently.</p>
                 </div>
 
                 <!-- 2 -->
-                <div class="detail-card" style="padding: 2.5rem; background: rgba(20,20,30,0.8); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px;">
-                    <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: #fff;"><i class="fas fa-microphone-lines" style="color: #a259f7; margin-right: 12px;"></i>Voice Intelligence</h3>
+                <div class="detail-card reveal-fade stagger-child" style="padding: 2.5rem; background: rgba(20,20,30,0.8); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px;">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: #fff;"><i class="fas fa-microphone-lines" style="color: #c0c0c0; margin-right: 12px;"></i>Voice Intelligence</h3>
                     <p style="color: var(--text-secondary); line-height: 1.6;">Natural real-time conversations across phone calls and communication channels with enterprise-grade reliability.</p>
                 </div>
 
                 <!-- 3 -->
-                <div class="detail-card" style="padding: 2.5rem; background: rgba(20,20,30,0.8); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px;">
-                    <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: #fff;"><i class="fas fa-brain" style="color: #10b981; margin-right: 12px;"></i>Knowledge Intelligence</h3>
+                <div class="detail-card reveal-fade stagger-child" style="padding: 2.5rem; background: rgba(20,20,30,0.8); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px;">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: #fff;"><i class="fas fa-brain" style="color: #e0e0e0; margin-right: 12px;"></i>Knowledge Intelligence</h3>
                     <p style="color: var(--text-secondary); line-height: 1.6;">Connect documents, websites, cloud storage, CRMs, ERPs, databases, and internal knowledge so AI always works with accurate business information.</p>
                 </div>
 
                 <!-- 4 -->
-                <div class="detail-card" style="padding: 2.5rem; background: rgba(20,20,30,0.8); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px;">
-                    <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: #fff;"><i class="fas fa-bolt" style="color: #f59e0b; margin-right: 12px;"></i>Workflow Intelligence</h3>
+                <div class="detail-card reveal-fade stagger-child" style="padding: 2.5rem; background: rgba(20,20,30,0.8); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px;">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: #fff;"><i class="fas fa-bolt" style="color: #ffffff; margin-right: 12px;"></i>Workflow Intelligence</h3>
                     <p style="color: var(--text-secondary); margin-bottom: 1rem;">Turn conversations into business actions.</p>
                     <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                        <span style="background: rgba(245, 158, 11, 0.1); color: #f59e0b; padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.85rem;">Create records</span>
-                        <span style="background: rgba(245, 158, 11, 0.1); color: #f59e0b; padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.85rem;">Update customer data</span>
-                        <span style="background: rgba(245, 158, 11, 0.1); color: #f59e0b; padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.85rem;">Schedule appointments</span>
-                        <span style="background: rgba(245, 158, 11, 0.1); color: #f59e0b; padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.85rem;">Trigger workflows</span>
-                        <span style="background: rgba(245, 158, 11, 0.1); color: #f59e0b; padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.85rem;">Automate operations</span>
+                        <span style="background: rgba(255,255,255,0.06); color: #d4d4d4; padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.12);">Create records</span>
+                        <span style="background: rgba(255,255,255,0.06); color: #d4d4d4; padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.12);">Update customer data</span>
+                        <span style="background: rgba(255,255,255,0.06); color: #d4d4d4; padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.12);">Schedule appointments</span>
+                        <span style="background: rgba(255,255,255,0.06); color: #d4d4d4; padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.12);">Trigger workflows</span>
+                        <span style="background: rgba(255,255,255,0.06); color: #d4d4d4; padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.12);">Automate operations</span>
                     </div>
                 </div>
 
                 <!-- 5 -->
-                <div class="detail-card" style="padding: 2.5rem; background: rgba(20,20,30,0.8); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px;">
-                    <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: #fff;"><i class="fas fa-shield-halved" style="color: #ec4899; margin-right: 12px;"></i>Enterprise Security</h3>
+                <div class="detail-card reveal-fade stagger-child" style="padding: 2.5rem; background: rgba(20,20,30,0.8); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px;">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: #fff;"><i class="fas fa-shield-halved" style="color: #a8a8a8; margin-right: 12px;"></i>Enterprise Security</h3>
                     <p style="color: var(--text-secondary); line-height: 1.6;">Every organization operates inside an isolated environment protected through encryption, role-based access control, audit logging, approval workflows, and continuous monitoring.</p>
                 </div>
 
                 <!-- 6 -->
-                <div class="detail-card" style="padding: 2.5rem; background: rgba(20,20,30,0.8); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px;">
-                    <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: #fff;"><i class="fas fa-plug" style="color: #06b6d4; margin-right: 12px;"></i>Open Integration Platform</h3>
+                <div class="detail-card reveal-fade stagger-child" style="padding: 2.5rem; background: rgba(20,20,30,0.8); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px;">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: #fff;"><i class="fas fa-plug" style="color: #c8c8c8; margin-right: 12px;"></i>Open Integration Platform</h3>
                     <p style="color: var(--text-secondary); line-height: 1.6;">Markova connects with modern APIs, legacy software, spreadsheets, business applications, and custom systems, allowing organizations to adopt AI without rebuilding their technology stack.</p>
                 </div>
             </div>
 
-            <div style="margin: 4rem auto 0; max-width: 800px; padding: 3rem; background: rgba(59, 130, 246, 0.05); border-radius: 16px; border: 1px solid rgba(59, 130, 246, 0.1); text-align: center;">
-                <i class="fas fa-quote-left" style="font-size: 2rem; color: rgba(59,130,246,0.3); margin-bottom: 1.5rem;"></i>
+            <div class="reveal-scale" style="margin: 4rem auto 0; max-width: 800px; padding: 3rem; background: rgba(255,255,255,0.03); border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); text-align: center;">
+                <i class="fas fa-quote-left" style="font-size: 2rem; color: rgba(255,255,255,0.2); margin-bottom: 1.5rem;"></i>
                 <p style="font-size: 1.35rem; color: #fff; font-weight: 500; line-height: 1.6; margin-bottom: 1rem;">Technology should never become another obstacle.</p>
-                <p style="font-size: 1.2rem; color: #3b82f6; font-style: italic;">It should quietly work behind the scenes while your business moves forward.</p>
+                <p style="font-size: 1.2rem; color: #c0c0c0; font-style: italic;">It should quietly work behind the scenes while your business moves forward.</p>
             </div>
             
         </div>
@@ -897,6 +773,42 @@
     </div>
 
     <script src="work.js"></script>
+    <script>
+    // ── Global Scroll-Reveal (IntersectionObserver) ──────────────────────────
+    (function () {
+        var revealClasses = ['.reveal-fade', '.reveal-left', '.reveal-right', '.reveal-scale'];
+        var revealEls = document.querySelectorAll(revealClasses.join(','));
+
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                    io.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+        revealEls.forEach(function (el) { io.observe(el); });
+
+        // ── Solution cards staggered reveal ─────────────────────────────────
+        var cardGrid = document.querySelector('.solutions-cards-grid');
+        if (cardGrid) {
+            var cards = cardGrid.querySelectorAll('.solution-card');
+            var cardIO = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        var idx = Array.from(cards).indexOf(entry.target);
+                        setTimeout(function () {
+                            entry.target.classList.add('visible');
+                        }, idx * 90);
+                        cardIO.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+            cards.forEach(function (c) { cardIO.observe(c); });
+        }
+    })();
+    </script>
     <script type="text/javascript">
       (function(d, t) {
           var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
