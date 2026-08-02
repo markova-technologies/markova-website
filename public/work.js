@@ -2591,4 +2591,85 @@ document.addEventListener('DOMContentLoaded', () => {
             if (e.key === 'Enter') submitDemo();
         });
     }
+
+    // Flip Text Initialization
+    const flipElements = document.querySelectorAll('[data-flip-text]');
+    flipElements.forEach(el => {
+        const text = el.getAttribute('data-flip-text') || el.textContent.trim();
+        const duration = 2.2;
+        const delay = 0;
+        const words = text.split(' ');
+        const totalChars = text.length;
+
+        el.innerHTML = '';
+
+        let globalIndex = 0;
+        words.forEach((word, wIdx) => {
+            const wordSpan = document.createElement('span');
+            wordSpan.className = 'flip-word';
+            
+            word.split('').forEach((char) => {
+                const charSpan = document.createElement('span');
+                charSpan.className = 'flip-char';
+                charSpan.textContent = char;
+
+                const normalizedIndex = globalIndex / totalChars;
+                const sineValue = Math.sin(normalizedIndex * (Math.PI / 2));
+                const calculatedDelay = (sineValue * (duration * 0.25) + delay).toFixed(3);
+
+                charSpan.style.setProperty('--flip-duration', `${duration}s`);
+                charSpan.style.setProperty('--flip-delay', `${calculatedDelay}s`);
+                charSpan.style.setProperty('--flip-iteration', 'infinite');
+
+                wordSpan.appendChild(charSpan);
+                globalIndex++;
+            });
+
+            el.appendChild(wordSpan);
+
+            if (wIdx < words.length - 1) {
+                const spaceSpan = document.createElement('span');
+                spaceSpan.innerHTML = '&nbsp;';
+                spaceSpan.style.display = 'inline-block';
+                el.appendChild(spaceSpan);
+                globalIndex++;
+            }
+        });
+    });
+
+    // Stagger Text Initialization with Intersection Observer
+    const staggerElements = document.querySelectorAll('[data-stagger-text]');
+    const staggerObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const words = entry.target.querySelectorAll('.stagger-word');
+                words.forEach((w, idx) => {
+                    setTimeout(() => {
+                        w.classList.add('is-visible');
+                    }, idx * 60);
+                });
+                staggerObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 });
+
+    staggerElements.forEach(el => {
+        const text = el.getAttribute('data-stagger-text') || el.textContent.trim();
+        const words = text.split(' ');
+        el.innerHTML = '';
+
+        words.forEach((word, wIdx) => {
+            const wrap = document.createElement('span');
+            wrap.className = 'stagger-word-wrap';
+            
+            const inner = document.createElement('span');
+            inner.className = 'stagger-word';
+            inner.textContent = word + (wIdx < words.length - 1 ? '\u00A0' : '');
+
+            wrap.appendChild(inner);
+            el.appendChild(wrap);
+        });
+
+        staggerObserver.observe(el);
+    });
 });
