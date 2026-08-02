@@ -3189,9 +3189,9 @@ strong {
     margin-left: -50vw;
     margin-right: -50vw;
     overflow: hidden;
-    background: rgba(10, 10, 15, 0.8);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background: transparent;
+    border-top: none;
+    border-bottom: none;
     padding: 1.5rem 0;
     margin-top: 4rem;
 }
