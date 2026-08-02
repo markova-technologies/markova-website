@@ -258,7 +258,8 @@ body {
     position: relative;
     transform-style: preserve-3d;
     backface-visibility: hidden;
-    color: inherit;
+    color: #fff;
+    -webkit-text-fill-color: #fff;
     animation: flipCharAnim var(--flip-duration, 2.2s) ease-in-out var(--flip-delay, 0s) var(--flip-iteration, infinite);
 }
 
@@ -285,7 +286,8 @@ body {
     transform: translateY(0%);
     transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
     will-change: transform;
-    color: inherit;
+    color: #fff;
+    -webkit-text-fill-color: #fff;
 }
 
 .stagger-text-ready .stagger-word {
