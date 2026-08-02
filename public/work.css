@@ -258,6 +258,7 @@ body {
     position: relative;
     transform-style: preserve-3d;
     backface-visibility: hidden;
+    color: inherit;
     animation: flipCharAnim var(--flip-duration, 2.2s) ease-in-out var(--flip-delay, 0s) var(--flip-iteration, infinite);
 }
 
@@ -281,12 +282,17 @@ body {
 
 .stagger-word {
     display: inline-block;
-    transform: translateY(115%);
+    transform: translateY(0%);
     transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
     will-change: transform;
+    color: inherit;
 }
 
-.stagger-word.is-visible {
+.stagger-text-ready .stagger-word {
+    transform: translateY(115%);
+}
+
+.stagger-text-ready .stagger-word.is-visible {
     transform: translateY(0%);
 }
 
