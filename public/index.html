@@ -112,6 +112,7 @@
                 <a href="#about" class="nav-link" data-text="About">About</a>
                 <a href="#ecosystem" class="nav-link" data-text="Markova Ecosystem">Markova Ecosystem</a>
                 <a href="#industries" class="nav-link" data-text="Industries">Industries</a>
+                <a href="#technology" class="nav-link" data-text="Technology">Technology</a>
                 <a href="#why-markova" class="nav-link" data-text="Why Markova">Why Markova</a>
             </div>
             <div class="nav-cta" style="display: flex; gap: 10px; align-items: center;">
@@ -362,6 +363,126 @@
                     <div class="system-pill"><i class="fas fa-book" style="color: #ec4899;"></i> Knowledge Base</div>
                     <div class="system-pill"><i class="fas fa-code" style="color: #6366f1;"></i> API</div>
                     <div class="system-pill"><i class="fas fa-server" style="color: #94a3b8;"></i> Legacy Software</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visual Operation Section (Preserved Interactive Visualization) -->
+    <section id="visual-operation" class="viz-hero" style="padding-top: 4rem; padding-bottom: 5rem; background: #0a0a0a; position: relative; z-index: 10;">
+        <div class="container">
+            <div class="section-header" style="text-align: center; margin-bottom: 3rem;">
+                <div class="section-badge" style="background: rgba(161,140,209,.1); border-color: rgba(161,140,209,.2);">
+                    <i class="fas fa-network-wired" style="color: #a18cd1;"></i>
+                    <span style="color: #a18cd1;">Live Demonstration</span>
+                </div>
+                <h2 class="section-title">Autonomous Execution Engine</h2>
+                <p class="section-subtitle">Watch in real time as the Commander AI receives a business objective and coordinates specialized agents across business systems.</p>
+            </div>
+            
+            <div class="viz-page-wrapper">
+                <div class="workforce-viz-full">
+                    <!-- The Scenario Header -->
+                    <div class="scenario-display">
+                        <div class="scenario-label">Business Objective:</div>
+                        <div class="scenario-text" id="scenarioObjective">Customer wants to book an appointment</div>
+                    </div>
+
+                    <!-- Level 1: Commander -->
+                    <div class="viz-level level-commander">
+                        <div class="viz-node node-commander" data-tooltip="Understands the objective and coordinates the workforce.">
+                            <div class="node-icon"><i class="fas fa-brain"></i></div>
+                            <div class="node-content">
+                                <div class="node-title">Commander</div>
+                                <div class="node-status" id="statusCommander">Routing request...</div>
+                            </div>
+                            <div class="status-indicator active"></div>
+                        </div>
+                    </div>
+
+                    <!-- Connection Lines -->
+                    <div class="viz-connections">
+                        <svg viewBox="0 0 600 100" preserveAspectRatio="none">
+                            <path d="M 300 0 C 300 50, 100 50, 100 100" class="conn-line" />
+                            <path d="M 300 0 L 300 100" class="conn-line" />
+                            <path d="M 300 0 C 300 50, 500 50, 500 100" class="conn-line" />
+                            <circle cx="0" cy="0" r="4" class="pulse pulse-left"><animateMotion dur="2s" repeatCount="indefinite" path="M 300 0 C 300 50, 100 50, 100 100" /></circle>
+                            <circle cx="0" cy="0" r="4" class="pulse pulse-center"><animateMotion dur="2.5s" repeatCount="indefinite" path="M 300 0 L 300 100" /></circle>
+                            <circle cx="0" cy="0" r="4" class="pulse pulse-right"><animateMotion dur="3s" repeatCount="indefinite" path="M 300 0 C 300 50, 500 50, 500 100" /></circle>
+                        </svg>
+                    </div>
+
+                    <!-- Level 2: Agents -->
+                    <div class="viz-level level-agents">
+                        <div class="viz-node node-agent" data-tooltip="Handles leads, qualification, and revenue opportunities.">
+                            <div class="node-icon"><i class="fas fa-bullhorn"></i></div>
+                            <div class="node-content">
+                                <div class="node-title">Sales Agent</div>
+                                <div class="node-status" id="statusSales">Checking CRM...</div>
+                            </div>
+                            <div class="status-indicator"></div>
+                        </div>
+                        <div class="viz-node node-agent" data-tooltip="Resolves customer questions and support requests.">
+                            <div class="node-icon"><i class="fas fa-headset"></i></div>
+                            <div class="node-content">
+                                <div class="node-title">Support Agent</div>
+                                <div class="node-status" id="statusSupport">Idle</div>
+                            </div>
+                            <div class="status-indicator"></div>
+                        </div>
+                        <div class="viz-node node-agent" data-tooltip="Executes internal business processes.">
+                            <div class="node-icon"><i class="fas fa-cogs"></i></div>
+                            <div class="node-content">
+                                <div class="node-title">Operations Agent</div>
+                                <div class="node-status" id="statusOps">Idle</div>
+                            </div>
+                            <div class="status-indicator"></div>
+                        </div>
+                    </div>
+
+                    <!-- Connection Lines -->
+                    <div class="viz-connections">
+                        <svg viewBox="0 0 600 100" preserveAspectRatio="none">
+                            <path d="M 100 0 C 100 50, 300 50, 300 100" class="conn-line" />
+                            <path d="M 300 0 L 300 100" class="conn-line" />
+                            <path d="M 500 0 C 500 50, 300 50, 300 100" class="conn-line" />
+                            <circle cx="0" cy="0" r="4" class="pulse pulse-left-down"><animateMotion dur="2.2s" repeatCount="indefinite" path="M 100 0 C 100 50, 300 50, 300 100" /></circle>
+                            <circle cx="0" cy="0" r="4" class="pulse pulse-center-down"><animateMotion dur="2.7s" repeatCount="indefinite" path="M 300 0 L 300 100" /></circle>
+                            <circle cx="0" cy="0" r="4" class="pulse pulse-right-down"><animateMotion dur="3.1s" repeatCount="indefinite" path="M 500 0 C 500 50, 300 50, 300 100" /></circle>
+                        </svg>
+                    </div>
+
+                    <!-- Level 3: Systems -->
+                    <div class="viz-level level-systems">
+                        <div class="viz-node node-systems" data-tooltip="Your company's information, tools, and connected software.">
+                            <div class="node-icon"><i class="fas fa-database"></i></div>
+                            <div class="node-content">
+                                <div class="node-title">Knowledge &amp; Tools</div>
+                                <div class="node-status" id="statusSystems">Finding available time...</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Connection Lines -->
+                    <div class="viz-connections short-conn">
+                        <svg viewBox="0 0 600 50" preserveAspectRatio="none">
+                            <path d="M 300 0 L 300 50" class="conn-line" />
+                            <circle cx="0" cy="0" r="4" class="pulse pulse-final"><animateMotion dur="1.5s" repeatCount="indefinite" path="M 300 0 L 300 50" /></circle>
+                        </svg>
+                    </div>
+
+                    <!-- Level 4: Outcome -->
+                    <div class="viz-level level-outcome">
+                        <div class="viz-node node-outcome">
+                            <div class="node-icon"><i class="fas fa-check-circle"></i></div>
+                            <div class="node-content">
+                                <div class="node-title">Business Outcome</div>
+                                <div class="node-status success-text" id="statusOutcome">Appointment confirmed</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="vizTooltip" class="viz-tooltip">Tooltip text</div>
                 </div>
             </div>
         </div>
@@ -661,6 +782,7 @@
                         <a href="#about">About Markova</a>
                         <a href="#partners">Partners</a>
                         <a href="#industries">Industries</a>
+                        <a href="#technology">Technology</a>
                         </div>
                     
                     <div class="footer-column">
