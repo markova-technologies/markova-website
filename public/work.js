@@ -2705,3 +2705,508 @@ if (document.readyState === 'loading') {
 } else {
     initTextAnimations();
 }
+
+// --- Perspective Carousel Implementation ---
+function initPerspectiveCarousel() {
+    const dataElement = document.getElementById('carousel-data');
+    const track = document.querySelector('.perspective-carousel-track');
+    const dotContainer = document.querySelector('.carousel-dots');
+    const prevBtn = document.querySelector('.carousel-prev');
+    const nextBtn = document.querySelector('.carousel-next');
+
+    if (!dataElement || !track || !dotContainer) return;
+
+    let items = [];
+    try {
+        items = JSON.parse(dataElement.textContent);
+    } catch (e) {
+        console.error('Failed to parse carousel data', e);
+        return;
+    }
+
+    const slideWidth = 200;
+    const rotationStep = 60;
+    const inactiveScale = 0.85;
+    let currentIndex = 0;
+    const maxIndex = items.length - 1;
+
+    // Generate Slides
+    track.innerHTML = '';
+    dotContainer.innerHTML = '';
+
+    items.forEach((item, index) => {
+        // Slide container
+        const slide = document.createElement('div');
+        slide.className = 'carousel-slide shrink-0';
+        slide.style.width = `${slideWidth}px`;
+        slide.style.perspective = '1200px';
+        slide.style.flexShrink = '0';
+        
+        // Inner animated container
+        const inner = document.createElement('div');
+        inner.className = 'carousel-slide-inner';
+        inner.style.width = '100%';
+        inner.style.display = 'flex';
+        inner.style.flexDirection = 'column';
+        inner.style.alignItems = 'center';
+        inner.style.gap = '12px';
+        inner.style.transformStyle = 'preserve-3d';
+        inner.style.transition = 'transform 0.9s cubic-bezier(0.14, 1, 0.34, 1)';
+        inner.style.willChange = 'transform';
+        
+        // Image button
+        const btn = document.createElement('button');
+        btn.style.width = '100%';
+        btn.style.aspectRatio = '3/4';
+        btn.style.cursor = 'pointer';
+        btn.style.background = 'transparent';
+        btn.style.border = 'none';
+        btn.style.padding = '0';
+        btn.onclick = () => selectSlide(index);
+        
+        const img = document.createElement('img');
+        img.src = item.src;
+        img.alt = item.title;
+        img.style.width = '100%';
+        img.style.height = '100%';
+        img.style.objectFit = 'cover';
+        img.style.borderRadius = '12px';
+        img.style.boxShadow = '0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.3)';
+        img.style.userSelect = 'none';
+        
+        btn.appendChild(img);
+        
+        // Label
+        const label = document.createElement('p');
+        label.textContent = item.title;
+        label.style.whiteSpace = 'nowrap';
+        label.style.fontSize = '0.875rem';
+        label.style.color = '#fff';
+        label.style.transition = 'filter 0.9s, opacity 0.9s';
+        
+        inner.appendChild(btn);
+        inner.appendChild(label);
+        slide.appendChild(inner);
+        track.appendChild(slide);
+
+        // Dot
+        const dot = document.createElement('button');
+        dot.style.height = '8px';
+        dot.style.borderRadius = '999px';
+        dot.style.backgroundColor = 'currentColor';
+        dot.style.border = 'none';
+        dot.style.padding = '0';
+        dot.style.cursor = 'pointer';
+        dot.style.transition = 'width 0.3s, opacity 0.3s';
+        dot.onclick = () => selectSlide(index);
+        dotContainer.appendChild(dot);
+    });
+
+    function selectSlide(index) {
+        if (index < 0) index = 0;
+        if (index > maxIndex) index = maxIndex;
+        currentIndex = index;
+        updateCarousel();
+    }
+
+    function updateCarousel() {
+        // Track position
+        const trackX = -(currentIndex * slideWidth + slideWidth / 2);
+        track.style.transform = `translateY(-50%) translateX(${trackX}px)`;
+
+        // Slides
+        const slides = track.querySelectorAll('.carousel-slide-inner');
+        const labels = track.querySelectorAll('p');
+        slides.forEach((slide, idx) => {
+            const isActive = currentIndex === idx;
+            const rotateY = (currentIndex - idx) * rotationStep;
+            const scale = isActive ? 1 : inactiveScale;
+            slide.style.transform = `rotateY(${rotateY}deg) scale(${scale})`;
+            
+            labels[idx].style.filter = isActive ? 'blur(0px)' : 'blur(2px)';
+            labels[idx].style.opacity = isActive ? '1' : '0';
+        });
+
+        // Dots
+        const dots = dotContainer.querySelectorAll('button');
+        dots.forEach((dot, idx) => {
+            const isActive = currentIndex === idx;
+            dot.style.width = isActive ? '28px' : '8px';
+            dot.style.opacity = isActive ? '1' : '0.3';
+        });
+
+        // Buttons
+        if (prevBtn) {
+            prevBtn.disabled = currentIndex === 0;
+            prevBtn.style.opacity = currentIndex === 0 ? '0.35' : '1';
+            prevBtn.style.cursor = currentIndex === 0 ? 'not-allowed' : 'pointer';
+        }
+        if (nextBtn) {
+            nextBtn.disabled = currentIndex === maxIndex;
+            nextBtn.style.opacity = currentIndex === maxIndex ? '0.35' : '1';
+            nextBtn.style.cursor = currentIndex === maxIndex ? 'not-allowed' : 'pointer';
+        }
+    }
+
+    if (prevBtn) prevBtn.onclick = () => selectSlide(currentIndex - 1);
+    if (nextBtn) nextBtn.onclick = () => selectSlide(currentIndex + 1);
+
+    // Initial render
+    updateCarousel();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    initPerspectiveCarousel();
+});
+
+// --- Scroll Dissolve Reveal Implementation ---
+const coverVertexShader = `
+  varying vec2 vUv;
+  void main() {
+    vUv = uv;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+  }
+`;
+
+const coverFragmentShader = `
+  uniform sampler2D uTexture;
+  uniform vec2 uResolution;
+  uniform vec2 uImageResolution;
+  uniform float uDissolve;
+  uniform float uTime;
+  varying vec2 vUv;
+
+  float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+  float noise(vec2 p) {
+    vec2 i = floor(p); vec2 f = fract(p);
+    f = f * f * (3.0 - 2.0 * f);
+    return mix(mix(hash(i), hash(i + vec2(1.0, 0.0)), f.x), mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), f.x), f.y);
+  }
+  float fbm(vec2 p) {
+    float v = 0.0, a = 0.5, f = 1.0;
+    for (int i = 0; i < 5; i++) { v += a * noise(p * f); a *= 0.5; f *= 2.0; }
+    return v;
+  }
+
+  void main() {
+    vec2 ratio = vec2(
+      min((uResolution.x / uResolution.y) / (uImageResolution.x / uImageResolution.y), 1.0),
+      min((uResolution.y / uResolution.x) / (uImageResolution.y / uImageResolution.x), 1.0)
+    );
+    vec2 uv = vec2(
+      vUv.x * ratio.x + (1.0 - ratio.x) * 0.5,
+      vUv.y * ratio.y + (1.0 - ratio.y) * 0.5
+    );
+
+    vec4 texColor = texture2D(uTexture, uv);
+    
+    // Convert to grayscale for effect
+    float gray = dot(texColor.rgb, vec3(0.299, 0.587, 0.114));
+    vec3 grayscale = vec3(gray);
+    texColor.rgb = mix(texColor.rgb, grayscale, uDissolve * 2.0);
+
+    // Distance from center
+    vec2 centered = vUv - 0.5;
+    centered.x *= uResolution.x / uResolution.y;
+    float dist = length(centered);
+    
+    // Add noise to dissolve edge
+    float n = fbm(vUv * 10.0 + uTime * 0.1) * 0.3;
+    float noisyDist = dist + n;
+    
+    float dissolveThreshold = uDissolve * 1.5;
+    float dissolveMask = smoothstep(dissolveThreshold - 0.1, dissolveThreshold + 0.1, noisyDist);
+    
+    // Burn edge
+    float burn = smoothstep(dissolveThreshold - 0.15, dissolveThreshold, noisyDist) * 
+                 smoothstep(dissolveThreshold + 0.15, dissolveThreshold, noisyDist);
+    vec3 burnColor = vec3(1.0, 0.5, 0.1) * burn * 3.0;
+
+    gl_FragColor = vec4(texColor.rgb + burnColor, dissolveMask * texColor.a);
+  }
+`;
+
+function initScrollDissolve() {
+    if (typeof THREE === 'undefined') return;
+    const canvas = document.getElementById('dissolve-canvas');
+    const container = document.getElementById('dissolve-transition');
+    const textEl = document.querySelector('.dissolve-text');
+    if (!canvas || !container) return;
+
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    renderer.setPixelRatio(window.devicePixelRatio);
+    
+    const scene = new THREE.Scene();
+    const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 10);
+    camera.position.z = 1;
+
+    const geometry = new THREE.PlaneGeometry(2, 2);
+    
+    // Load images
+    const loader = new THREE.TextureLoader();
+    const texture1 = loader.load('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop'); // Front
+    const texture2 = loader.load('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop'); // Back
+
+    const uniforms1 = {
+        uTexture: { value: texture1 },
+        uResolution: { value: new THREE.Vector2() },
+        uImageResolution: { value: new THREE.Vector2(1200, 800) },
+        uDissolve: { value: 0.0 },
+        uTime: { value: 0.0 }
+    };
+    const uniforms2 = {
+        uTexture: { value: texture2 },
+        uResolution: { value: new THREE.Vector2() },
+        uImageResolution: { value: new THREE.Vector2(1200, 800) },
+        uDissolve: { value: 0.0 }, // We just render the back image directly without dissolve logic
+        uTime: { value: 0.0 }
+    };
+
+    // Material 2 (Background image, slowly scaling up)
+    const material2 = new THREE.ShaderMaterial({
+        vertexShader: coverVertexShader,
+        fragmentShader: `
+            uniform sampler2D uTexture;
+            uniform vec2 uResolution;
+            uniform vec2 uImageResolution;
+            varying vec2 vUv;
+            void main() {
+                vec2 ratio = vec2(
+                  min((uResolution.x / uResolution.y) / (uImageResolution.x / uImageResolution.y), 1.0),
+                  min((uResolution.y / uResolution.x) / (uImageResolution.y / uImageResolution.x), 1.0)
+                );
+                vec2 uv = vec2(
+                  vUv.x * ratio.x + (1.0 - ratio.x) * 0.5,
+                  vUv.y * ratio.y + (1.0 - ratio.y) * 0.5
+                );
+                gl_FragColor = texture2D(uTexture, uv);
+            }
+        `,
+        uniforms: uniforms2,
+        transparent: true,
+        depthTest: false
+    });
+    
+    const material1 = new THREE.ShaderMaterial({
+        vertexShader: coverVertexShader,
+        fragmentShader: coverFragmentShader,
+        uniforms: uniforms1,
+        transparent: true,
+        depthTest: false
+    });
+
+    const mesh2 = new THREE.Mesh(geometry, material2);
+    mesh2.position.z = -0.1; // Behind
+    const mesh1 = new THREE.Mesh(geometry, material1);
+    
+    scene.add(mesh2);
+    scene.add(mesh1);
+
+    const clock = new THREE.Clock();
+
+    function resize() {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        renderer.setSize(width, height);
+        uniforms1.uResolution.value.set(width, height);
+        uniforms2.uResolution.value.set(width, height);
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    // Scroll Logic
+    function render() {
+        requestAnimationFrame(render);
+        const time = clock.getElapsedTime();
+        uniforms1.uTime.value = time;
+        
+        // Calculate scroll progress for this container
+        const rect = container.getBoundingClientRect();
+        const startY = rect.top; // When top hits viewport top
+        const endY = rect.bottom - window.innerHeight; // When bottom hits viewport bottom
+        
+        let progress = 0;
+        if (startY <= 0) {
+            progress = Math.min(1.0, -startY / (rect.height - window.innerHeight));
+        }
+        
+        uniforms1.uDissolve.value = progress; // 0 to 1
+
+        // Zoom the back image slightly as progress goes
+        mesh2.scale.set(1 + progress * 0.1, 1 + progress * 0.1, 1);
+
+        // Text reveal in middle of transition
+        if (textEl) {
+            if (progress > 0.4 && progress < 0.9) {
+                textEl.style.opacity = '1';
+                textEl.style.transform = 'translateY(0)';
+            } else {
+                textEl.style.opacity = '0';
+                textEl.style.transform = progress >= 0.9 ? 'translateY(-50px)' : 'translateY(50px)';
+            }
+        }
+
+        renderer.render(scene, camera);
+    }
+    render();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    initScrollDissolve();
+});
+
+// --- Highlight Grid Implementation ---
+function initHighlightGrid() {
+    const container = document.getElementById('highlight-grid-container');
+    const highlight = document.getElementById('highlight-box');
+    
+    if (!container || !highlight) return;
+    
+    const cells = container.querySelectorAll('.hl-cell');
+    
+    cells.forEach(cell => {
+        cell.addEventListener('mouseenter', () => {
+            const containerRect = container.getBoundingClientRect();
+            const cellRect = cell.getBoundingClientRect();
+            
+            const x = cellRect.left - containerRect.left;
+            const y = cellRect.top - containerRect.top;
+            
+            highlight.style.transform = `translate(${x}px, ${y}px)`;
+            highlight.style.width = `${cellRect.width}px`;
+            highlight.style.height = `${cellRect.height}px`;
+            highlight.style.backgroundColor = cell.getAttribute('data-color');
+            
+            // Set text color to solid white
+            cells.forEach(c => {
+                c.querySelector('span').style.color = 'rgba(255,255,255,0.7)';
+            });
+            cell.querySelector('span').style.color = '#ffffff';
+        });
+    });
+    
+    // Initial position on first cell
+    if (cells.length > 0) {
+        // Temporarily disable transition for initial snap
+        highlight.style.transition = 'none';
+        const firstCell = cells[0];
+        const containerRect = container.getBoundingClientRect();
+        const cellRect = firstCell.getBoundingClientRect();
+        
+        highlight.style.transform = `translate(${cellRect.left - containerRect.left}px, ${cellRect.top - containerRect.top}px)`;
+        highlight.style.width = `${cellRect.width}px`;
+        highlight.style.height = `${cellRect.height}px`;
+        highlight.style.backgroundColor = firstCell.getAttribute('data-color');
+        firstCell.querySelector('span').style.color = '#ffffff';
+        
+        // Re-enable transition
+        setTimeout(() => {
+            highlight.style.transition = 'transform 0.25s ease, width 0.25s ease, height 0.25s ease, background-color 0.25s ease';
+        }, 50);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    // A slight delay ensures layout is fully calculated before placing highlight box
+    setTimeout(initHighlightGrid, 100);
+});
+
+// --- Staggered Grid Implementation ---
+function initStaggeredGrid() {
+    if (typeof gsap === 'undefined') return;
+    
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Animate Massive Text
+    const chars = document.querySelectorAll('.m-char');
+    if (chars.length > 0) {
+        gsap.from(chars, {
+            scrollTrigger: {
+                trigger: '.massive-text',
+                start: 'top bottom',
+                end: 'center center-=25%',
+                scrub: 1,
+            },
+            ease: 'sine.out',
+            yPercent: 300,
+            autoAlpha: 0,
+            stagger: {
+                each: 0.05,
+                from: 'center'
+            }
+        });
+    }
+
+    // Animate Grid Columns
+    const grid = document.querySelector('.stagger-grid');
+    if (grid) {
+        const columns = Array.from({ length: 7 }, () => []);
+        const items = grid.querySelectorAll('.sg-item');
+        
+        items.forEach(item => {
+            const col = parseInt(item.getAttribute('data-col'), 10);
+            if (!isNaN(col) && columns[col]) {
+                columns[col].push(item);
+            }
+        });
+
+        const middleCol = 3; // Index 3 is middle of 7
+
+        columns.forEach((colItems, colIndex) => {
+            if (colItems.length === 0) return;
+            const delayFactor = Math.abs(colIndex - middleCol) * 0.2;
+            
+            gsap.from(colItems, {
+                scrollTrigger: {
+                    trigger: grid,
+                    start: 'top bottom',
+                    end: 'center center',
+                    scrub: 1.5,
+                },
+                yPercent: 450,
+                autoAlpha: 0,
+                delay: delayFactor,
+                ease: 'sine.out',
+            });
+            
+            // Also animate inner item transforms
+            const inners = colItems.map(el => el.querySelector('.sg-item-inner')).filter(Boolean);
+            if (inners.length > 0) {
+                gsap.from(inners, {
+                    scrollTrigger: {
+                        trigger: grid,
+                        start: 'top bottom',
+                        end: 'center center',
+                        scrub: 1.5,
+                    },
+                    transformOrigin: '50% 0%',
+                    ease: 'sine.out',
+                }, 0);
+            }
+        });
+
+        // Specific animation for bento container
+        const bento = document.querySelector('.bento-container');
+        if (bento) {
+            gsap.to(bento, {
+                scrollTrigger: {
+                    trigger: grid,
+                    start: 'top top+=15%',
+                    end: 'bottom center',
+                    scrub: 1,
+                },
+                y: window.innerHeight * 0.1,
+                scale: 1.5,
+                zIndex: 1000,
+                ease: 'power2.out',
+                duration: 1,
+                force3D: true
+            }, 0);
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Delay initialization slightly to ensure all DOM elements are painted
+    setTimeout(initStaggeredGrid, 200);
+});
