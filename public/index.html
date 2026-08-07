@@ -89,6 +89,9 @@
 </head>
 <body>
 
+    <!-- 3D Storytelling Canvas -->
+    <canvas id="storyCanvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 1; pointer-events: none; opacity: 0; transition: opacity 1s; mix-blend-mode: screen;"></canvas>
+
     <!-- Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
         <div class="loading-content">
@@ -201,7 +204,7 @@
     </section>
 
     <!-- About Markova (Purpose Section) -->
-    <section id="about" class="about details-carousel-section" style="padding-top: 6rem; padding-bottom: 6rem; background-color: #000;">
+    <section id="about" class="about details-carousel-section" data-reveal="overlay" style="padding-top: 6rem; padding-bottom: 6rem; background-color: transparent; position: relative; z-index: 2;">
         <div class="container">
             <div class="section-header reveal-fade">
                 <div class="section-badge">
@@ -238,7 +241,7 @@
     </section>
 
     <!-- Vision Section -->
-    <section id="vision" class="about details-carousel-section" style="padding-top: 6rem; padding-bottom: 6rem; background-color: #000;">
+    <section id="vision" class="about details-carousel-section" data-reveal="blur" style="padding-top: 6rem; padding-bottom: 6rem; background-color: transparent; position: relative; z-index: 2;">
         <div class="container">
             <div class="section-header reveal-fade">
                 <div class="section-badge">
@@ -268,7 +271,7 @@
     </section>
 
     <!-- Solutions Section -->
-    <section id="solutions" class="about solutions-section" style="padding-top: 6rem; padding-bottom: 6rem; background-color: #000; overflow: hidden;">
+    <section id="solutions" class="about solutions-section" data-reveal="slide-up" style="padding-top: 6rem; padding-bottom: 6rem; background-color: #000; overflow: hidden; position: relative; z-index: 3;">
         <div class="container">
             <div class="section-header reveal-fade" style="text-align: center;">
                 <div class="section-badge" style="background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.15);">

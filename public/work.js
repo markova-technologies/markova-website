@@ -3215,4 +3215,203 @@ function initStaggeredGrid() {
 document.addEventListener('DOMContentLoaded', () => {
     // Delay initialization slightly to ensure all DOM elements are painted
     setTimeout(initStaggeredGrid, 200);
+    setTimeout(initStorytellingAnimations, 300);
 });
+
+// --- Enhanced Storytelling & Animations ---
+function initStorytellingAnimations() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined' || typeof THREE === 'undefined') return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // 1. Hero Overlay Animation
+    const hero = document.querySelector('.hero');
+    if (hero) {
+        ScrollTrigger.create({
+            trigger: hero,
+            start: "top top",
+            end: "bottom top",
+            pin: true,
+            pinSpacing: false
+        });
+    }
+
+    // 2. Varied Section Revelations
+    const blurSection = document.querySelector('[data-reveal="blur"] .container');
+    if (blurSection) {
+        gsap.from(blurSection, {
+            scrollTrigger: {
+                trigger: '[data-reveal="blur"]',
+                start: "top 80%",
+                end: "center center",
+                scrub: 1
+            },
+            filter: "blur(20px)",
+            opacity: 0,
+            scale: 0.8,
+            duration: 1
+        });
+    }
+
+    const slideUpSection = document.querySelector('[data-reveal="slide-up"] .container');
+    if (slideUpSection) {
+        gsap.from(slideUpSection.children, {
+            scrollTrigger: {
+                trigger: '[data-reveal="slide-up"]',
+                start: "top 85%",
+                toggleActions: "play none none reverse"
+            },
+            y: 50,
+            opacity: 0,
+            stagger: 0.1,
+            duration: 0.8,
+            ease: "power2.out"
+        });
+    }
+
+    // 3. Three.js Storytelling Canvas (Black & White Particles)
+    const canvas = document.getElementById('storyCanvas');
+    if (!canvas) return;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+    
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    // Create particles
+    const particleCount = 600;
+    const geometry = new THREE.BufferGeometry();
+    const positions = new Float32Array(particleCount * 3);
+    const targetPositions = new Float32Array(particleCount * 3);
+    
+    for (let i = 0; i < particleCount * 3; i+=3) {
+        // Initial state (Scattered - represents isolated tools)
+        positions[i] = (Math.random() - 0.5) * 40;
+        positions[i+1] = (Math.random() - 0.5) * 40;
+        positions[i+2] = (Math.random() - 0.5) * 20 - 10;
+        
+        // Target state (Sphere/Ecosystem - represents unified Markova OS)
+        const radius = 6 + Math.random() * 2;
+        const theta = Math.random() * 2 * Math.PI;
+        const phi = Math.acos((Math.random() * 2) - 1);
+        
+        targetPositions[i] = radius * Math.sin(phi) * Math.cos(theta);
+        targetPositions[i+1] = radius * Math.sin(phi) * Math.sin(theta);
+        targetPositions[i+2] = radius * Math.cos(phi) - 10;
+    }
+
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('targetPosition', new THREE.BufferAttribute(targetPositions, 3));
+
+    // Strictly White particles to match UI
+    const material = new THREE.PointsMaterial({
+        color: 0xffffff,
+        size: 0.08,
+        transparent: true,
+        opacity: 0.6,
+        blending: THREE.AdditiveBlending
+    });
+
+    const particles = new THREE.Points(geometry, material);
+    scene.add(particles);
+    camera.position.z = 5;
+
+    // Connect particles with lines for neural web effect
+    const lineMaterial = new THREE.LineBasicMaterial({
+        color: 0xffffff,
+        transparent: true,
+        opacity: 0.05,
+        blending: THREE.AdditiveBlending
+    });
+    
+    const lineGeometry = new THREE.BufferGeometry();
+    // We will update lines dynamically in render loop
+    let linePositions = new Float32Array(particleCount * 3 * 2); 
+    lineGeometry.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
+    const lines = new THREE.LineSegments(lineGeometry, lineMaterial);
+    scene.add(lines);
+
+    // Animation state
+    const animState = { progress: 0 };
+    
+    // Setup ScrollTrigger to control particle morphing
+    const aboutSection = document.getElementById('about');
+    const visionSection = document.getElementById('vision');
+    
+    if (aboutSection && visionSection) {
+        // Fade in canvas when reaching About
+        ScrollTrigger.create({
+            trigger: aboutSection,
+            start: "top 60%",
+            end: "bottom top",
+            onEnter: () => gsap.to(canvas, {opacity: 1, duration: 1}),
+            onLeaveBack: () => gsap.to(canvas, {opacity: 0, duration: 1}),
+        });
+
+        // Morph particles when scrolling through Vision
+        ScrollTrigger.create({
+            trigger: visionSection,
+            start: "top bottom",
+            end: "bottom center",
+            scrub: 1,
+            onUpdate: (self) => {
+                animState.progress = self.progress;
+            }
+        });
+    }
+
+    let time = 0;
+    function animate() {
+        requestAnimationFrame(animate);
+        time += 0.002;
+        
+        particles.rotation.y = time * 0.5;
+        particles.rotation.x = time * 0.2;
+        lines.rotation.y = time * 0.5;
+        lines.rotation.x = time * 0.2;
+
+        const pos = geometry.attributes.position.array;
+        const target = geometry.attributes.targetPosition.array;
+        let lineIdx = 0;
+
+        for (let i = 0; i < particleCount * 3; i+=3) {
+            // Morph between scatter and sphere based on scroll
+            const currentX = THREE.MathUtils.lerp(positions[i], target[i], animState.progress);
+            const currentY = THREE.MathUtils.lerp(positions[i+1], target[i+1], animState.progress);
+            const currentZ = THREE.MathUtils.lerp(positions[i+2], target[i+2], animState.progress);
+            
+            // Add subtle floating motion
+            pos[i] = currentX + Math.sin(time * 2 + i) * 0.2;
+            pos[i+1] = currentY + Math.cos(time * 2 + i) * 0.2;
+            pos[i+2] = currentZ + Math.sin(time * 3 + i) * 0.2;
+            
+            // Connect nearby points to form web (simplified for performance)
+            if (i % 6 === 0 && lineIdx < linePositions.length - 6) {
+                linePositions[lineIdx++] = pos[i];
+                linePositions[lineIdx++] = pos[i+1];
+                linePositions[lineIdx++] = pos[i+2];
+                // Connect to a pseudo-random other point to create a web structure
+                let nextIdx = (i + 15) % (particleCount * 3);
+                linePositions[lineIdx++] = pos[nextIdx];
+                linePositions[lineIdx++] = pos[nextIdx+1];
+                linePositions[lineIdx++] = pos[nextIdx+2];
+            }
+        }
+        
+        geometry.attributes.position.needsUpdate = true;
+        lines.geometry.attributes.position.needsUpdate = true;
+
+        renderer.render(scene, camera);
+    }
+    
+    animate();
+
+    window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+}
+
