@@ -3224,50 +3224,28 @@ function initStorytellingAnimations() {
 
     gsap.registerPlugin(ScrollTrigger);
 
-    // 1. Hero Overlay Animation
-    const hero = document.querySelector('.hero');
-    if (hero) {
-        ScrollTrigger.create({
-            trigger: hero,
-            start: "top top",
-            end: "bottom top",
-            pin: true,
-            pinSpacing: false
-        });
-    }
+    // 1. Remove previous pinning/blur logic to fix the video and blur issues.
 
-    // 2. Varied Section Revelations
-    const blurSection = document.querySelector('[data-reveal="blur"] .container');
-    if (blurSection) {
-        gsap.from(blurSection, {
-            scrollTrigger: {
-                trigger: '[data-reveal="blur"]',
-                start: "top 80%",
-                end: "center center",
-                scrub: 1
-            },
-            filter: "blur(20px)",
-            opacity: 0,
-            scale: 0.8,
-            duration: 1
-        });
-    }
-
-    const slideUpSection = document.querySelector('[data-reveal="slide-up"] .container');
-    if (slideUpSection) {
-        gsap.from(slideUpSection.children, {
-            scrollTrigger: {
-                trigger: '[data-reveal="slide-up"]',
-                start: "top 85%",
-                toggleActions: "play none none reverse"
-            },
-            y: 50,
-            opacity: 0,
-            stagger: 0.1,
-            duration: 0.8,
-            ease: "power2.out"
-        });
-    }
+    // 2. Beautiful Paragraph Text Animation
+    const storySections = document.querySelectorAll('#about, #vision');
+    storySections.forEach(section => {
+        const paragraphs = section.querySelectorAll('.about-text-content p');
+        if (paragraphs.length > 0) {
+            // Setup simple staggered fade up for paragraphs to make them look beautiful
+            gsap.from(paragraphs, {
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top 75%",
+                    toggleActions: "play none none reverse"
+                },
+                y: 30,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.15,
+                ease: "power3.out"
+            });
+        }
+    });
 
     // 3. Three.js Storytelling Canvas (Black & White Particles)
     const canvas = document.getElementById('storyCanvas');
