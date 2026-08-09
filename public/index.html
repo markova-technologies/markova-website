@@ -594,120 +594,24 @@
         </div>
 
         <div class="stagger-grid-wrapper" style="position: relative; width: 100%; margin: 10vh auto; max-width: 1200px;">
-            <!-- 7 columns by 3 rows for simplification -->
-            <div class="stagger-grid" style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 16px; padding: 16px;">
-                <!-- 21 items total -->
-
-                <div class="sg-item" data-col="0" style="position: relative; aspect-ratio: 1; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; perspective: 800px;">
-                    <div class="sg-item-inner" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; backface-visibility: hidden;">
-                        <i class="fas fa-microchip" style="color: rgba(255,255,255,0.2); font-size: 24px;"></i>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; padding: 1rem;">
+                
+                <!-- Markova OS Card -->
+                <div class="reveal-fade" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; padding: 3rem; display: flex; flex-direction: column; gap: 1.5rem; backdrop-filter: blur(10px); transition: transform 0.4s ease, background 0.4s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.background='rgba(255,255,255,0.05)';" onmouseout="this.style.transform='translateY(0)'; this.style.background='rgba(255,255,255,0.03)';">
+                    <div style="width: 60px; height: 60px; background: rgba(255,255,255,0.1); border-radius: 16px; display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-network-wired" style="font-size: 1.8rem; color: #fff;"></i>
                     </div>
+                    <h3 style="font-size: 2rem; color: #fff; font-weight: 500;">Markova OS</h3>
+                    <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.6;">The foundational AI workforce operating system. Deploy and manage specialized AI agents that collaborate naturally to execute complex business workflows across your connected software.</p>
                 </div>
 
-                <div class="sg-item" data-col="1" style="position: relative; aspect-ratio: 1; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; perspective: 800px;">
-                    <div class="sg-item-inner" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; backface-visibility: hidden;">
-                        <i class="fas fa-microchip" style="color: rgba(255,255,255,0.2); font-size: 24px;"></i>
+                <!-- Nuracre Card -->
+                <div class="reveal-fade" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; padding: 3rem; display: flex; flex-direction: column; gap: 1.5rem; backdrop-filter: blur(10px); transition: transform 0.4s ease, background 0.4s ease; transition-delay: 0.1s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.background='rgba(255,255,255,0.05)';" onmouseout="this.style.transform='translateY(0)'; this.style.background='rgba(255,255,255,0.03)';">
+                    <div style="width: 60px; height: 60px; background: rgba(255,255,255,0.1); border-radius: 16px; display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-leaf" style="font-size: 1.8rem; color: #fff;"></i>
                     </div>
-                </div>
-
-                <div class="sg-item" data-col="2" style="position: relative; aspect-ratio: 1; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; perspective: 800px;">
-                    <div class="sg-item-inner" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; backface-visibility: hidden;">
-                        <i class="fas fa-microchip" style="color: rgba(255,255,255,0.2); font-size: 24px;"></i>
-                    </div>
-                </div>
-
-                <div class="sg-item" data-col="3" style="position: relative; aspect-ratio: 1; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; perspective: 800px;">
-                    <div class="sg-item-inner" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; backface-visibility: hidden;">
-                        <i class="fas fa-microchip" style="color: rgba(255,255,255,0.2); font-size: 24px;"></i>
-                    </div>
-                </div>
-
-                <div class="sg-item" data-col="4" style="position: relative; aspect-ratio: 1; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; perspective: 800px;">
-                    <div class="sg-item-inner" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; backface-visibility: hidden;">
-                        <i class="fas fa-microchip" style="color: rgba(255,255,255,0.2); font-size: 24px;"></i>
-                    </div>
-                </div>
-
-                <div class="sg-item" data-col="5" style="position: relative; aspect-ratio: 1; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; perspective: 800px;">
-                    <div class="sg-item-inner" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; backface-visibility: hidden;">
-                        <i class="fas fa-microchip" style="color: rgba(255,255,255,0.2); font-size: 24px;"></i>
-                    </div>
-                </div>
-
-                <div class="sg-item" data-col="6" style="position: relative; aspect-ratio: 1; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; perspective: 800px;">
-                    <div class="sg-item-inner" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; backface-visibility: hidden;">
-                        <i class="fas fa-microchip" style="color: rgba(255,255,255,0.2); font-size: 24px;"></i>
-                    </div>
-                </div>
-
-                <div class="sg-item" data-col="0" style="position: relative; aspect-ratio: 1; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; perspective: 800px;">
-                    <div class="sg-item-inner" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; backface-visibility: hidden;">
-                        <i class="fas fa-microchip" style="color: rgba(255,255,255,0.2); font-size: 24px;"></i>
-                    </div>
-                </div>
-
-                <div class="sg-item" data-col="1" style="position: relative; aspect-ratio: 1; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; perspective: 800px;">
-                    <div class="sg-item-inner" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; backface-visibility: hidden;">
-                        <i class="fas fa-microchip" style="color: rgba(255,255,255,0.2); font-size: 24px;"></i>
-                    </div>
-                </div>
-
-                <div class="sg-item" data-col="2" style="position: relative; aspect-ratio: 1; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; perspective: 800px;">
-                    <div class="sg-item-inner" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; backface-visibility: hidden;">
-                        <i class="fas fa-microchip" style="color: rgba(255,255,255,0.2); font-size: 24px;"></i>
-                    </div>
-                </div>
-
-                <div class="sg-item bento-container" data-col="3" style="grid-column: span 3; position: relative; height: 180px; border-radius: 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center;">
-                    <h3 style="color: white;">Enterprise Ecosystem</h3>
-                </div>
-
-                <div class="sg-item" data-col="6" style="position: relative; aspect-ratio: 1; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; perspective: 800px;">
-                    <div class="sg-item-inner" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; backface-visibility: hidden;">
-                        <i class="fas fa-microchip" style="color: rgba(255,255,255,0.2); font-size: 24px;"></i>
-                    </div>
-                </div>
-
-                <div class="sg-item" data-col="0" style="position: relative; aspect-ratio: 1; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; perspective: 800px;">
-                    <div class="sg-item-inner" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; backface-visibility: hidden;">
-                        <i class="fas fa-microchip" style="color: rgba(255,255,255,0.2); font-size: 24px;"></i>
-                    </div>
-                </div>
-
-                <div class="sg-item" data-col="1" style="position: relative; aspect-ratio: 1; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; perspective: 800px;">
-                    <div class="sg-item-inner" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; backface-visibility: hidden;">
-                        <i class="fas fa-microchip" style="color: rgba(255,255,255,0.2); font-size: 24px;"></i>
-                    </div>
-                </div>
-
-                <div class="sg-item" data-col="2" style="position: relative; aspect-ratio: 1; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; perspective: 800px;">
-                    <div class="sg-item-inner" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; backface-visibility: hidden;">
-                        <i class="fas fa-microchip" style="color: rgba(255,255,255,0.2); font-size: 24px;"></i>
-                    </div>
-                </div>
-
-                <div class="sg-item" data-col="3" style="position: relative; aspect-ratio: 1; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; perspective: 800px;">
-                    <div class="sg-item-inner" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; backface-visibility: hidden;">
-                        <i class="fas fa-microchip" style="color: rgba(255,255,255,0.2); font-size: 24px;"></i>
-                    </div>
-                </div>
-
-                <div class="sg-item" data-col="4" style="position: relative; aspect-ratio: 1; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; perspective: 800px;">
-                    <div class="sg-item-inner" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; backface-visibility: hidden;">
-                        <i class="fas fa-microchip" style="color: rgba(255,255,255,0.2); font-size: 24px;"></i>
-                    </div>
-                </div>
-
-                <div class="sg-item" data-col="5" style="position: relative; aspect-ratio: 1; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; perspective: 800px;">
-                    <div class="sg-item-inner" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; backface-visibility: hidden;">
-                        <i class="fas fa-microchip" style="color: rgba(255,255,255,0.2); font-size: 24px;"></i>
-                    </div>
-                </div>
-
-                <div class="sg-item" data-col="6" style="position: relative; aspect-ratio: 1; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; perspective: 800px;">
-                    <div class="sg-item-inner" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; backface-visibility: hidden;">
-                        <i class="fas fa-microchip" style="color: rgba(255,255,255,0.2); font-size: 24px;"></i>
-                    </div>
+                    <h3 style="font-size: 2rem; color: #fff; font-weight: 500;">Nuracre</h3>
+                    <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.6;">A powerful ecosystem component seamlessly integrated with Markova OS. It provides specialized infrastructure and intelligence to further expand the capabilities of your autonomous workforce.</p>
                 </div>
 
             </div>

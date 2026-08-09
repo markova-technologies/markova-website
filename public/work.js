@@ -3513,23 +3513,6 @@ function initHumanoidAnimation() {
                 { opacity: 0, y: 50 },
                 { opacity: 1, y: 0, duration: 1.2, ease: "power3.out" }
             );
-
-            // 2. Then texts appear perfectly
-            const header = visionSection.querySelector('.vision-header');
-            const paragraphs = visionSection.querySelectorAll('.vision-paragraph');
-            
-            if (header) {
-                tl.from(header, { opacity: 0, x: 30, duration: 0.8, ease: "power2.out" }, "-=0.6");
-            }
-            if (paragraphs.length > 0) {
-                tl.from(paragraphs, { 
-                    opacity: 0, 
-                    y: 20, 
-                    duration: 0.8, 
-                    stagger: 0.1, 
-                    ease: "power2.out" 
-                }, "-=0.4");
-            }
         }
 
         function animate() {
@@ -3633,23 +3616,6 @@ function initAboutAnimation() {
                 { opacity: 0, scale: 0.9, y: 30 },
                 { opacity: 1, scale: 1, y: 0, duration: 1.2, ease: "power3.out" }
             );
-
-            // 2. Then texts appear perfectly
-            const header = aboutSection.querySelector('.about-header');
-            const paragraphs = aboutSection.querySelectorAll('.about-paragraph');
-            
-            if (header) {
-                tl.from(header, { opacity: 0, x: -30, duration: 0.8, ease: "power2.out" }, "-=0.6");
-            }
-            if (paragraphs.length > 0) {
-                tl.from(paragraphs, { 
-                    opacity: 0, 
-                    y: 20, 
-                    duration: 0.8, 
-                    stagger: 0.1, 
-                    ease: "power2.out" 
-                }, "-=0.4");
-            }
         }
 
         function animate() {
