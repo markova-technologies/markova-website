@@ -3217,6 +3217,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(initStaggeredGrid, 200);
     setTimeout(initStorytellingAnimations, 300);
     setTimeout(initHumanoidAnimation, 400);
+    setTimeout(initAboutAnimation, 500);
 });
 
 // --- Enhanced Storytelling & Animations ---
@@ -3521,6 +3522,122 @@ function initHumanoidAnimation() {
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
             mesh.position.x = window.innerWidth > 768 ? -2 : 0;
+        });
+    });
+}
+
+// --- About Office Architecture Canvas ---
+function initAboutAnimation() {
+    const canvas = document.getElementById('aboutCanvas');
+    if (!canvas || typeof THREE === 'undefined') return;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 6; // slightly further back for the architecture
+
+    const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    const textureLoader = new THREE.TextureLoader();
+    textureLoader.load('office-architecture-dark.png', (texture) => {
+        const imgAspect = texture.image.width / texture.image.height;
+        const screenAspect = window.innerWidth / window.innerHeight;
+        
+        let planeWidth = 7;
+        let planeHeight = 7 / imgAspect;
+        
+        if (screenAspect < imgAspect) {
+            planeWidth = 9;
+            planeHeight = 9 / imgAspect;
+        }
+
+        const geometry = new THREE.PlaneGeometry(planeWidth, planeHeight, 32, 32);
+        
+        const material = new THREE.MeshBasicMaterial({ 
+            map: texture, 
+            transparent: true,
+            opacity: 1,
+            side: THREE.DoubleSide
+        });
+        
+        const mesh = new THREE.Mesh(geometry, material);
+        scene.add(mesh);
+        
+        // Position it to the right side
+        mesh.position.x = window.innerWidth > 768 ? 2.5 : 0;
+        
+        // Mouse interaction for 3D tilt
+        let mouseX = 0;
+        let mouseY = 0;
+        let targetX = 0;
+        let targetY = 0;
+        const windowHalfX = window.innerWidth / 2;
+        const windowHalfY = window.innerHeight / 2;
+
+        document.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX - windowHalfX) * 0.0004;
+            mouseY = (event.clientY - windowHalfY) * 0.0004;
+        });
+
+        // Add ScrollTrigger to orchestrate the "Picture first, then Text" perfect animation
+        const aboutSection = document.getElementById('about');
+        if (aboutSection && typeof gsap !== 'undefined') {
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: aboutSection,
+                    start: "top 65%",
+                    toggleActions: "play none none reverse"
+                }
+            });
+
+            // 1. Picture appears first (fade and slight zoom/float up)
+            tl.fromTo(canvas, 
+                { opacity: 0, scale: 0.9, y: 30 },
+                { opacity: 1, scale: 1, y: 0, duration: 1.2, ease: "power3.out" }
+            );
+
+            // 2. Then texts appear perfectly
+            const header = aboutSection.querySelector('.about-header');
+            const paragraphs = aboutSection.querySelectorAll('.about-paragraph');
+            
+            if (header) {
+                tl.from(header, { opacity: 0, x: -30, duration: 0.8, ease: "power2.out" }, "-=0.6");
+            }
+            if (paragraphs.length > 0) {
+                tl.from(paragraphs, { 
+                    opacity: 0, 
+                    y: 20, 
+                    duration: 0.8, 
+                    stagger: 0.1, 
+                    ease: "power2.out" 
+                }, "-=0.4");
+            }
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            targetX = mouseX;
+            targetY = mouseY;
+            
+            // Smoothly rotate the plane to simulate 3D depth/parallax
+            mesh.rotation.y += (targetX - mesh.rotation.y) * 0.05;
+            mesh.rotation.x += (targetY - mesh.rotation.x) * 0.05;
+            
+            // Subtle floating effect
+            mesh.position.y = Math.sin(Date.now() * 0.0008) * 0.15;
+            
+            renderer.render(scene, camera);
+        }
+        
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            mesh.position.x = window.innerWidth > 768 ? 2.5 : 0;
         });
     });
 }
