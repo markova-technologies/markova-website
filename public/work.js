@@ -3447,8 +3447,8 @@ function initHumanoidAnimation() {
         const mesh = new THREE.Mesh(geometry, material);
         scene.add(mesh);
         
-        // Position it to the side so it doesn't completely block text
-        mesh.position.x = window.innerWidth > 768 ? 2 : 0;
+        // Position it to the left side to fit the new empty space
+        mesh.position.x = window.innerWidth > 768 ? -2 : 0;
         
         // Mouse interaction for 3D tilt
         let mouseX = 0;
@@ -3463,20 +3463,39 @@ function initHumanoidAnimation() {
             mouseY = (event.clientY - windowHalfY) * 0.0005;
         });
 
-        // Add ScrollTrigger to fade the canvas in/out for performance and polish
+        // Add ScrollTrigger to orchestrate the "Picture first, then Text" perfect animation
         const visionSection = document.getElementById('vision');
         if (visionSection && typeof gsap !== 'undefined') {
-            gsap.from(canvas, {
+            const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: visionSection,
-                    start: "top 70%",
-                    end: "bottom top",
-                    toggleActions: "play reverse play reverse"
-                },
-                opacity: 0,
-                duration: 1.5,
-                ease: "power2.out"
+                    start: "top 65%",
+                    toggleActions: "play none none reverse"
+                }
             });
+
+            // 1. Picture appears first (fade and slight zoom/float up)
+            tl.fromTo(canvas, 
+                { opacity: 0, y: 50 },
+                { opacity: 1, y: 0, duration: 1.2, ease: "power3.out" }
+            );
+
+            // 2. Then texts appear perfectly
+            const header = visionSection.querySelector('.vision-header');
+            const paragraphs = visionSection.querySelectorAll('.vision-paragraph');
+            
+            if (header) {
+                tl.from(header, { opacity: 0, x: 30, duration: 0.8, ease: "power2.out" }, "-=0.6");
+            }
+            if (paragraphs.length > 0) {
+                tl.from(paragraphs, { 
+                    opacity: 0, 
+                    y: 20, 
+                    duration: 0.8, 
+                    stagger: 0.1, 
+                    ease: "power2.out" 
+                }, "-=0.4");
+            }
         }
 
         function animate() {
@@ -3501,7 +3520,7 @@ function initHumanoidAnimation() {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
-            mesh.position.x = window.innerWidth > 768 ? 2 : 0;
+            mesh.position.x = window.innerWidth > 768 ? -2 : 0;
         });
     });
 }

@@ -247,28 +247,34 @@
         <!-- Interactive Humanoid Canvas -->
         <canvas id="humanoidCanvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.6; pointer-events: none; mix-blend-mode: screen;"></canvas>
         <div class="container" style="position: relative; z-index: 2;">
-            <div class="section-header reveal-fade">
-                <div class="section-badge">
-                    <i class="fas fa-eye"></i>
-                    <span>Vision</span>
-                </div>
-                <h2 class="section-title" style="margin-bottom: 3rem;">Building the Agentic Ecosystem of Tomorrow</h2>
-            </div>
-            
-            <div class="about-text-content" style="max-width: 900px; margin: 0 auto; text-align: center; font-size: 1.15rem; line-height: 1.8; color: var(--text-secondary); display: flex; flex-direction: column; gap: 1.5rem;">
-                <p>Artificial intelligence is rapidly becoming part of every business.</p>
-                <p>Yet most AI solutions remain isolated.</p>
-                <p>One assistant answers questions.<br>Another automates emails.<br>Another schedules meetings.</p>
-                <p>Businesses are left managing disconnected tools instead of intelligent systems that work together.</p>
-                <p style="font-size: 1.35rem; color: #fff; margin-top: 1rem;">Our vision is different.</p>
-                <p>We believe organizations should be able to deploy an entire workforce of specialized AI agents that collaborate naturally, understand business context, and execute real work securely.</p>
-                <p>We're building an open ecosystem where AI products, developers, partners, and businesses can work together through shared intelligence.</p>
-                <p>Markova OS is one part of that ecosystem.</p>
-                <p>The ecosystem itself is our destination.</p>
-
-                <div style="margin: 2rem 0; padding: 2.5rem; background: rgba(255, 255, 255, 0.03); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.08);">
-                    <p style="font-weight: 600; color: #fff; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem;">Vision Statement</p>
-                    <p style="font-size: 1.5rem; color: #ffffff; font-weight: 500; line-height: 1.5;">"To build the infrastructure that powers the world's next generation of intelligent organizations."</p>
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 2rem;">
+                <!-- Space for 3D Character (Left) -->
+                <div style="flex: 1 1 400px; min-height: 500px;" class="vision-character-placeholder"></div>
+                
+                <!-- Text Content (Right) -->
+                <div style="flex: 1 1 500px; text-align: left; padding: 2rem 0;">
+                    <div class="section-header vision-header" style="text-align: left; margin-bottom: 2rem;">
+                        <div class="section-badge" style="margin: 0 0 1rem 0; display: inline-flex;">
+                            <i class="fas fa-eye"></i>
+                            <span>Vision</span>
+                        </div>
+                        <h2 class="section-title" style="margin-bottom: 1rem; font-size: 3rem; font-weight: 300; letter-spacing: -1px; line-height: 1.2;">Building the <span style="font-weight: 600; background: linear-gradient(90deg, #fff, #a1a1aa); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">Agentic Ecosystem</span> of Tomorrow</h2>
+                    </div>
+                    
+                    <div class="vision-text-content" style="font-size: 1.2rem; line-height: 1.8; color: var(--text-secondary); display: flex; flex-direction: column; gap: 1.5rem; font-weight: 300;">
+                        <p class="vision-paragraph">Artificial intelligence is rapidly becoming part of every business.</p>
+                        <p class="vision-paragraph">Yet most AI solutions remain isolated.</p>
+                        <p class="vision-paragraph" style="border-left: 2px solid rgba(255,255,255,0.1); padding-left: 1.5rem; margin: 1rem 0; font-style: italic; color: #a1a1aa;">One assistant answers questions.<br>Another automates emails.<br>Another schedules meetings.</p>
+                        <p class="vision-paragraph">Businesses are left managing disconnected tools instead of intelligent systems that work together.</p>
+                        <p class="vision-paragraph" style="font-size: 1.4rem; color: #fff; margin-top: 1rem; font-weight: 400;">Our vision is different.</p>
+                        <p class="vision-paragraph">We believe organizations should be able to deploy an entire workforce of specialized AI agents that collaborate naturally, understand business context, and execute real work securely.</p>
+                        <p class="vision-paragraph">We're building an open ecosystem where AI products, developers, partners, and businesses can work together through shared intelligence.</p>
+                        
+                        <div class="vision-paragraph" style="margin: 2rem 0; padding: 2.5rem; background: rgba(255, 255, 255, 0.03); border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.08); backdrop-filter: blur(10px);">
+                            <p style="font-weight: 600; color: #a1a1aa; margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 2px; font-size: 0.85rem;">Vision Statement</p>
+                            <p style="font-size: 1.6rem; color: #ffffff; font-weight: 400; line-height: 1.4;">"To build the infrastructure that powers the world's next generation of intelligent organizations."</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
