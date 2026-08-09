@@ -50,7 +50,6 @@
 }
 
 html {
-    scroll-behavior: smooth;
     overflow-x: hidden;
 }
 
@@ -1942,7 +1941,6 @@ strong {
         transform: none;
         border: none;
     }
-}
     
     /* Disable complex animations on touch devices */
     .service-card:hover,
@@ -4216,4 +4214,21 @@ body.mobile-nav-open {
 /* --- Block Background Video on Middle Sections --- */
 #about, #vision, #solutions, #technology, #ecosystem {
     background-color: #000 !important;
+}
+
+/* --- Lenis Smooth Scrolling Boilerplate --- */
+html.lenis, html.lenis body {
+    height: auto;
+}
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+.lenis.lenis-scrolling iframe {
+    pointer-events: none;
 }
