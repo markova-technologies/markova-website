@@ -598,206 +598,499 @@
             <div class="stagger-grid" style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 16px; padding: 16px;">
                 <!-- 21 items total -->
                 <style>
-                    .bento-container {
-                        grid-column: span 3;
+                    /* Grid and Base styles */
+                    .sg-item-square {
                         position: relative;
-                        height: 180px;
-                        border-radius: 16px;
-                        display: flex;
-                        gap: 8px;
-                        overflow: hidden;
-                        z-index: 20;
-                    }
-                    .accordion-item {
-                        position: relative;
-                        flex: 1;
+                        aspect-ratio: 1;
                         border-radius: 12px;
-                        background: #09090b;
-                        border: 1px solid rgba(255,255,255,0.05);
                         overflow: hidden;
+                        perspective: 800px;
                         cursor: pointer;
-                        transition: flex 0.7s cubic-bezier(0.25, 1, 0.5, 1), background 0.7s ease, border-color 0.7s ease;
+                        margin: 0;
+                        z-index: 10;
+                    }
+                    .sg-item-square-inner {
+                        width: 100%;
+                        height: 100%;
+                        backface-visibility: hidden;
+                        border-radius: 12px;
+                        overflow: hidden;
+                        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+                        border: 1px solid rgba(255,255,255,0.05); /* dark:border-zinc-900 */
+                        background: #09090b; /* dark:bg-zinc-950 */
                         display: flex;
                         align-items: center;
                         justify-content: center;
+                        transition: all 0.5s ease-out;
                     }
-                    .accordion-item:hover {
-                        flex: 3;
-                        background: rgba(255,255,255,0.05);
-                        border-color: rgba(255,255,255,0.2);
-                        box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+                    .sg-item-square:hover .sg-item-square-inner {
+                        transform: scale(1.05);
+                        box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04); /* shadow-xl */
+                        border-color: transparent;
                     }
-                    
-                    /* Inactive state */
-                    .acc-inactive {
+                    .sg-hover-gradient {
+                        position: absolute;
+                        inset: 0;
+                        background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.8), #000);
+                        backdrop-filter: blur(2px);
+                        opacity: 0;
+                        transition: opacity 0.5s;
+                        z-index: 0;
+                    }
+                    .sg-item-square:hover .sg-hover-gradient {
+                        opacity: 1;
+                    }
+                    .sg-content-container {
+                        position: relative;
+                        z-index: 10;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 0.75rem;
+                    }
+                    .sg-icon {
+                        font-size: 2rem;
+                        color: #71717a; /* zinc-500 */
+                        transition: all 0.3s;
+                    }
+                    .sg-item-square:hover .sg-icon {
+                        color: #fff;
+                        transform: scale(1.1);
+                    }
+                    .sg-text-reveal {
+                        text-align: center;
+                        opacity: 0;
+                        transform: translateY(8px);
+                        transition: all 0.3s;
+                        transition-delay: 75ms;
+                    }
+                    .sg-item-square:hover .sg-text-reveal {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                    .sg-text-build {
+                        display: block;
+                        font-size: 10px;
+                        font-weight: 500;
+                        color: rgba(255,255,255,0.9);
+                        text-transform: uppercase;
+                        letter-spacing: 0.05em;
+                        margin-bottom: 2px;
+                    }
+                    .sg-text-label {
+                        display: block;
+                        font-size: 14px;
+                        font-weight: 700;
+                        color: #fff;
+                        letter-spacing: -0.025em;
+                    }
+
+                    /* Bento Accordion styles */
+                    .bento-container {
+                        grid-column: span 3;
+                        position: relative;
+                        height: 180px; /* Base height, might need adjust */
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 8px;
+                        z-index: 20;
+                        will-change: transform;
+                    }
+                    .bento-item {
+                        position: relative;
+                        cursor: pointer;
+                        overflow: hidden;
+                        border-radius: 16px;
+                        height: 100%;
+                        transition: all 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+                        background: #09090b; /* zinc-950 */
+                        width: 20%; /* Default inactive */
+                    }
+                    .bento-item.active {
+                        background: rgba(24, 24, 27, 0.1); /* zinc-900/10 */
+                        box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+                        width: 60%;
+                    }
+                    .bento-border {
+                        position: absolute;
+                        inset: 0;
+                        border-radius: 16px;
+                        border: 1px solid rgba(39, 39, 42, 0.5); /* zinc-800/50 */
+                        z-index: 50;
+                        pointer-events: none;
+                        transition: border-color 0.7s;
+                    }
+                    .bento-item:hover .bento-border {
+                        border-color: #3f3f46; /* zinc-700 */
+                    }
+                    .bento-item.active .bento-border {
+                        border-color: rgba(113, 113, 122, 0.5); /* zinc-500/50 */
+                    }
+
+                    .bento-active-content {
+                        position: absolute;
+                        inset: 0;
+                        display: flex;
+                        flex-direction: column;
+                        transition: all 0.5s ease-in-out;
+                        opacity: 0;
+                        transform: translateY(16px);
+                        pointer-events: none;
+                    }
+                    .bento-item.active .bento-active-content {
+                        opacity: 1;
+                        transform: translateY(0);
+                        pointer-events: auto;
+                    }
+
+                    .bento-inactive-content {
                         position: absolute;
                         inset: 0;
                         display: flex;
                         flex-direction: column;
                         align-items: center;
                         justify-content: center;
-                        gap: 0.5rem;
-                        transition: all 0.5s ease;
+                        gap: 8px;
+                        transition: all 0.5s;
+                        opacity: 1;
+                        transform: scale(1);
                     }
-                    .accordion-item:hover .acc-inactive {
+                    .bento-item.active .bento-inactive-content {
                         opacity: 0;
                         transform: scale(0.9);
                         pointer-events: none;
                     }
-                    
-                    /* Active state */
-                    .acc-active {
-                        position: absolute;
-                        inset: 0;
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: flex-end;
-                        padding: 1.5rem;
-                        opacity: 0;
-                        transform: translateY(20px);
-                        transition: all 0.5s ease;
-                        pointer-events: none;
-                        background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
-                    }
-                    .accordion-item:hover .acc-active {
-                        opacity: 1;
-                        transform: translateY(0);
-                        pointer-events: auto;
-                        transition-delay: 0.1s;
-                    }
                 </style>
 
+                <script>
+                    function handleBentoHover(index) {
+                        const items = document.querySelectorAll('.bento-item');
+                        items.forEach((item, i) => {
+                            if (i === index) {
+                                item.classList.add('active');
+                            } else {
+                                item.classList.remove('active');
+                            }
+                        });
+                    }
+                </script>
+
                 <!-- Row 1 -->
-                <div class="sg-item" data-col="0" style="position: relative; aspect-ratio: 1; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; perspective: 800px;">
-                    <div class="sg-item-inner" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; backface-visibility: hidden;">
-                        <i class="fas fa-microchip" style="color: rgba(255,255,255,0.2); font-size: 24px;"></i>
+                <figure class="grid__item sg-item-square" data-col="0">
+                    <div class="sg-item-square-inner">
+                        <div class="sg-hover-gradient"></div>
+                        <div class="sg-content-container">
+                            <i class="fab fa-github sg-icon"></i>
+                            <div class="sg-text-reveal">
+                                <span class="sg-text-build">Build with</span>
+                                <span class="sg-text-label">Github</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="sg-item" data-col="1" style="position: relative; aspect-ratio: 1; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; perspective: 800px;">
-                    <div class="sg-item-inner" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; backface-visibility: hidden;">
-                        <i class="fas fa-microchip" style="color: rgba(255,255,255,0.2); font-size: 24px;"></i>
+                </figure>
+                <figure class="grid__item sg-item-square" data-col="1">
+                    <div class="sg-item-square-inner">
+                        <div class="sg-hover-gradient"></div>
+                        <div class="sg-content-container">
+                            <i class="fab fa-slack sg-icon"></i>
+                            <div class="sg-text-reveal">
+                                <span class="sg-text-build">Build with</span>
+                                <span class="sg-text-label">Slack</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="sg-item" data-col="2" style="position: relative; aspect-ratio: 1; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; perspective: 800px;">
-                    <div class="sg-item-inner" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; backface-visibility: hidden;">
-                        <i class="fas fa-microchip" style="color: rgba(255,255,255,0.2); font-size: 24px;"></i>
+                </figure>
+                <figure class="grid__item sg-item-square" data-col="2">
+                    <div class="sg-item-square-inner">
+                        <div class="sg-hover-gradient"></div>
+                        <div class="sg-content-container">
+                            <i class="fab fa-twitter sg-icon"></i>
+                            <div class="sg-text-reveal">
+                                <span class="sg-text-build">Build with</span>
+                                <span class="sg-text-label">Twitter</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="sg-item" data-col="3" style="position: relative; aspect-ratio: 1; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; perspective: 800px;">
-                    <div class="sg-item-inner" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; backface-visibility: hidden;">
-                        <i class="fas fa-microchip" style="color: rgba(255,255,255,0.2); font-size: 24px;"></i>
+                </figure>
+                <figure class="grid__item sg-item-square" data-col="3">
+                    <div class="sg-item-square-inner">
+                        <div class="sg-hover-gradient"></div>
+                        <div class="sg-content-container">
+                            <i class="fab fa-github sg-icon"></i>
+                            <div class="sg-text-reveal">
+                                <span class="sg-text-build">Build with</span>
+                                <span class="sg-text-label">Github</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="sg-item" data-col="4" style="position: relative; aspect-ratio: 1; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; perspective: 800px;">
-                    <div class="sg-item-inner" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; backface-visibility: hidden;">
-                        <i class="fas fa-microchip" style="color: rgba(255,255,255,0.2); font-size: 24px;"></i>
+                </figure>
+                <figure class="grid__item sg-item-square" data-col="4">
+                    <div class="sg-item-square-inner">
+                        <div class="sg-hover-gradient"></div>
+                        <div class="sg-content-container">
+                            <i class="fab fa-slack sg-icon"></i>
+                            <div class="sg-text-reveal">
+                                <span class="sg-text-build">Build with</span>
+                                <span class="sg-text-label">Slack</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="sg-item" data-col="5" style="position: relative; aspect-ratio: 1; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; perspective: 800px;">
-                    <div class="sg-item-inner" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; backface-visibility: hidden;">
-                        <i class="fas fa-microchip" style="color: rgba(255,255,255,0.2); font-size: 24px;"></i>
+                </figure>
+                <figure class="grid__item sg-item-square" data-col="5">
+                    <div class="sg-item-square-inner">
+                        <div class="sg-hover-gradient"></div>
+                        <div class="sg-content-container">
+                            <i class="fab fa-twitter sg-icon"></i>
+                            <div class="sg-text-reveal">
+                                <span class="sg-text-build">Build with</span>
+                                <span class="sg-text-label">Twitter</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="sg-item" data-col="6" style="position: relative; aspect-ratio: 1; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; perspective: 800px;">
-                    <div class="sg-item-inner" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; backface-visibility: hidden;">
-                        <i class="fas fa-microchip" style="color: rgba(255,255,255,0.2); font-size: 24px;"></i>
+                </figure>
+                <figure class="grid__item sg-item-square" data-col="6">
+                    <div class="sg-item-square-inner">
+                        <div class="sg-hover-gradient"></div>
+                        <div class="sg-content-container">
+                            <i class="fab fa-github sg-icon"></i>
+                            <div class="sg-text-reveal">
+                                <span class="sg-text-build">Build with</span>
+                                <span class="sg-text-label">Github</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </figure>
 
                 <!-- Row 2 -->
-                <div class="sg-item" data-col="0" style="position: relative; aspect-ratio: 1; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; perspective: 800px;">
-                    <div class="sg-item-inner" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; backface-visibility: hidden;">
-                        <i class="fas fa-microchip" style="color: rgba(255,255,255,0.2); font-size: 24px;"></i>
+                <figure class="grid__item sg-item-square" data-col="0">
+                    <div class="sg-item-square-inner">
+                        <div class="sg-hover-gradient"></div>
+                        <div class="sg-content-container">
+                            <i class="fab fa-slack sg-icon"></i>
+                            <div class="sg-text-reveal">
+                                <span class="sg-text-build">Build with</span>
+                                <span class="sg-text-label">Slack</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="sg-item" data-col="1" style="position: relative; aspect-ratio: 1; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; perspective: 800px;">
-                    <div class="sg-item-inner" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; backface-visibility: hidden;">
-                        <i class="fas fa-microchip" style="color: rgba(255,255,255,0.2); font-size: 24px;"></i>
+                </figure>
+                <figure class="grid__item sg-item-square" data-col="1">
+                    <div class="sg-item-square-inner">
+                        <div class="sg-hover-gradient"></div>
+                        <div class="sg-content-container">
+                            <i class="fab fa-twitter sg-icon"></i>
+                            <div class="sg-text-reveal">
+                                <span class="sg-text-build">Build with</span>
+                                <span class="sg-text-label">Twitter</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="sg-item" data-col="2" style="position: relative; aspect-ratio: 1; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; perspective: 800px;">
-                    <div class="sg-item-inner" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; backface-visibility: hidden;">
-                        <i class="fas fa-microchip" style="color: rgba(255,255,255,0.2); font-size: 24px;"></i>
+                </figure>
+                <figure class="grid__item sg-item-square" data-col="2">
+                    <div class="sg-item-square-inner">
+                        <div class="sg-hover-gradient"></div>
+                        <div class="sg-content-container">
+                            <i class="fab fa-github sg-icon"></i>
+                            <div class="sg-text-reveal">
+                                <span class="sg-text-build">Build with</span>
+                                <span class="sg-text-label">Github</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </figure>
 
-                <!-- BENTO ACCORDION CONTAINER (Spans 3 cols) -->
-                <div class="sg-item bento-container" data-col="3">
+                <!-- BENTO GROUP (Spans 3 cols) -->
+                <div class="grid__item bento-container" data-col="3">
                     
-                    <!-- Markova OS -->
-                    <div class="accordion-item">
-                        <div class="acc-inactive">
-                            <i class="fas fa-network-wired" style="font-size: 1.5rem; color: rgba(255,255,255,0.5);"></i>
-                            <span style="font-size: 0.75rem; font-weight: 500; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px;">Markova OS</span>
-                        </div>
-                        <div class="acc-active">
-                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem;">
-                                <h3 style="color: white; font-size: 1.4rem; font-weight: 600; margin: 0;">Markova OS</h3>
-                                <i class="fas fa-network-wired" style="font-size: 1.4rem; color: white;"></i>
+                    <!-- Item 0: Markova OS (Active by default) -->
+                    <div class="bento-item active" onmouseenter="handleBentoHover(0)" onclick="handleBentoHover(0)">
+                        <div class="bento-border"></div>
+                        <div style="position:relative; z-index:10; width:100%; height:100%; display:flex; flex-direction:column; padding:0;">
+                            
+                            <div class="bento-active-content">
+                                <div style="position:absolute; inset:0; background:#18181b; overflow:hidden; z-index:0;">
+                                    <div style="position:absolute; bottom:0; left:0; width:100%; height:160px; background:linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 50%, transparent 100%); pointer-events:none;"></div>
+                                </div>
+                                <div style="position:absolute; bottom:0; left:0; width:100%; height:80px; display:flex; align-items:center; justify-content:space-between; padding:0 20px; z-index:20;">
+                                    <div style="display:flex; flex-direction:column; position:relative; z-index:10;">
+                                        <h3 style="font-size:14px; font-weight:700; color:white; line-height:1; letter-spacing:-0.025em; text-shadow:0 1px 2px rgba(0,0,0,0.5);">Markova OS</h3>
+                                    </div>
+                                    <div style="color:rgba(255,255,255,0.9); position:relative; z-index:10; text-shadow:0 1px 2px rgba(0,0,0,0.5);">
+                                        <i class="fas fa-network-wired"></i>
+                                    </div>
+                                </div>
                             </div>
-                            <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem; line-height: 1.4; margin: 0;">The foundational AI workforce operating system. Deploy and manage specialized AI agents that collaborate naturally to execute complex business workflows across your connected software.</p>
+
+                            <div class="bento-inactive-content">
+                                <div style="color:rgba(255,255,255,0.5); transition:color 0.3s;">
+                                    <i class="fas fa-network-wired"></i>
+                                </div>
+                                <span style="font-size:10px; font-weight:500; color:#71717a; text-transform:uppercase; letter-spacing:0.05em; transition:color 0.3s;">Markova OS</span>
+                            </div>
+
                         </div>
                     </div>
 
-                    <!-- Nuracre -->
-                    <div class="accordion-item">
-                        <div class="acc-inactive">
-                            <i class="fas fa-leaf" style="font-size: 1.5rem; color: rgba(255,255,255,0.5);"></i>
-                            <span style="font-size: 0.75rem; font-weight: 500; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px;">Nuracre</span>
-                        </div>
-                        <div class="acc-active">
-                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem;">
-                                <h3 style="color: white; font-size: 1.4rem; font-weight: 600; margin: 0;">Nuracre</h3>
-                                <i class="fas fa-leaf" style="font-size: 1.4rem; color: white;"></i>
+                    <!-- Item 1: Nuracre -->
+                    <div class="bento-item" onmouseenter="handleBentoHover(1)" onclick="handleBentoHover(1)">
+                        <div class="bento-border"></div>
+                        <div style="position:relative; z-index:10; width:100%; height:100%; display:flex; flex-direction:column; padding:0;">
+                            
+                            <div class="bento-active-content">
+                                <div style="position:absolute; inset:0; background:#18181b; overflow:hidden; z-index:0;">
+                                    <div style="position:absolute; bottom:0; left:0; width:100%; height:160px; background:linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 50%, transparent 100%); pointer-events:none;"></div>
+                                </div>
+                                <div style="position:absolute; bottom:0; left:0; width:100%; height:80px; display:flex; align-items:center; justify-content:space-between; padding:0 20px; z-index:20;">
+                                    <div style="display:flex; flex-direction:column; position:relative; z-index:10;">
+                                        <h3 style="font-size:14px; font-weight:700; color:white; line-height:1; letter-spacing:-0.025em; text-shadow:0 1px 2px rgba(0,0,0,0.5);">Nuracre</h3>
+                                    </div>
+                                    <div style="color:rgba(255,255,255,0.9); position:relative; z-index:10; text-shadow:0 1px 2px rgba(0,0,0,0.5);">
+                                        <i class="fas fa-leaf"></i>
+                                    </div>
+                                </div>
                             </div>
-                            <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem; line-height: 1.4; margin: 0;">A powerful ecosystem component seamlessly integrated with Markova OS. It provides specialized infrastructure and intelligence to further expand the capabilities of your autonomous workforce.</p>
+
+                            <div class="bento-inactive-content">
+                                <div style="color:rgba(255,255,255,0.5); transition:color 0.3s;">
+                                    <i class="fas fa-leaf"></i>
+                                </div>
+                                <span style="font-size:10px; font-weight:500; color:#71717a; text-transform:uppercase; letter-spacing:0.05em; transition:color 0.3s;">Nuracre</span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Item 2: Neural Fabric -->
+                    <div class="bento-item" onmouseenter="handleBentoHover(2)" onclick="handleBentoHover(2)">
+                        <div class="bento-border"></div>
+                        <div style="position:relative; z-index:10; width:100%; height:100%; display:flex; flex-direction:column; padding:0;">
+                            
+                            <div class="bento-active-content">
+                                <div style="position:absolute; inset:0; background:#18181b; overflow:hidden; z-index:0;">
+                                    <div style="position:absolute; bottom:0; left:0; width:100%; height:160px; background:linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 50%, transparent 100%); pointer-events:none;"></div>
+                                </div>
+                                <div style="position:absolute; bottom:0; left:0; width:100%; height:80px; display:flex; align-items:center; justify-content:space-between; padding:0 20px; z-index:20;">
+                                    <div style="display:flex; flex-direction:column; position:relative; z-index:10;">
+                                        <h3 style="font-size:14px; font-weight:700; color:white; line-height:1; letter-spacing:-0.025em; text-shadow:0 1px 2px rgba(0,0,0,0.5);">Neural Fabric</h3>
+                                    </div>
+                                    <div style="color:rgba(255,255,255,0.9); position:relative; z-index:10; text-shadow:0 1px 2px rgba(0,0,0,0.5);">
+                                        <i class="fas fa-brain"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bento-inactive-content">
+                                <div style="color:rgba(255,255,255,0.5); transition:color 0.3s;">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                                <span style="font-size:10px; font-weight:500; color:#71717a; text-transform:uppercase; letter-spacing:0.05em; transition:color 0.3s;">Fabric</span>
+                            </div>
+
                         </div>
                     </div>
 
                 </div>
 
-                <div class="sg-item" data-col="6" style="position: relative; aspect-ratio: 1; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; perspective: 800px;">
-                    <div class="sg-item-inner" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; backface-visibility: hidden;">
-                        <i class="fas fa-microchip" style="color: rgba(255,255,255,0.2); font-size: 24px;"></i>
+                <figure class="grid__item sg-item-square" data-col="6">
+                    <div class="sg-item-square-inner">
+                        <div class="sg-hover-gradient"></div>
+                        <div class="sg-content-container">
+                            <i class="fab fa-slack sg-icon"></i>
+                            <div class="sg-text-reveal">
+                                <span class="sg-text-build">Build with</span>
+                                <span class="sg-text-label">Slack</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </figure>
 
                 <!-- Row 3 -->
-                <div class="sg-item" data-col="0" style="position: relative; aspect-ratio: 1; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; perspective: 800px;">
-                    <div class="sg-item-inner" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; backface-visibility: hidden;">
-                        <i class="fas fa-microchip" style="color: rgba(255,255,255,0.2); font-size: 24px;"></i>
+                <figure class="grid__item sg-item-square" data-col="0">
+                    <div class="sg-item-square-inner">
+                        <div class="sg-hover-gradient"></div>
+                        <div class="sg-content-container">
+                            <i class="fab fa-twitter sg-icon"></i>
+                            <div class="sg-text-reveal">
+                                <span class="sg-text-build">Build with</span>
+                                <span class="sg-text-label">Twitter</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="sg-item" data-col="1" style="position: relative; aspect-ratio: 1; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; perspective: 800px;">
-                    <div class="sg-item-inner" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; backface-visibility: hidden;">
-                        <i class="fas fa-microchip" style="color: rgba(255,255,255,0.2); font-size: 24px;"></i>
+                </figure>
+                <figure class="grid__item sg-item-square" data-col="1">
+                    <div class="sg-item-square-inner">
+                        <div class="sg-hover-gradient"></div>
+                        <div class="sg-content-container">
+                            <i class="fab fa-github sg-icon"></i>
+                            <div class="sg-text-reveal">
+                                <span class="sg-text-build">Build with</span>
+                                <span class="sg-text-label">Github</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="sg-item" data-col="2" style="position: relative; aspect-ratio: 1; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; perspective: 800px;">
-                    <div class="sg-item-inner" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; backface-visibility: hidden;">
-                        <i class="fas fa-microchip" style="color: rgba(255,255,255,0.2); font-size: 24px;"></i>
+                </figure>
+                <figure class="grid__item sg-item-square" data-col="2">
+                    <div class="sg-item-square-inner">
+                        <div class="sg-hover-gradient"></div>
+                        <div class="sg-content-container">
+                            <i class="fab fa-slack sg-icon"></i>
+                            <div class="sg-text-reveal">
+                                <span class="sg-text-build">Build with</span>
+                                <span class="sg-text-label">Slack</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="sg-item" data-col="3" style="position: relative; aspect-ratio: 1; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; perspective: 800px;">
-                    <div class="sg-item-inner" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; backface-visibility: hidden;">
-                        <i class="fas fa-microchip" style="color: rgba(255,255,255,0.2); font-size: 24px;"></i>
+                </figure>
+                <figure class="grid__item sg-item-square" data-col="3">
+                    <div class="sg-item-square-inner">
+                        <div class="sg-hover-gradient"></div>
+                        <div class="sg-content-container">
+                            <i class="fab fa-twitter sg-icon"></i>
+                            <div class="sg-text-reveal">
+                                <span class="sg-text-build">Build with</span>
+                                <span class="sg-text-label">Twitter</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="sg-item" data-col="4" style="position: relative; aspect-ratio: 1; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; perspective: 800px;">
-                    <div class="sg-item-inner" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; backface-visibility: hidden;">
-                        <i class="fas fa-microchip" style="color: rgba(255,255,255,0.2); font-size: 24px;"></i>
+                </figure>
+                <figure class="grid__item sg-item-square" data-col="4">
+                    <div class="sg-item-square-inner">
+                        <div class="sg-hover-gradient"></div>
+                        <div class="sg-content-container">
+                            <i class="fab fa-github sg-icon"></i>
+                            <div class="sg-text-reveal">
+                                <span class="sg-text-build">Build with</span>
+                                <span class="sg-text-label">Github</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="sg-item" data-col="5" style="position: relative; aspect-ratio: 1; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; perspective: 800px;">
-                    <div class="sg-item-inner" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; backface-visibility: hidden;">
-                        <i class="fas fa-microchip" style="color: rgba(255,255,255,0.2); font-size: 24px;"></i>
+                </figure>
+                <figure class="grid__item sg-item-square" data-col="5">
+                    <div class="sg-item-square-inner">
+                        <div class="sg-hover-gradient"></div>
+                        <div class="sg-content-container">
+                            <i class="fab fa-slack sg-icon"></i>
+                            <div class="sg-text-reveal">
+                                <span class="sg-text-build">Build with</span>
+                                <span class="sg-text-label">Slack</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="sg-item" data-col="6" style="position: relative; aspect-ratio: 1; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; perspective: 800px;">
-                    <div class="sg-item-inner" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; backface-visibility: hidden;">
-                        <i class="fas fa-microchip" style="color: rgba(255,255,255,0.2); font-size: 24px;"></i>
+                </figure>
+                <figure class="grid__item sg-item-square" data-col="6">
+                    <div class="sg-item-square-inner">
+                        <div class="sg-hover-gradient"></div>
+                        <div class="sg-content-container">
+                            <i class="fab fa-twitter sg-icon"></i>
+                            <div class="sg-text-reveal">
+                                <span class="sg-text-build">Build with</span>
+                                <span class="sg-text-label">Twitter</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </figure>
 
             </div>
         </div>
