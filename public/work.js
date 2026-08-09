@@ -3216,6 +3216,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Delay initialization slightly to ensure all DOM elements are painted
     setTimeout(initStaggeredGrid, 200);
     setTimeout(initStorytellingAnimations, 300);
+    setTimeout(initHumanoidAnimation, 400);
 });
 
 // --- Enhanced Storytelling & Animations ---
@@ -3250,6 +3251,9 @@ function initStorytellingAnimations() {
     // 3. Three.js Storytelling Canvas (Black & White Particles)
     const canvas = document.getElementById('storyCanvas');
     if (!canvas) return;
+    
+    // Set opacity since it's naturally constrained within the wrapper now
+    canvas.style.opacity = '1';
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -3305,29 +3309,32 @@ function initStorytellingAnimations() {
     });
     
     const lineGeometry = new THREE.BufferGeometry();
-    // We will update lines dynamically in render loop
     let linePositions = new Float32Array(particleCount * 3 * 2); 
     lineGeometry.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
     const lines = new THREE.LineSegments(lineGeometry, lineMaterial);
     scene.add(lines);
 
+    // Mouse Interaction Logic
+    let mouseX = 0;
+    let mouseY = 0;
+    let targetX = 0;
+    let targetY = 0;
+    const windowHalfX = window.innerWidth / 2;
+    const windowHalfY = window.innerHeight / 2;
+
+    document.addEventListener('mousemove', (event) => {
+        mouseX = (event.clientX - windowHalfX) * 0.001;
+        mouseY = (event.clientY - windowHalfY) * 0.001;
+    });
+
     // Animation state
     const animState = { progress: 0 };
     
-    // Setup ScrollTrigger to control particle morphing
-    const aboutSection = document.getElementById('about');
+    // Setup ScrollTrigger to control particle morphing inside the wrapper
+    const storyWrapper = document.getElementById('story-wrapper');
     const visionSection = document.getElementById('vision');
     
-    if (aboutSection && visionSection) {
-        // Fade in canvas when reaching About
-        ScrollTrigger.create({
-            trigger: aboutSection,
-            start: "top 60%",
-            end: "bottom top",
-            onEnter: () => gsap.to(canvas, {opacity: 1, duration: 1}),
-            onLeaveBack: () => gsap.to(canvas, {opacity: 0, duration: 1}),
-        });
-
+    if (visionSection && storyWrapper) {
         // Morph particles when scrolling through Vision
         ScrollTrigger.create({
             trigger: visionSection,
@@ -3345,10 +3352,18 @@ function initStorytellingAnimations() {
         requestAnimationFrame(animate);
         time += 0.002;
         
-        particles.rotation.y = time * 0.5;
-        particles.rotation.x = time * 0.2;
-        lines.rotation.y = time * 0.5;
-        lines.rotation.x = time * 0.2;
+        // Apply interactive mouse rotation & camera movement
+        targetX = mouseX * 2;
+        targetY = mouseY * 2;
+        
+        camera.position.x += (targetX - camera.position.x) * 0.05;
+        camera.position.y += (-targetY - camera.position.y) * 0.05;
+        camera.lookAt(scene.position);
+
+        particles.rotation.y = time * 0.5 + targetX * 0.5;
+        particles.rotation.x = time * 0.2 + targetY * 0.5;
+        lines.rotation.y = time * 0.5 + targetX * 0.5;
+        lines.rotation.x = time * 0.2 + targetY * 0.5;
 
         const pos = geometry.attributes.position.array;
         const target = geometry.attributes.targetPosition.array;
@@ -3365,12 +3380,11 @@ function initStorytellingAnimations() {
             pos[i+1] = currentY + Math.cos(time * 2 + i) * 0.2;
             pos[i+2] = currentZ + Math.sin(time * 3 + i) * 0.2;
             
-            // Connect nearby points to form web (simplified for performance)
+            // Connect nearby points to form web
             if (i % 6 === 0 && lineIdx < linePositions.length - 6) {
                 linePositions[lineIdx++] = pos[i];
                 linePositions[lineIdx++] = pos[i+1];
                 linePositions[lineIdx++] = pos[i+2];
-                // Connect to a pseudo-random other point to create a web structure
                 let nextIdx = (i + 15) % (particleCount * 3);
                 linePositions[lineIdx++] = pos[nextIdx];
                 linePositions[lineIdx++] = pos[nextIdx+1];
@@ -3390,6 +3404,105 @@ function initStorytellingAnimations() {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+}
+
+// --- Humanoid Vision Canvas ---
+function initHumanoidAnimation() {
+    const canvas = document.getElementById('humanoidCanvas');
+    if (!canvas || typeof THREE === 'undefined') return;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 5;
+
+    const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    const textureLoader = new THREE.TextureLoader();
+    textureLoader.load('glossy-humanoid.png', (texture) => {
+        const imgAspect = texture.image.width / texture.image.height;
+        const screenAspect = window.innerWidth / window.innerHeight;
+        
+        let planeWidth = 6;
+        let planeHeight = 6 / imgAspect;
+        
+        if (screenAspect < imgAspect) {
+            planeWidth = 8;
+            planeHeight = 8 / imgAspect;
+        }
+
+        const geometry = new THREE.PlaneGeometry(planeWidth, planeHeight, 32, 32);
+        
+        // Since the image has a solid black background, we don't need additive blending. 
+        // It will naturally blend with the black background of the story-wrapper.
+        const material = new THREE.MeshBasicMaterial({ 
+            map: texture, 
+            transparent: true,
+            opacity: 1,
+            side: THREE.DoubleSide
+        });
+        
+        const mesh = new THREE.Mesh(geometry, material);
+        scene.add(mesh);
+        
+        // Position it to the side so it doesn't completely block text
+        mesh.position.x = window.innerWidth > 768 ? 2 : 0;
+        
+        // Mouse interaction for 3D tilt
+        let mouseX = 0;
+        let mouseY = 0;
+        let targetX = 0;
+        let targetY = 0;
+        const windowHalfX = window.innerWidth / 2;
+        const windowHalfY = window.innerHeight / 2;
+
+        document.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX - windowHalfX) * 0.0005;
+            mouseY = (event.clientY - windowHalfY) * 0.0005;
+        });
+
+        // Add ScrollTrigger to fade the canvas in/out for performance and polish
+        const visionSection = document.getElementById('vision');
+        if (visionSection && typeof gsap !== 'undefined') {
+            gsap.from(canvas, {
+                scrollTrigger: {
+                    trigger: visionSection,
+                    start: "top 70%",
+                    end: "bottom top",
+                    toggleActions: "play reverse play reverse"
+                },
+                opacity: 0,
+                duration: 1.5,
+                ease: "power2.out"
+            });
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            targetX = mouseX;
+            targetY = mouseY;
+            
+            // Smoothly rotate the plane to simulate 3D depth/parallax
+            mesh.rotation.y += (targetX - mesh.rotation.y) * 0.05;
+            mesh.rotation.x += (targetY - mesh.rotation.x) * 0.05;
+            
+            // Subtle floating effect
+            mesh.position.y = Math.sin(Date.now() * 0.001) * 0.1;
+            
+            renderer.render(scene, camera);
+        }
+        
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            mesh.position.x = window.innerWidth > 768 ? 2 : 0;
+        });
     });
 }
 

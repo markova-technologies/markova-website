@@ -89,8 +89,6 @@
 </head>
 <body>
 
-    <!-- 3D Storytelling Canvas -->
-    <canvas id="storyCanvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 1; pointer-events: none; opacity: 0; transition: opacity 1s; mix-blend-mode: screen;"></canvas>
 
     <!-- Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
@@ -203,8 +201,12 @@
         </div>
     </section>
 
-    <!-- About Markova (Purpose Section) -->
-    <section id="about" class="about details-carousel-section" style="padding-top: 6rem; padding-bottom: 6rem; background-color: #000; position: relative;">
+    <!-- Storytelling Wrapper for 3D Particles -->
+    <div id="story-wrapper" style="position: relative; background-color: #000; z-index: 2;">
+        <canvas id="storyCanvas" style="position: sticky; top: 0; left: 0; width: 100%; height: 100vh; z-index: 0; pointer-events: none; opacity: 0; transition: opacity 1s; mix-blend-mode: screen;"></canvas>
+        
+        <!-- About Markova (Purpose Section) -->
+        <section id="about" class="about details-carousel-section" style="padding-top: 6rem; padding-bottom: 6rem; background-color: transparent; position: relative; z-index: 1;">
         <div class="container">
             <div class="section-header reveal-fade">
                 <div class="section-badge">
@@ -241,8 +243,10 @@
     </section>
 
     <!-- Vision Section -->
-    <section id="vision" class="about details-carousel-section" style="padding-top: 6rem; padding-bottom: 6rem; background-color: #000; position: relative;">
-        <div class="container">
+    <section id="vision" class="about details-carousel-section" style="padding-top: 6rem; padding-bottom: 6rem; background-color: transparent; position: relative; z-index: 1;">
+        <!-- Interactive Humanoid Canvas -->
+        <canvas id="humanoidCanvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.6; pointer-events: none; mix-blend-mode: screen;"></canvas>
+        <div class="container" style="position: relative; z-index: 2;">
             <div class="section-header reveal-fade">
                 <div class="section-badge">
                     <i class="fas fa-eye"></i>
@@ -269,6 +273,7 @@
             </div>
         </div>
     </section>
+    </div>
 
     <!-- Solutions Section -->
     <section id="solutions" class="about solutions-section" style="padding-top: 6rem; padding-bottom: 6rem; background-color: #000; overflow: hidden;">
