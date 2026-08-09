@@ -1943,11 +1943,7 @@ strong {
         border: none;
     }
 }
-
-/* --- Block Background Video on Middle Sections --- */
-#about, #vision, #solutions, #technology, #ecosystem {
-    background-color: #000 !important;
-}    
+    
     /* Disable complex animations on touch devices */
     .service-card:hover,
     .portfolio-item:hover,
@@ -4215,4 +4211,9 @@ body.mobile-nav-open {
         /* Snap immediately on touch – skip transform delays */
         transition-duration: 0.4s;
     }
+}
+
+/* --- Block Background Video on Middle Sections --- */
+#about, #vision, #solutions, #technology, #ecosystem {
+    background-color: #000 !important;
 }
