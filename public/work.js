@@ -3645,3 +3645,79 @@ function initAboutAnimation() {
     });
 }
 
+\n
+// ==========================================
+//   Page Transition Logic
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Create overlay element
+    const overlay = document.createElement('div');
+    overlay.className = 'page-transition-overlay';
+    document.body.appendChild(overlay);
+
+    // Determine current page to pick entrance animation
+    const path = window.location.pathname.toLowerCase();
+    const isWorkforce = path.includes('workforce.html');
+    
+    // Set base class based on current page
+    const enterClass = isWorkforce ? 'transition-swipe-right' : 'transition-slide-up';
+    overlay.classList.add(enterClass);
+
+    // 2. Trigger entrance animation
+    // Use requestAnimationFrame to ensure the browser paints the overlay first
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            overlay.classList.add('is-loaded');
+        });
+    });
+
+    // Clean up classes after entrance
+    setTimeout(() => {
+        overlay.classList.remove(enterClass, 'is-loaded');
+    }, 650);
+
+    // 3. Intercept navigation links
+    document.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            
+            // Ignore if no href, hash link, target blank, or external link
+            if (!href || 
+                href.startsWith('#') || 
+                href.startsWith('javascript:') || 
+                link.getAttribute('target') === '_blank' ||
+                (href.startsWith('http') && !href.includes(window.location.hostname))) {
+                return;
+            }
+
+            // Also ignore simple hash jumps on the same page
+            if (href.includes('#')) {
+                const parts = href.split('#');
+                if (parts[0] === '' || window.location.pathname.endsWith(parts[0])) {
+                    return; // same page hash link
+                }
+            }
+
+            e.preventDefault();
+
+            // Determine exit animation based on destination
+            const isDestWorkforce = href.toLowerCase().includes('workforce.html');
+            const exitClass = isDestWorkforce ? 'transition-swipe-right' : 'transition-slide-up';
+            
+            // Reset overlay state
+            overlay.className = 'page-transition-overlay ' + exitClass;
+            
+            // Force reflow
+            void overlay.offsetWidth;
+            
+            // Trigger exit animation
+            document.documentElement.classList.add('is-transitioning');
+            overlay.classList.add('is-exiting');
+
+            // Wait for animation to finish before navigating
+            setTimeout(() => {
+                window.location.href = href;
+            }, 600);
+        });
+    });
+});
