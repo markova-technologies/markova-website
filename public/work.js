@@ -3421,7 +3421,7 @@ function initHumanoidAnimation() {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
     const textureLoader = new THREE.TextureLoader();
-    textureLoader.load('glossy-humanoid.png', (texture) => {
+    textureLoader.load('user-custom-humanoid.png', (texture) => {
         const imgAspect = texture.image.width / texture.image.height;
         const screenAspect = window.innerWidth / window.innerHeight;
         
