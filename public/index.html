@@ -581,8 +581,59 @@
     
     <!-- Staggered Grid Ecosystem -->
     <section id="ecosystem" class="services" style="padding-top: 5rem; padding-bottom: 5rem; background-color: #000; overflow: hidden; position: relative;">
-        <div class="stagger-text-container" style="display: flex; justify-content: center; margin-top: 10vh;">
-            <div class="massive-text" style="font-family: sans-serif; font-size: clamp(3rem, 14vw, 10rem); font-weight: 900; line-height: 0.7; color: white; display: flex;">
+        <style>
+            .eco-card {
+                background: rgba(255,255,255,0.03);
+                border: 1px solid rgba(255,255,255,0.08);
+                border-radius: 24px;
+                padding: 3rem 2rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 1.5rem;
+                backdrop-filter: blur(10px);
+                transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+                cursor: pointer;
+                text-align: center;
+                overflow: hidden;
+                height: 220px;
+            }
+            .eco-card-content {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+                pointer-events: none;
+                max-height: 0;
+            }
+            .eco-card:hover {
+                transform: translateY(-5px);
+                background: rgba(255,255,255,0.05);
+                height: 420px;
+                border-color: rgba(255,255,255,0.2);
+            }
+            .eco-card:hover .eco-card-content {
+                opacity: 1;
+                transform: translateY(0);
+                pointer-events: auto;
+                max-height: 200px;
+            }
+            .eco-card .icon-wrapper {
+                width: 70px; height: 70px; background: rgba(255,255,255,0.05); border-radius: 20px; display: flex; align-items: center; justify-content: center;
+                transition: all 0.5s ease;
+            }
+            .eco-card:hover .icon-wrapper {
+                background: rgba(255,255,255,0.1);
+                transform: scale(1.1);
+            }
+            @media (max-width: 768px) {
+                .eco-card { height: auto; }
+                .eco-card-content { opacity: 1; transform: translateY(0); pointer-events: auto; max-height: none; }
+            }
+        </style>
+        
+        <div class="stagger-text-container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin-top: 10vh; gap: 1rem;">
+            <!-- MARKOVA OS -->
+            <div class="massive-text" style="font-family: sans-serif; font-size: clamp(3rem, 10vw, 8rem); font-weight: 900; line-height: 0.9; color: white; display: flex; flex-wrap: wrap; justify-content: center;">
                 <span class="m-char" style="display: inline-block; will-change: transform;">M</span>
                 <span class="m-char" style="display: inline-block; will-change: transform;">A</span>
                 <span class="m-char" style="display: inline-block; will-change: transform;">R</span>
@@ -590,28 +641,51 @@
                 <span class="m-char" style="display: inline-block; will-change: transform;">O</span>
                 <span class="m-char" style="display: inline-block; will-change: transform;">V</span>
                 <span class="m-char" style="display: inline-block; will-change: transform;">A</span>
+                <span class="m-char" style="display: inline-block; will-change: transform; width: 0.5em;"></span>
+                <span class="m-char" style="display: inline-block; will-change: transform; color: var(--primary);">O</span>
+                <span class="m-char" style="display: inline-block; will-change: transform; color: var(--primary);">S</span>
+            </div>
+            
+            <!-- & -->
+            <div class="massive-text" style="font-family: sans-serif; font-size: clamp(2rem, 6vw, 4rem); font-weight: 300; line-height: 0.9; color: #a1a1aa; display: flex;">
+                <span class="m-char" style="display: inline-block; will-change: transform;">&amp;</span>
+            </div>
+
+            <!-- NURACRE -->
+            <div class="massive-text" style="font-family: sans-serif; font-size: clamp(3rem, 10vw, 8rem); font-weight: 900; line-height: 0.9; background: linear-gradient(90deg, var(--primary), var(--secondary)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; display: flex; flex-wrap: wrap; justify-content: center;">
+                <span class="m-char" style="display: inline-block; will-change: transform;">N</span>
+                <span class="m-char" style="display: inline-block; will-change: transform;">U</span>
+                <span class="m-char" style="display: inline-block; will-change: transform;">R</span>
+                <span class="m-char" style="display: inline-block; will-change: transform;">A</span>
+                <span class="m-char" style="display: inline-block; will-change: transform;">C</span>
+                <span class="m-char" style="display: inline-block; will-change: transform;">R</span>
+                <span class="m-char" style="display: inline-block; will-change: transform;">E</span>
             </div>
         </div>
 
-        <div class="stagger-grid-wrapper" style="position: relative; width: 100%; margin: 10vh auto; max-width: 1200px;">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; padding: 1rem;">
+        <div class="stagger-grid-wrapper" style="position: relative; width: 100%; margin: 10vh auto; max-width: 1000px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem; padding: 1rem;">
                 
                 <!-- Markova OS Card -->
-                <div class="reveal-fade" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; padding: 3rem; display: flex; flex-direction: column; gap: 1.5rem; backdrop-filter: blur(10px); transition: transform 0.4s ease, background 0.4s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.background='rgba(255,255,255,0.05)';" onmouseout="this.style.transform='translateY(0)'; this.style.background='rgba(255,255,255,0.03)';">
-                    <div style="width: 60px; height: 60px; background: rgba(255,255,255,0.1); border-radius: 16px; display: flex; align-items: center; justify-content: center;">
-                        <i class="fas fa-network-wired" style="font-size: 1.8rem; color: #fff;"></i>
+                <div class="eco-card reveal-fade">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-network-wired" style="font-size: 2rem; color: #fff;"></i>
                     </div>
-                    <h3 style="font-size: 2rem; color: #fff; font-weight: 500;">Markova OS</h3>
-                    <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.6;">The foundational AI workforce operating system. Deploy and manage specialized AI agents that collaborate naturally to execute complex business workflows across your connected software.</p>
+                    <h3 style="font-size: 2.2rem; color: #fff; font-weight: 600;">Markova OS</h3>
+                    <div class="eco-card-content">
+                        <p style="color: var(--text-secondary); font-size: 1.15rem; line-height: 1.6;">The foundational AI workforce operating system. Deploy and manage specialized AI agents that collaborate naturally to execute complex business workflows across your connected software.</p>
+                    </div>
                 </div>
 
                 <!-- Nuracre Card -->
-                <div class="reveal-fade" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; padding: 3rem; display: flex; flex-direction: column; gap: 1.5rem; backdrop-filter: blur(10px); transition: transform 0.4s ease, background 0.4s ease; transition-delay: 0.1s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.background='rgba(255,255,255,0.05)';" onmouseout="this.style.transform='translateY(0)'; this.style.background='rgba(255,255,255,0.03)';">
-                    <div style="width: 60px; height: 60px; background: rgba(255,255,255,0.1); border-radius: 16px; display: flex; align-items: center; justify-content: center;">
-                        <i class="fas fa-leaf" style="font-size: 1.8rem; color: #fff;"></i>
+                <div class="eco-card reveal-fade" style="transition-delay: 0.1s;">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-leaf" style="font-size: 2rem; color: #fff;"></i>
                     </div>
-                    <h3 style="font-size: 2rem; color: #fff; font-weight: 500;">Nuracre</h3>
-                    <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.6;">A powerful ecosystem component seamlessly integrated with Markova OS. It provides specialized infrastructure and intelligence to further expand the capabilities of your autonomous workforce.</p>
+                    <h3 style="font-size: 2.2rem; color: #fff; font-weight: 600;">Nuracre</h3>
+                    <div class="eco-card-content">
+                        <p style="color: var(--text-secondary); font-size: 1.15rem; line-height: 1.6;">A powerful ecosystem component seamlessly integrated with Markova OS. It provides specialized infrastructure and intelligence to further expand the capabilities of your autonomous workforce.</p>
+                    </div>
                 </div>
 
             </div>
