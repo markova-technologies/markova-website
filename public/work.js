@@ -3710,7 +3710,6 @@ document.addEventListener('DOMContentLoaded', () => {
             void overlay.offsetWidth;
             
             // Trigger exit animation
-            document.documentElement.classList.add('is-transitioning');
             overlay.classList.add('is-exiting');
 
             // Wait for animation to finish before navigating
