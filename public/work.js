@@ -3452,6 +3452,10 @@ function initHumanoidAnimation() {
 
     const textureLoader = new THREE.TextureLoader();
     textureLoader.load('user-custom-humanoid.png', (texture) => {
+        texture.generateMipmaps = false;
+        texture.minFilter = THREE.LinearFilter;
+        texture.magFilter = THREE.LinearFilter;
+        
         const imgAspect = texture.image.width / texture.image.height;
         const screenAspect = window.innerWidth / window.innerHeight;
         
@@ -3500,7 +3504,7 @@ function initHumanoidAnimation() {
                 scrollTrigger: {
                     trigger: visionSection,
                     start: "top 65%",
-                    toggleActions: "play none none reverse"
+                    toggleActions: "play none none none"
                 }
             });
 
@@ -3570,6 +3574,10 @@ function initAboutAnimation() {
 
     const textureLoader = new THREE.TextureLoader();
     textureLoader.load('office-architecture-dark.png', (texture) => {
+        texture.generateMipmaps = false;
+        texture.minFilter = THREE.LinearFilter;
+        texture.magFilter = THREE.LinearFilter;
+        
         const imgAspect = texture.image.width / texture.image.height;
         const screenAspect = window.innerWidth / window.innerHeight;
         
@@ -3616,7 +3624,7 @@ function initAboutAnimation() {
                 scrollTrigger: {
                     trigger: aboutSection,
                     start: "top 65%",
-                    toggleActions: "play none none reverse"
+                    toggleActions: "play none none none"
                 }
             });
 

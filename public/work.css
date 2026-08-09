@@ -124,8 +124,16 @@ body {
     gap: 1rem;
     justify-content: center;
     margin-bottom: 2rem;
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.loading-logo span {
+    background: linear-gradient(90deg, #fff, #a1a1aa);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .loading-logo i {
