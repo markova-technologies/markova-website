@@ -303,8 +303,19 @@
                 </p>
             </div>
 
+            <script>
+                function handleSolutionClick(element) {
+                    // Close others
+                    document.querySelectorAll('.solution-card').forEach(card => {
+                        if (card !== element) card.classList.remove('active');
+                    });
+                    // Toggle this
+                    element.classList.toggle('active');
+                }
+            </script>
+
             <div class="solutions-cards-grid">
-                <div class="solution-card stagger-child">
+                <div class="solution-card stagger-child" onclick="handleSolutionClick(this)">
                     <div class="solution-card-bg" style="background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=600&auto=format&fit=crop');"></div>
                     <div class="solution-card-overlay"></div>
                     <div class="solution-card-content">
@@ -314,7 +325,7 @@
                     </div>
                 </div>
 
-                <div class="solution-card stagger-child">
+                <div class="solution-card stagger-child" onclick="handleSolutionClick(this)">
                     <div class="solution-card-bg" style="background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=600&auto=format&fit=crop');"></div>
                     <div class="solution-card-overlay"></div>
                     <div class="solution-card-content">
@@ -324,7 +335,7 @@
                     </div>
                 </div>
 
-                <div class="solution-card stagger-child">
+                <div class="solution-card stagger-child" onclick="handleSolutionClick(this)">
                     <div class="solution-card-bg" style="background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=600&auto=format&fit=crop');"></div>
                     <div class="solution-card-overlay"></div>
                     <div class="solution-card-content">
@@ -334,7 +345,7 @@
                     </div>
                 </div>
 
-                <div class="solution-card stagger-child">
+                <div class="solution-card stagger-child" onclick="handleSolutionClick(this)">
                     <div class="solution-card-bg" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop');"></div>
                     <div class="solution-card-overlay"></div>
                     <div class="solution-card-content">
@@ -344,7 +355,7 @@
                     </div>
                 </div>
 
-                <div class="solution-card stagger-child">
+                <div class="solution-card stagger-child" onclick="handleSolutionClick(this)">
                     <div class="solution-card-bg" style="background-image: url('https://images.unsplash.com/photo-1633412802994-5c058f151b66?q=80&w=600&auto=format&fit=crop');"></div>
                     <div class="solution-card-overlay"></div>
                     <div class="solution-card-content">
@@ -375,49 +386,91 @@
                 </div>
             </div>
 
-            <div class="tech-grid" style="margin-top: 4rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
-                
-                <!-- 1 -->
-                <div class="detail-card reveal-fade stagger-child" style="padding: 2.5rem; background: rgba(20,20,30,0.8); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px;">
-                    <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: #fff;"><i class="fas fa-network-wired" style="color: #ffffff; margin-right: 12px;"></i>AI Workforce Runtime</h3>
-                    <p style="color: var(--text-secondary); line-height: 1.6;">Coordinate multiple intelligent AI agents that collaborate to complete business operations instead of acting independently.</p>
-                </div>
+            <style>
+                @keyframes cylinder-ry {
+                    to { transform: rotateY(1turn); }
+                }
+                .cylinder-carousel {
+                    width: 100%;
+                    min-height: 500px;
+                    display: grid;
+                    place-items: center;
+                    overflow: hidden;
+                    perspective: 35em;
+                    mask-image: linear-gradient(90deg, transparent, #000 20% 80%, transparent);
+                    -webkit-mask-image: linear-gradient(90deg, transparent, #000 20% 80%, transparent);
+                    margin-top: 4rem;
+                }
+                .cylinder-container {
+                    display: grid;
+                    place-items: center;
+                    transform-style: preserve-3d;
+                    animation: cylinder-ry 32s linear infinite;
+                    --n: 6;
+                    --w: 280px;
+                    --ba: calc(1turn / var(--n));
+                }
+                .cylinder-container:hover {
+                    animation-play-state: paused;
+                }
+                .cylinder-card {
+                    grid-area: 1/1;
+                    backface-visibility: hidden;
+                    width: var(--w);
+                    aspect-ratio: 7/10;
+                    padding: 2.5rem 1.5rem;
+                    background: rgba(20,20,30,0.95);
+                    border: 1px solid rgba(255,255,255,0.08);
+                    border-radius: 20px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    transform: rotateY(calc(var(--i) * var(--ba))) translateZ(calc(-1 * (0.5 * var(--w) + 1em) / tan(0.5 * var(--ba))));
+                    transition: transform 0.3s ease, border-color 0.3s ease;
+                }
+                .cylinder-card:hover {
+                    border-color: rgba(255,255,255,0.3);
+                }
+            </style>
 
-                <!-- 2 -->
-                <div class="detail-card reveal-fade stagger-child" style="padding: 2.5rem; background: rgba(20,20,30,0.8); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px;">
-                    <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: #fff;"><i class="fas fa-microphone-lines" style="color: #c0c0c0; margin-right: 12px;"></i>Voice Intelligence</h3>
-                    <p style="color: var(--text-secondary); line-height: 1.6;">Natural real-time conversations across phone calls and communication channels with enterprise-grade reliability.</p>
-                </div>
-
-                <!-- 3 -->
-                <div class="detail-card reveal-fade stagger-child" style="padding: 2.5rem; background: rgba(20,20,30,0.8); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px;">
-                    <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: #fff;"><i class="fas fa-brain" style="color: #e0e0e0; margin-right: 12px;"></i>Knowledge Intelligence</h3>
-                    <p style="color: var(--text-secondary); line-height: 1.6;">Connect documents, websites, cloud storage, CRMs, ERPs, databases, and internal knowledge so AI always works with accurate business information.</p>
-                </div>
-
-                <!-- 4 -->
-                <div class="detail-card reveal-fade stagger-child" style="padding: 2.5rem; background: rgba(20,20,30,0.8); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px;">
-                    <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: #fff;"><i class="fas fa-bolt" style="color: #ffffff; margin-right: 12px;"></i>Workflow Intelligence</h3>
-                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">Turn conversations into business actions.</p>
-                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                        <span style="background: rgba(255,255,255,0.06); color: #d4d4d4; padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.12);">Create records</span>
-                        <span style="background: rgba(255,255,255,0.06); color: #d4d4d4; padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.12);">Update customer data</span>
-                        <span style="background: rgba(255,255,255,0.06); color: #d4d4d4; padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.12);">Schedule appointments</span>
-                        <span style="background: rgba(255,255,255,0.06); color: #d4d4d4; padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.12);">Trigger workflows</span>
-                        <span style="background: rgba(255,255,255,0.06); color: #d4d4d4; padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.12);">Automate operations</span>
+            <div class="cylinder-carousel">
+                <div class="cylinder-container reveal-fade stagger-child">
+                    
+                    <!-- 1 -->
+                    <div class="cylinder-card" style="--i: 0;">
+                        <h3 style="font-size: 1.25rem; margin-bottom: 1rem; color: #fff; line-height: 1.3;"><i class="fas fa-network-wired" style="color: #ffffff; margin-right: 10px;"></i>AI Workforce</h3>
+                        <p style="color: var(--text-secondary); line-height: 1.6; font-size: 0.95rem;">Coordinate multiple intelligent AI agents that collaborate to complete business operations instead of acting independently.</p>
                     </div>
-                </div>
 
-                <!-- 5 -->
-                <div class="detail-card reveal-fade stagger-child" style="padding: 2.5rem; background: rgba(20,20,30,0.8); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px;">
-                    <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: #fff;"><i class="fas fa-shield-halved" style="color: #a8a8a8; margin-right: 12px;"></i>Enterprise Security</h3>
-                    <p style="color: var(--text-secondary); line-height: 1.6;">Every organization operates inside an isolated environment protected through encryption, role-based access control, audit logging, approval workflows, and continuous monitoring.</p>
-                </div>
+                    <!-- 2 -->
+                    <div class="cylinder-card" style="--i: 1;">
+                        <h3 style="font-size: 1.25rem; margin-bottom: 1rem; color: #fff; line-height: 1.3;"><i class="fas fa-microphone-lines" style="color: #c0c0c0; margin-right: 10px;"></i>Voice Intel</h3>
+                        <p style="color: var(--text-secondary); line-height: 1.6; font-size: 0.95rem;">Natural real-time conversations across phone calls and communication channels with enterprise-grade reliability.</p>
+                    </div>
 
-                <!-- 6 -->
-                <div class="detail-card reveal-fade stagger-child" style="padding: 2.5rem; background: rgba(20,20,30,0.8); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px;">
-                    <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: #fff;"><i class="fas fa-plug" style="color: #c8c8c8; margin-right: 12px;"></i>Open Integration Platform</h3>
-                    <p style="color: var(--text-secondary); line-height: 1.6;">Markova connects with modern APIs, legacy software, spreadsheets, business applications, and custom systems, allowing organizations to adopt AI without rebuilding their technology stack.</p>
+                    <!-- 3 -->
+                    <div class="cylinder-card" style="--i: 2;">
+                        <h3 style="font-size: 1.25rem; margin-bottom: 1rem; color: #fff; line-height: 1.3;"><i class="fas fa-brain" style="color: #e0e0e0; margin-right: 10px;"></i>Knowledge Map</h3>
+                        <p style="color: var(--text-secondary); line-height: 1.6; font-size: 0.95rem;">Connect documents, CRMs, ERPs, databases, and internal knowledge so AI works with accurate data.</p>
+                    </div>
+
+                    <!-- 4 -->
+                    <div class="cylinder-card" style="--i: 3;">
+                        <h3 style="font-size: 1.25rem; margin-bottom: 1rem; color: #fff; line-height: 1.3;"><i class="fas fa-bolt" style="color: #ffffff; margin-right: 10px;"></i>Automations</h3>
+                        <p style="color: var(--text-secondary); line-height: 1.6; font-size: 0.95rem; margin-bottom: 1rem;">Turn conversations into actions. Create records, update data, and trigger workflows automatically.</p>
+                    </div>
+
+                    <!-- 5 -->
+                    <div class="cylinder-card" style="--i: 4;">
+                        <h3 style="font-size: 1.25rem; margin-bottom: 1rem; color: #fff; line-height: 1.3;"><i class="fas fa-shield-halved" style="color: #a8a8a8; margin-right: 10px;"></i>Enterprise Sec</h3>
+                        <p style="color: var(--text-secondary); line-height: 1.6; font-size: 0.95rem;">Isolated environments protected through encryption, RBAC, audit logging, and continuous monitoring.</p>
+                    </div>
+
+                    <!-- 6 -->
+                    <div class="cylinder-card" style="--i: 5;">
+                        <h3 style="font-size: 1.25rem; margin-bottom: 1rem; color: #fff; line-height: 1.3;"><i class="fas fa-plug" style="color: #c8c8c8; margin-right: 10px;"></i>Open Platform</h3>
+                        <p style="color: var(--text-secondary); line-height: 1.6; font-size: 0.95rem;">Connects with modern APIs, legacy software, and custom systems to adopt AI without rebuilding stacks.</p>
+                    </div>
                 </div>
             </div>
 

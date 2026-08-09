@@ -3523,7 +3523,7 @@ strong {
     display: flex;
     gap: 1.25rem;
     margin-top: 4rem;
-    height: 500px; /* Fixed height for accordion */
+    height: 340px; /* Standard length */
 }
 
 @media (max-width: 1100px) {
@@ -3566,7 +3566,7 @@ strong {
     transform: translateY(0);
 }
 
-.solution-card:hover {
+.solution-card.active {
     flex: 3;
     transform: translateY(-10px);
     box-shadow: 0 24px 60px rgba(0,0,0,0.7);
@@ -3574,7 +3574,7 @@ strong {
 }
 
 @media (max-width: 1100px) {
-    .solution-card:hover {
+    .solution-card.active {
         height: 320px;
         flex: none;
     }
@@ -3655,7 +3655,7 @@ strong {
     transition: font-size 0.5s ease;
 }
 
-.solution-card:hover .solution-card-content h3 {
+.solution-card.active .solution-card-content h3 {
     font-size: 1.25rem;
     white-space: normal;
 }
@@ -3673,14 +3673,14 @@ strong {
     transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.solution-card:hover .solution-card-content p {
+.solution-card.active .solution-card-content p {
     max-height: 150px;
     opacity: 1;
     transform: translateY(0);
     margin-top: 0.4rem;
 }
 
-.solution-card:hover .solution-card-content p {
+.solution-card.active .solution-card-content p {
     color: rgba(255,255,255,0.82);
 }
 
