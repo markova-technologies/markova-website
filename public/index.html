@@ -408,8 +408,7 @@
                     transform-style: preserve-3d;
                     animation: cylinder-ry 32s linear infinite;
                     --n: 6;
-                    --w: 400px; /* Increased width */
-                    --gap: 2rem;
+                    --w: 250px; /* Matched to reference */
                     --ba: calc(1turn / var(--n));
                 }
                 .cylinder-container:hover {
@@ -426,11 +425,12 @@
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
-                    transform: rotateY(calc(var(--i) * var(--ba))) translateZ(calc(-1 * (0.5 * var(--w) + var(--gap)) / tan(0.5 * var(--ba))));
+                    transform: rotateY(calc(var(--i) * var(--ba))) translateZ(calc(-1 * (0.5 * var(--w) + 0.5em) / tan(0.5 * var(--ba))));
                     transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
                     position: relative;
                     overflow: hidden;
                     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+                    -webkit-box-reflect: below 5px linear-gradient(transparent 50%, rgba(0,0,0,0.3));
                 }
                 .cylinder-card:hover {
                     border-color: rgba(255,255,255,0.3);
