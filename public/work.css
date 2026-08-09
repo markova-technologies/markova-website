@@ -1489,7 +1489,7 @@ strong {
 /* Social Media Buttons */
 .social-media-fixed {
     position: fixed;
-    bottom: 6.5rem; /* Positioned higher to avoid Voiceflow widget */
+    bottom: 9.5rem; /* Positioned higher to avoid Voiceflow widget */
     right: 2rem;
     display: flex;
     flex-direction: row;
@@ -4017,7 +4017,7 @@ section::before {
 
     /* ── Social fixed bar ── */
     .social-media-fixed {
-        bottom: 1rem;
+        bottom: 6rem; /* Raised to avoid Voiceflow widget */
         top: auto;
         right: 1rem;
         flex-direction: row;
