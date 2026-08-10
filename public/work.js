@@ -3670,9 +3670,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Clean up classes after entrance
+    // Clean up classes after entrance — MUST hide overlay or it blacks out the page
     setTimeout(() => {
         overlay.classList.remove(enterClass, 'is-loaded');
+        overlay.style.display = 'none';
     }, 650);
 
     // 3. Intercept navigation links
