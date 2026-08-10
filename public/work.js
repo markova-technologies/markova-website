@@ -82,14 +82,6 @@ function normalizeCallingCode(raw) {
 
 document.addEventListener('DOMContentLoaded', function() {
     
-    // Hide loading screen after page loads
-    const loadingScreen = document.getElementById('loadingScreen');
-    if (loadingScreen) {
-        setTimeout(() => {
-            loadingScreen.classList.add('hide');
-        }, 500);
-    }
-    
     // Force emoji rendering for country flags
     function ensureEmojiRendering() {
         const countrySelect = document.getElementById('countryCode');
