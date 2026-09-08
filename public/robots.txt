@@ -1,0 +1,44 @@
+User-agent: *
+Allow: /
+
+# Dedicated AI search crawlers & LLM indexers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+# Canonical Sitemaps and AI Fact Manifests
+Sitemap: https://markova.tech/sitemap.xml
+# LLM Context: https://markova.tech/llms.txt
+# Agent Manifest: https://markova.tech/agents.json

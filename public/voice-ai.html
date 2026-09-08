@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Conversational Voice AI & Telephony Automation — Markova Voice</title>
+    <meta name="description" content="Deploy real-time conversational voice AI agents for enterprise call centers and client support. Native multilingual support in English and Amharic with direct CRM and telephony integration.">
+    <meta name="keywords" content="Markova Voice, Voice AI, Conversational Voice Agents, Amharic Voice AI, Call Center Automation AI, Enterprise Voice AI, Telephony AI Ethiopia">
+    <link rel="canonical" href="https://markova.tech/voice-ai.html">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <!-- Open Graph / Social Meta -->
+    <meta property="og:type" content="service">
+    <meta property="og:url" content="https://markova.tech/voice-ai.html">
+    <meta property="og:title" content="Enterprise Conversational Voice AI & Telephony Automation — Markova Voice">
+    <meta property="og:description" content="Transform call centers with real-time conversational voice agents. Low-latency, natural turn-taking, and native support for Amharic and English.">
+    <meta property="og:image" content="https://markova.tech/office-architecture-dark.png">
+    <meta property="og:site_name" content="Markova">
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@0fficialmarkova">
+    <meta name="twitter:title" content="Enterprise Conversational Voice AI — Markova Voice">
+    <meta name="twitter:description" content="Next-generation voice AI for enterprise customer service with native Amharic and English conversational intelligence.">
+    <meta name="twitter:image" content="https://markova.tech/office-architecture-dark.png">
+
+    <!-- Linked Schema: Service + FAQPage + Breadcrumbs -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Service",
+          "@id": "https://markova.tech/voice-ai.html#service",
+          "name": "Markova Voice AI",
+          "serviceType": "Enterprise Conversational Voice Intelligence",
+          "provider": {
+            "@type": "Organization",
+            "name": "Markova",
+            "url": "https://markova.tech"
+          },
+          "description": "Enterprise conversational voice intelligence supporting automated inbound call handling, outbound campaigns, and multilingual dialog in English and Amharic.",
+          "areaServed": ["Worldwide", "Ethiopia", "Africa"],
+          "availableChannel": {
+            "@type": "ServiceChannel",
+            "serviceUrl": "https://markova.tech/voice-ai.html",
+            "servicePhone": "+251920002789"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://markova.tech/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Voice AI",
+              "item": "https://markova.tech/voice-ai.html"
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://markova.tech/voice-ai.html#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "How does Markova Voice handle telephony calls?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Markova Voice interfaces directly with SIP trunks, VoIP providers, Twilio, and enterprise PBX phone systems to handle inbound and outbound calls with sub-second response latency."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Does Markova Voice support the Amharic language?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, Markova builds proprietary and fine-tuned speech-to-text and text-to-speech models specifically for Amharic, enabling natural, accent-aware voice agents for Ethiopian and East African enterprises."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can voice agents update company databases during a phone call?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Markova Voice agents can trigger API calls in real time to look up account details, schedule appointments, process payments, and update CRM records while conversing with the caller."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="work.css">
+    <style>
+        body { background: #070709; color: #f1f5f9; font-family: 'Poppins', sans-serif; }
+        .page-hero {
+            padding: 150px 0 70px;
+            text-align: center;
+            position: relative;
+            background: radial-gradient(circle at 50% 10%, rgba(168, 85, 247, 0.12), transparent 60%);
+        }
+        .page-container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+        .back-nav {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            transition: color 0.2s;
+        }
+        .back-nav:hover { color: #fff; }
+        .hero-h1 {
+            font-size: clamp(2.4rem, 5vw, 3.8rem);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff 40%, #c084fc 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-lead {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            max-width: 780px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.75;
+            font-weight: 300;
+        }
+        .cta-row {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+        .btn-live {
+            background: linear-gradient(135deg, #a855f7, #7e22ce);
+            color: #fff;
+            font-weight: 700;
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 10px 25px rgba(168, 85, 247, 0.3);
+        }
+        .btn-live:hover { transform: translateY(-2px); box-shadow: 0 15px 35px rgba(168, 85, 247, 0.45); }
+        .btn-secondary-custom {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.15);
+            color: #fff;
+            padding: 14px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .btn-secondary-custom:hover { background: rgba(255,255,255,0.12); }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin: 4rem 0;
+        }
+        .feature-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 36px 28px;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(168, 85, 247, 0.4);
+            background: rgba(255,255,255,0.04);
+        }
+        .feature-icon {
+            font-size: 2rem;
+            color: #c084fc;
+            margin-bottom: 20px;
+        }
+        .feature-card h3 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+        .feature-card p {
+            font-size: 1rem;
+            color: #94a3b8;
+            line-height: 1.65;
+        }
+
+        .metric-band {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin: 4rem 0;
+            padding: 30px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            text-align: center;
+        }
+        .metric-val { font-size: 2.5rem; font-weight: 800; color: #c084fc; margin-bottom: 4px; }
+        .metric-desc { color: #94a3b8; font-size: 0.95rem; }
+
+        .faq-box { margin: 3rem 0; }
+        .faq-item {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 14px;
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+        .faq-item h4 { font-size: 1.15rem; font-weight: 600; color: #fff; margin-bottom: 8px; }
+        .faq-item p { color: #94a3b8; line-height: 1.6; margin: 0; }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="index.html" style="text-decoration: none;">
+                    <div class="brand-logo">
+                        <span class="brand-text">MARKOVA</span>
+                    </div>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html#home" class="nav-link">Home</a>
+                <a href="markova-os.html" class="nav-link">Markova OS</a>
+                <a href="workforce.html" class="nav-link">Operating Model</a>
+                <a href="voice-ai.html" class="nav-link active" style="color:#c084fc;">Voice AI</a>
+                <a href="about.html" class="nav-link">About</a>
+            </div>
+            <div class="nav-cta">
+                <a href="index.html#contact">
+                    <button class="cta-button" style="background: rgba(168, 85, 247, 0.15); border: 1px solid rgba(168, 85, 247, 0.4); color: #c084fc;">
+                        <span>Request Voice Demo</span>
+                    </button>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="page-hero">
+        <div class="page-container">
+            <a href="index.html" class="back-nav"><i class="fas fa-arrow-left"></i> Back to Home</a>
+            <div class="section-badge" style="margin: 0 auto 1.5rem; display: inline-flex;">
+                <i class="fas fa-microphone-lines" style="color: #c084fc;"></i>
+                <span style="color: #c084fc;">CONVERSATIONAL TELEPHONY AI</span>
+            </div>
+            <h1 class="hero-h1">Real-Time Enterprise Voice AI with Native Amharic Intelligence</h1>
+            <p class="hero-lead">
+                Handle millions of enterprise customer phone calls autonomously. Markova Voice combines low-latency neural speech, context understanding, CRM synchronization, and native multilingual support in English and Amharic.
+            </p>
+            <div class="cta-row">
+                <a href="index.html#contact" class="btn-live">
+                    Deploy a Voice Agent
+                </a>
+                <a href="markova-os.html" class="btn-secondary-custom">
+                    Explore Full Markova OS →
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-container">
+
+        <!-- Metrics -->
+        <div class="metric-band">
+            <div>
+                <div class="metric-val">&lt; 450ms</div>
+                <div class="metric-desc">Turn-Taking Latency</div>
+            </div>
+            <div>
+                <div class="metric-val">100%</div>
+                <div class="metric-desc">CRM & ERP Auto-Sync</div>
+            </div>
+            <div>
+                <div class="metric-val">EN + AM</div>
+                <div class="metric-desc">Native Multilingual Speech</div>
+            </div>
+            <div>
+                <div class="metric-val">24/7/365</div>
+                <div class="metric-desc">Autonomous Call Handling</div>
+            </div>
+        </div>
+
+        <!-- Pillars -->
+        <section>
+            <div class="section-header" style="text-align: center; margin-bottom: 2rem;">
+                <h2 style="font-size: 2.2rem; font-weight: 700; color: #fff;">Designed for Enterprise Call Center Automation</h2>
+                <p style="color: #94a3b8; max-width: 650px; margin: 0.5rem auto 0;">Deliver human-grade customer conversations without wait times or repetitive menu trees.</p>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-headset"></i></div>
+                    <h3>Inbound Call Center Handling</h3>
+                    <p>Answer customer inquiries instantly, troubleshoot issues, check order statuses, and route escalations to human agents with full transcripts and context summaries.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-language"></i></div>
+                    <h3>Proprietary Amharic Voice AI</h3>
+                    <p>Purpose-built acoustic and language models for Amharic. Accurately understands regional accents, dialects, and code-switching between Amharic and English.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                    <h3>Real-Time System Execution</h3>
+                    <p>Agents don't just speak; they perform real work during the call. Reschedule appointments, issue receipts, trigger notifications, or query core banking/ERP records.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-phone-volume"></i></div>
+                    <h3>Telephony & PBX Integration</h3>
+                    <p>Integrates seamlessly with existing SIP trunks, Twilio, Asterisk, FreePBX, and cloud contact centers without replacing existing infrastructure.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-wave-square"></i></div>
+                    <h3>Interruption & Emotional Nuance</h3>
+                    <p>Callers can interrupt naturally mid-sentence. The agent pauses immediately, re-evaluates intent, and responds with emotional intelligence and empathy.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-file-shield"></i></div>
+                    <h3>Compliance & Quality Assurance</h3>
+                    <p>Every conversation is transcribed, sentiment-analyzed, and archived according to enterprise security standards with automated compliance scoring.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQs -->
+        <section class="faq-box">
+            <h2 style="font-size: 2rem; font-weight: 700; color: #fff; text-align: center; margin-bottom: 2rem;">Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h4>What makes Markova's Amharic voice capabilities unique?</h4>
+                <p>Most commercial voice AI platforms fail on African languages due to lack of training data. Markova builds fine-tuned acoustic representations and phoneme mappings for Amharic, delivering natural pronunciation and high recognition accuracy.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Can we keep our current phone numbers?</h4>
+                <p>Yes. Markova Voice agents connect via SIP forwarding or telephony API webhooks, allowing businesses to retain their established support lines and toll-free numbers.</p>
+            </div>
+            <div class="faq-item">
+                <h4>How are human escalations managed?</h4>
+                <p>When a call requires human judgment or falls outside policy boundaries, the agent executes a warm transfer to a human specialist, providing them with a 3-bullet summary of the caller's issue.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" style="margin-top: 5rem;">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="brand-logo">
+                        <span class="brand-text">MARKOVA</span>
+                    </div>
+                    <p class="brand-description">Building AI products, AI infrastructure, and autonomous workforces for modern businesses.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Solutions</h4>
+                        <a href="markova-os.html">Markova OS</a>
+                        <a href="workforce.html">Operating Model</a>
+                        <a href="voice-ai.html">Voice Intelligence</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <a href="about.html">About Markova</a>
+                        <a href="index.html#ecosystem">Ecosystem</a>
+                        <a href="index.html#contact">Contact Us</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Connect</h4>
+                        <a href="https://t.me/officialmarkova" target="_blank" rel="noopener">Telegram</a>
+                        <a href="https://x.com/0fficialmarkova" target="_blank" rel="noopener">X / Twitter</a>
+                        <a href="https://www.facebook.com/share/1H5nKXCg1V/" target="_blank" rel="noopener">Facebook</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2026 MARKOVA. All rights reserved.</p>
+                    <div class="footer-legal">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="work.js"></script>
+</body>
+</html>

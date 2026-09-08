@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json.schemastore.org/agents.json",
+  "name": "Markova",
+  "legal_name": "Markova Technology",
+  "url": "https://markova.tech",
+  "description": "Markova builds enterprise AI products, AI infrastructure, and deploys autonomous AI workforces that execute business operations across connected software.",
+  "contact": {
+    "email": "officialmarkova.d@gmail.com",
+    "phone": "+251920002789",
+    "support_telegram": "https://t.me/officialmarkova"
+  },
+  "documentation": {
+    "llms_txt": "https://markova.tech/llms.txt",
+    "operating_model": "https://markova.tech/workforce.html",
+    "sitemap": "https://markova.tech/sitemap.xml"
+  },
+  "products": [
+    {
+      "name": "Markova OS",
+      "category": "AI Workforce Operating System",
+      "url": "https://markova-os-client-dashboard.vercel.app/",
+      "overview": "An enterprise operating system that deploys specialized, multi-agent AI workforces capable of reasoning, planning, and executing operations across ERPs, CRMs, and custom software."
+    },
+    {
+      "name": "Markova Voice",
+      "category": "Conversational & Telephony Voice AI",
+      "overview": "Enterprise real-time conversational voice agents for inbound call center automation and outbound engagement, with native multilingual support including English and Amharic."
+    },
+    {
+      "name": "NuraCare",
+      "category": "AI Health & Wellness Intelligence",
+      "url": "https://nuracare.vercel.app/",
+      "overview": "Multilingual AI healthcare and wellness intelligence platform designed for localized health guidance."
+    },
+    {
+      "name": "Markova Neural Fabric",
+      "category": "Enterprise Knowledge Graph & Tool Orchestration",
+      "overview": "Unified data integration fabric linking databases, documents, spreadsheets, and APIs into real-time business context for autonomous AI agents."
+    }
+  ],
+  "capabilities": [
+    "autonomous_workflow_execution",
+    "multi_agent_orchestration",
+    "multilingual_voice_agents",
+    "amharic_nlp_and_voice",
+    "crm_erp_database_integration",
+    "enterprise_security_rbac_audit_logging"
+  ]
+}

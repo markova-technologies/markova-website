@@ -5,10 +5,29 @@
     <meta name="author" content="Markova Technology">
     <script src="https://cdn.tailwindcss.com"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="Markova, AI Company, AI Infrastructure, AI Workforce, AI Agents, Markova OS, Autonomous AI, Enterprise AI, Multilingual AI, Amharic Voice AI">
-    <meta name="description" content="Markova is an AI technology company that builds AI products, AI infrastructure, and deploys autonomous AI workforces for modern businesses.">
+    <meta name="keywords" content="Markova, AI Company, AI Infrastructure, AI Workforce, AI Agents, Markova OS, Autonomous AI, Enterprise AI, Multilingual AI, Amharic Voice AI, Agentic AI, AI Automation Ethiopia">
+    <meta name="description" content="Markova is an AI technology company that builds AI products, enterprise infrastructure, and deploys autonomous AI workforces for modern businesses.">
     <title>MARKOVA - AI Infrastructure & Autonomous Workforces</title>
+    <link rel="canonical" href="https://markova.tech/">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <!-- Open Graph / Facebook / LinkedIn -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://markova.tech/">
+    <meta property="og:title" content="MARKOVA - AI Infrastructure & Autonomous Workforces">
+    <meta property="og:description" content="Markova is an AI technology company that builds AI products, enterprise infrastructure, and deploys autonomous AI workforces that execute business operations.">
+    <meta property="og:image" content="https://markova.tech/office-architecture-dark.png">
+    <meta property="og:site_name" content="Markova">
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@0fficialmarkova">
+    <meta name="twitter:creator" content="@0fficialmarkova">
+    <meta name="twitter:url" content="https://markova.tech/">
+    <meta name="twitter:title" content="MARKOVA - AI Infrastructure & Autonomous Workforces">
+    <meta name="twitter:description" content="Markova is an AI technology company that builds AI products, enterprise infrastructure, and deploys autonomous AI workforces that execute business operations.">
+    <meta name="twitter:image" content="https://markova.tech/office-architecture-dark.png">
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="work.css">
@@ -16,64 +35,149 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Segoe+UI+Emoji&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Apple+Color+Emoji&display=swap" rel="stylesheet">
+
+    <!-- Canonical Linked Knowledge Graph Schema (Organization, WebSite, SoftwareApplication, FAQPage) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
+      "@graph": [
         {
-          "@type": "Question",
-          "name": "What is Markova?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Markova is an AI technology company focused on building intelligent software, autonomous AI agents, and enterprise AI infrastructure that help organizations automate operations and scale efficiently."
+          "@type": "Organization",
+          "@id": "https://markova.tech/#organization",
+          "name": "Markova",
+          "legalName": "Markova Technology",
+          "url": "https://markova.tech",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://markova.tech/office-architecture-dark.png",
+            "caption": "Markova Technology Logo"
+          },
+          "image": "https://markova.tech/office-architecture-dark.png",
+          "description": "Markova is an AI technology company building enterprise AI products, AI infrastructure, and autonomous AI workforces.",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Addis Ababa",
+            "addressCountry": "Ethiopia"
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+251920002789",
+            "contactType": "customer support",
+            "areaServed": "Worldwide",
+            "availableLanguage": ["en", "am"]
+          },
+          "sameAs": [
+            "https://t.me/officialmarkova",
+            "https://x.com/0fficialmarkova",
+            "https://www.facebook.com/share/1H5nKXCg1V/",
+            "https://www.instagram.com/official_markova/"
+          ],
+          "knowsAbout": [
+            "Artificial Intelligence",
+            "Autonomous AI Agents",
+            "Agentic AI Ecosystems",
+            "Markova OS",
+            "Enterprise Workflow Automation",
+            "Multilingual Voice AI",
+            "Amharic Speech Synthesis & Recognition",
+            "AI Infrastructure"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://markova.tech/#website",
+          "url": "https://markova.tech",
+          "name": "Markova",
+          "publisher": {
+            "@id": "https://markova.tech/#organization"
+          },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://markova.tech/?q={search_term_string}",
+            "query-input": "required name=search_term_string"
           }
         },
         {
-          "@type": "Question",
-          "name": "What is Markova OS?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Markova OS is an AI workforce operating system within the Markova ecosystem that allows businesses to deploy specialized AI agents capable of executing complex business workflows across connected software."
-          }
+          "@type": "SoftwareApplication",
+          "@id": "https://markova.tech/#markova-os",
+          "name": "Markova OS",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Web, Cloud, Enterprise",
+          "description": "Markova OS is an AI Workforce Operating System that deploys specialized, collaborative AI agent teams capable of executing end-to-end business operations across connected software.",
+          "url": "https://markova-os-client-dashboard.vercel.app/",
+          "creator": {
+            "@id": "https://markova.tech/#organization"
+          },
+          "featureList": [
+            "Continuous 5-stage lifecycle: Understand, Think, Act, Work Together, Stay Accountable",
+            "Autonomous tool and API execution",
+            "Multi-agent team orchestration",
+            "Enterprise RBAC and sandboxed runtime security",
+            "Native multilingual support with Amharic voice agents"
+          ]
         },
         {
-          "@type": "Question",
-          "name": "Does Markova support local languages like Amharic?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, Markova builds multilingual AI infrastructure, including robust support for Amharic and localized voice agents for African and global enterprise markets."
-          }
+          "@type": "FAQPage",
+          "@id": "https://markova.tech/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is Markova?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Markova is an AI technology company focused on building intelligent software, autonomous AI agents, and enterprise AI infrastructure that help organizations automate complex operations, communication, and business workflows."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is Markova OS?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Markova OS is an enterprise AI workforce operating system within the Markova ecosystem that coordinates collaborative AI agent teams capable of reasoning, planning, and executing real work across CRMs, ERPs, databases, and custom software."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How is Markova different from traditional chatbots or RPA?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Unlike conversational chatbots that only answer questions or brittle RPA scripts that break when layouts shift, Markova deploys autonomous agents with dynamic reasoning and API tool-calling capabilities. Markova agents adapt to changing inputs, collaborate across departments, and execute verified actions with human-in-the-loop oversight."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Does Markova support local African languages like Amharic?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, Markova develops specialized multilingual AI infrastructure including high-accuracy Amharic voice AI, conversational telephony agents, and localized natural language understanding for African and international enterprise markets."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can Markova integrate with legacy software and spreadsheets?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Markova Neural Fabric connects modern cloud platforms (Slack, Notion, Google Workspace, AWS) as well as legacy on-premise systems, spreadsheets, SQL databases, and custom REST APIs without requiring companies to replace their existing tech stack."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What are the 5 stages of the Markova AI workforce operating model?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The 5 stages of the Markova AI operating model are: 1. Understand (ingesting business context and data), 2. Think (reasoning and path planning), 3. Act (tool execution across systems), 4. Work Together (multi-agent collaboration), and 5. Stay Accountable (human-in-the-loop governance and audit trails)."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do enterprise security and human oversight work in Markova?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Markova enforces enterprise-grade security including end-to-end encryption, role-based access control (RBAC), isolated sandboxed environments, full immutable audit logging, and configurable human-in-the-loop approval checkpoints before high-stakes actions are committed."
+              }
+            }
+          ]
         }
-      ]
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Markova",
-      "url": "https://markova.tech",
-      "logo": "https://markova.tech/favicon.ico",
-      "description": "Markova is an AI technology company building intelligent software, autonomous AI agents, and AI infrastructure.",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Addis Ababa",
-        "addressLocality": "Addis Ababa",
-        "addressCountry": "Ethiopia"
-      },
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+251920002789",
-        "contactType": "customer support",
-        "areaServed": "Worldwide",
-        "availableLanguage": ["en", "am"]
-      },
-      "sameAs": [
-        "https://t.me/officialmarkova",
-        "https://x.com/0fficialmarkova",
-        "https://www.facebook.com/share/1H5nKXCg1V/",
-        "https://www.instagram.com/official_markova/"
       ]
     }
     </script>
@@ -87,6 +191,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+    <!-- Vercel Analytics -->
+    <script>
+      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+    <!-- Vercel Speed Insights -->
+    <script>
+      window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
 <body>
 
@@ -138,7 +252,7 @@
     </nav>
     
     <!-- Background Video -->
-    <video class="bg-video" autoplay muted loop playsinline>
+    <video class="bg-video" autoplay muted loop playsinline poster="office-architecture-dark.png" preload="metadata">
         <source src="markova.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
@@ -1222,18 +1336,19 @@
 
                 <div class="footer-links">
                     <div class="footer-column">
-                        <h4>Navigation</h4>
-                        <a href="#about">About Markova</a>
-                        <a href="#partners">Partners</a>
-                        <a href="#solutions">Solutions</a>
-                        <a href="#technology">Technology</a>
-                        </div>
+                        <h4>Solutions</h4>
+                        <a href="markova-os.html">Markova OS</a>
+                        <a href="workforce.html">Operating Model</a>
+                        <a href="voice-ai.html">Voice Intelligence</a>
+                        <a href="ai-automation.html">AI Automation</a>
+                    </div>
                     
                     <div class="footer-column">
                         <h4>Company</h4>
-                        <a href="#about">Our Purpose</a>
+                        <a href="about.html">About Markova</a>
                         <a href="#ecosystem">Ecosystem</a>
                         <a href="#contact">Contact Us</a>
+                        <a href="llms.txt" target="_blank">llms.txt (AI Facts)</a>
                     </div>
                     
                     <div class="footer-column">
@@ -1289,7 +1404,6 @@
         </div>
     </div>
 
-    <script src="work.js"></script>
     <script>
     // ── Global Scroll-Reveal (IntersectionObserver) ──────────────────────────
     (function () {

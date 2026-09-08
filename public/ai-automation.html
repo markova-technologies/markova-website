@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise AI Automation & Agentic Orchestration — Markova</title>
+    <meta name="description" content="Scale enterprise operations with autonomous AI automation. Markova deploys multi-agent workflows that connect CRMs, ERPs, databases, and communication channels under strict governance.">
+    <meta name="keywords" content="Enterprise AI Automation, Agentic Workflow Automation, Autonomous Operations, AI Agent Systems, Enterprise Workflow AI, AI Infrastructure">
+    <link rel="canonical" href="https://markova.tech/ai-automation.html">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <!-- Open Graph / Social Meta -->
+    <meta property="og:type" content="service">
+    <meta property="og:url" content="https://markova.tech/ai-automation.html">
+    <meta property="og:title" content="Enterprise AI Automation & Agentic Orchestration — Markova">
+    <meta property="og:description" content="Deploy autonomous multi-agent workflows that plan, execute, and verify operations across your enterprise stack.">
+    <meta property="og:image" content="https://markova.tech/office-architecture-dark.png">
+    <meta property="og:site_name" content="Markova">
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@0fficialmarkova">
+    <meta name="twitter:title" content="Enterprise AI Automation — Markova">
+    <meta name="twitter:description" content="Autonomous AI workflows connecting enterprise software systems with verifiable accuracy and human-in-the-loop oversight.">
+    <meta name="twitter:image" content="https://markova.tech/office-architecture-dark.png">
+
+    <!-- Schema.org Service & FAQ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Service",
+          "@id": "https://markova.tech/ai-automation.html#service",
+          "name": "Enterprise AI Automation & Orchestration",
+          "serviceType": "Agentic Workflow Automation",
+          "provider": {
+            "@type": "Organization",
+            "name": "Markova",
+            "url": "https://markova.tech"
+          },
+          "description": "Custom agentic automation systems designed to execute complex operations across enterprise applications without replacing core infrastructure.",
+          "areaServed": "Worldwide"
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://markova.tech/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "AI Automation",
+              "item": "https://markova.tech/ai-automation.html"
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://markova.tech/ai-automation.html#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What operational workflows can Markova automate?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Markova automates cross-system operations including financial reconciliation, customer support triage, outbound engagement, document processing, database synchronizations, and reporting."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How does Markova ensure data privacy during automation?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "All automations run in isolated, sandboxed runtime environments with end-to-end encryption. Proprietary enterprise data is never used to train third-party public models."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="work.css">
+    <style>
+        body { background: #070709; color: #f1f5f9; font-family: 'Poppins', sans-serif; }
+        .page-hero {
+            padding: 150px 0 70px;
+            text-align: center;
+            position: relative;
+            background: radial-gradient(circle at 50% 10%, rgba(34, 197, 94, 0.12), transparent 60%);
+        }
+        .page-container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+        .back-nav {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            transition: color 0.2s;
+        }
+        .back-nav:hover { color: #fff; }
+        .hero-h1 {
+            font-size: clamp(2.4rem, 5vw, 3.8rem);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff 40%, #86efac 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-lead {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            max-width: 780px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.75;
+            font-weight: 300;
+        }
+        .cta-row {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+        .btn-live {
+            background: linear-gradient(135deg, #22c55e, #15803d);
+            color: #fff;
+            font-weight: 700;
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 10px 25px rgba(34, 197, 94, 0.3);
+        }
+        .btn-live:hover { transform: translateY(-2px); box-shadow: 0 15px 35px rgba(34, 197, 94, 0.45); }
+        .btn-secondary-custom {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.15);
+            color: #fff;
+            padding: 14px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .btn-secondary-custom:hover { background: rgba(255,255,255,0.12); }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin: 4rem 0;
+        }
+        .feature-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 36px 28px;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(34, 197, 94, 0.4);
+            background: rgba(255,255,255,0.04);
+        }
+        .feature-icon {
+            font-size: 2rem;
+            color: #86efac;
+            margin-bottom: 20px;
+        }
+        .feature-card h3 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+        .feature-card p {
+            font-size: 1rem;
+            color: #94a3b8;
+            line-height: 1.65;
+        }
+
+        .faq-box { margin: 3rem 0; }
+        .faq-item {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 14px;
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+        .faq-item h4 { font-size: 1.15rem; font-weight: 600; color: #fff; margin-bottom: 8px; }
+        .faq-item p { color: #94a3b8; line-height: 1.6; margin: 0; }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="index.html" style="text-decoration: none;">
+                    <div class="brand-logo">
+                        <span class="brand-text">MARKOVA</span>
+                    </div>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html#home" class="nav-link">Home</a>
+                <a href="markova-os.html" class="nav-link">Markova OS</a>
+                <a href="workforce.html" class="nav-link">Operating Model</a>
+                <a href="voice-ai.html" class="nav-link">Voice AI</a>
+                <a href="ai-automation.html" class="nav-link active" style="color:#86efac;">AI Automation</a>
+                <a href="about.html" class="nav-link">About</a>
+            </div>
+            <div class="nav-cta">
+                <a href="index.html#contact">
+                    <button class="cta-button" style="background: rgba(34, 197, 94, 0.15); border: 1px solid rgba(34, 197, 94, 0.4); color: #86efac;">
+                        <span>Consult Our Team</span>
+                    </button>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="page-hero">
+        <div class="page-container">
+            <a href="index.html" class="back-nav"><i class="fas fa-arrow-left"></i> Back to Home</a>
+            <div class="section-badge" style="margin: 0 auto 1.5rem; display: inline-flex;">
+                <i class="fas fa-bolt" style="color: #86efac;"></i>
+                <span style="color: #86efac;">AGENTIC WORKFLOW ORCHESTRATION</span>
+            </div>
+            <h1 class="hero-h1">Autonomous AI Automation for Complex Operations</h1>
+            <p class="hero-lead">
+                Bridge modern software with intelligent agentic execution. Markova builds enterprise AI automations that ingest company context, trigger multi-stage actions across your software stack, and execute real work with verified accuracy.
+            </p>
+            <div class="cta-row">
+                <a href="index.html#contact" class="btn-live">
+                    Request Automation Audit
+                </a>
+                <a href="markova-os.html" class="btn-secondary-custom">
+                    Discover Markova OS →
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-container">
+
+        <!-- Solutions Grid -->
+        <section>
+            <div class="section-header" style="text-align: center; margin-bottom: 2rem;">
+                <h2 style="font-size: 2.2rem; font-weight: 700; color: #fff;">Enterprise-Grade Autonomous Workflows</h2>
+                <p style="color: #94a3b8; max-width: 650px; margin: 0.5rem auto 0;">Transform repetitive, manual operational bottlenecks into resilient AI workflows.</p>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                    <h3>Financial Reconciliation & Auditing</h3>
+                    <p>Cross-reference invoices, bank transactions, and ledger entries automatically. Flag anomalies, verify discrepancies, and prepare audit-ready reconciliations.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-comments"></i></div>
+                    <h3>Omnichannel Customer Operations</h3>
+                    <p>Connect customer interactions across WhatsApp, Telegram, email, and live chat into a unified agent that checks order records, processes returns, and updates tickets.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-database"></i></div>
+                    <h3>Knowledge Graph & Data Synchronization</h3>
+                    <p>Prevent fragmented data across spreadsheets and isolated CRMs. AI agents harmonize records in real-time, validating formatting and enforcing data hygiene.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-bullhorn"></i></div>
+                    <h3>Automated Marketing & Content Pipelines</h3>
+                    <p>Orchestrate social media distribution, email campaign scheduling, SEO keyword research, and analytics tracking with multi-agent review checkpoints.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-shield-virus"></i></div>
+                    <h3>IT Support & Incident Triage</h3>
+                    <p>Diagnose system alerts, triage internal employee support tickets, execute verified remediation scripts, and escalate edge cases with pre-packaged diagnostic logs.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-scale-balanced"></i></div>
+                    <h3>Contract & Document Intelligence</h3>
+                    <p>Extract terms, obligations, renewal dates, and compliance mandates from complex PDFs and legal documents directly into your ERP and alerting tools.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQs -->
+        <section class="faq-box">
+            <h2 style="font-size: 2rem; font-weight: 700; color: #fff; text-align: center; margin-bottom: 2rem;">Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h4>How long does it take to deploy an automation workflow?</h4>
+                <p>Standard workflows (such as CRM synchronizations or customer triage) can be deployed within 1 to 2 weeks. Custom multi-system enterprise architectures typically deploy within 3 to 4 weeks.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Do we need to replace our current software?</h4>
+                <p>No. Markova connects directly to your existing software via secure APIs, database connectors, and webhooks without disruption to your team's ongoing day-to-day operations.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" style="margin-top: 5rem;">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="brand-logo">
+                        <span class="brand-text">MARKOVA</span>
+                    </div>
+                    <p class="brand-description">Building AI products, AI infrastructure, and autonomous workforces for modern businesses.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Solutions</h4>
+                        <a href="markova-os.html">Markova OS</a>
+                        <a href="workforce.html">Operating Model</a>
+                        <a href="voice-ai.html">Voice Intelligence</a>
+                        <a href="ai-automation.html">AI Automation</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <a href="about.html">About Markova</a>
+                        <a href="index.html#ecosystem">Ecosystem</a>
+                        <a href="index.html#contact">Contact Us</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Connect</h4>
+                        <a href="https://t.me/officialmarkova" target="_blank" rel="noopener">Telegram</a>
+                        <a href="https://x.com/0fficialmarkova" target="_blank" rel="noopener">X / Twitter</a>
+                        <a href="https://www.facebook.com/share/1H5nKXCg1V/" target="_blank" rel="noopener">Facebook</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2026 MARKOVA. All rights reserved.</p>
+                    <div class="footer-legal">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="work.js"></script>
+</body>
+</html>

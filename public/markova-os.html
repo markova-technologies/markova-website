@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markova OS — Enterprise AI Workforce Operating System</title>
+    <meta name="description" content="Markova OS is the enterprise operating system for autonomous AI workforces. Deploy collaborative AI agents that understand context, execute workflows across software, and stay accountable.">
+    <meta name="keywords" content="Markova OS, AI Workforce Operating System, Autonomous AI Agents, Enterprise Agentic AI, AI Operations Platform, Autonomous Workflows">
+    <link rel="canonical" href="https://markova.tech/markova-os.html">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <!-- Open Graph / Social Meta -->
+    <meta property="og:type" content="product">
+    <meta property="og:url" content="https://markova.tech/markova-os.html">
+    <meta property="og:title" content="Markova OS — Enterprise AI Workforce Operating System">
+    <meta property="og:description" content="Deploy collaborative, autonomous AI agent teams that execute business operations across connected enterprise tools under human-in-the-loop governance.">
+    <meta property="og:image" content="https://markova.tech/office-architecture-dark.png">
+    <meta property="og:site_name" content="Markova">
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@0fficialmarkova">
+    <meta name="twitter:title" content="Markova OS — Enterprise AI Workforce Operating System">
+    <meta name="twitter:description" content="The operating system for autonomous AI workers. Plan, execute, and govern enterprise workflows across connected systems.">
+    <meta name="twitter:image" content="https://markova.tech/office-architecture-dark.png">
+
+    <!-- Linked Schema: SoftwareApplication + FAQPage + BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://markova.tech/markova-os.html#software",
+          "name": "Markova OS",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Web, Cloud, Enterprise Runtimes",
+          "description": "Markova OS coordinates autonomous multi-agent teams executing business operations across ERPs, CRMs, databases, and communication channels.",
+          "url": "https://markova-os-client-dashboard.vercel.app/",
+          "provider": {
+            "@type": "Organization",
+            "name": "Markova",
+            "url": "https://markova.tech"
+          },
+          "featureList": [
+            "Autonomous multi-agent orchestration",
+            "Dynamic cognitive reasoning and tool execution",
+            "Direct API integration with ERPs, CRMs, and custom databases",
+            "Continuous 5-stage operating lifecycle",
+            "Enterprise RBAC and sandboxed runtime security",
+            "Human-in-the-loop approval gates"
+          ]
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://markova.tech/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Products",
+              "item": "https://markova.tech/#ecosystem"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Markova OS",
+              "item": "https://markova.tech/markova-os.html"
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://markova.tech/markova-os.html#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is Markova OS?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Markova OS is an enterprise software platform and AI workforce operating system that coordinates autonomous multi-agent systems to plan and execute operations across connected enterprise tools."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How does Markova OS differ from robotic process automation (RPA)?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Unlike traditional RPA which depends on rigid screen-recording macros and breaks whenever software interfaces change, Markova OS uses dynamic LLM reasoning and API tool-calling. Agents intelligently adapt to unexpected inputs, self-correct errors, and execute workflows through structured APIs."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How can businesses access the Markova OS Dashboard?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Clients can log in to the official Markova OS client dashboard at https://markova-os-client-dashboard.vercel.app/ to monitor active agents, review execution logs, and manage approval queues."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="work.css">
+    <style>
+        body { background: #070709; color: #f1f5f9; font-family: 'Poppins', sans-serif; }
+        .page-hero {
+            padding: 150px 0 70px;
+            text-align: center;
+            position: relative;
+            background: radial-gradient(circle at 50% 10%, rgba(56, 189, 248, 0.12), transparent 60%);
+        }
+        .page-container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+        .back-nav {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            transition: color 0.2s;
+        }
+        .back-nav:hover { color: #fff; }
+        .hero-h1 {
+            font-size: clamp(2.4rem, 5vw, 3.8rem);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff 40%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-lead {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            max-width: 780px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.75;
+            font-weight: 300;
+        }
+        .cta-row {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 4rem;
+        }
+        .btn-live {
+            background: linear-gradient(135deg, #38bdf8, #0284c7);
+            color: #000;
+            font-weight: 700;
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.25);
+        }
+        .btn-live:hover { transform: translateY(-2px); box-shadow: 0 15px 35px rgba(56, 189, 248, 0.4); }
+        .btn-secondary-custom {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.15);
+            color: #fff;
+            padding: 14px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .btn-secondary-custom:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.3); }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin: 4rem 0;
+        }
+        .feature-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 36px 28px;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(56, 189, 248, 0.4);
+            background: rgba(255,255,255,0.04);
+        }
+        .feature-icon {
+            font-size: 2rem;
+            color: #38bdf8;
+            margin-bottom: 20px;
+        }
+        .feature-card h3 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+        .feature-card p {
+            font-size: 1rem;
+            color: #94a3b8;
+            line-height: 1.65;
+        }
+
+        .comparison-section {
+            padding: 60px 0;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            margin: 4rem 0;
+        }
+        .table-wrap { overflow-x: auto; margin-top: 2rem; }
+        .comp-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        .comp-table th, .comp-table td {
+            padding: 16px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            font-size: 0.95rem;
+        }
+        .comp-table th {
+            color: #94a3b8;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: rgba(255,255,255,0.02);
+        }
+        .comp-table td.highlight {
+            color: #38bdf8;
+            font-weight: 600;
+        }
+
+        .faq-box { margin: 3rem 0; }
+        .faq-item {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 14px;
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+        .faq-item h4 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+        .faq-item p {
+            color: #94a3b8;
+            line-height: 1.6;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="index.html" style="text-decoration: none;">
+                    <div class="brand-logo">
+                        <span class="brand-text">MARKOVA</span>
+                    </div>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html#home" class="nav-link">Home</a>
+                <a href="markova-os.html" class="nav-link active" style="color:#38bdf8;">Markova OS</a>
+                <a href="workforce.html" class="nav-link">Operating Model</a>
+                <a href="voice-ai.html" class="nav-link">Voice AI</a>
+                <a href="about.html" class="nav-link">About</a>
+            </div>
+            <div class="nav-cta">
+                <a href="https://markova-os-client-dashboard.vercel.app/" target="_blank" rel="noopener">
+                    <button class="cta-button" style="background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.4); color: #38bdf8;">
+                        <span>Launch Dashboard →</span>
+                    </button>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="page-hero">
+        <div class="page-container">
+            <a href="index.html" class="back-nav"><i class="fas fa-arrow-left"></i> Back to Main Ecosystem</a>
+            <div class="section-badge" style="margin: 0 auto 1.5rem; display: inline-flex;">
+                <i class="fas fa-network-wired" style="color: #38bdf8;"></i>
+                <span style="color: #38bdf8;">ENTERPRISE AI OPERATING SYSTEM</span>
+            </div>
+            <h1 class="hero-h1">The Operating System for Autonomous AI Workforces</h1>
+            <p class="hero-lead">
+                Markova OS moves beyond disconnected AI tools. Deploy coordinated AI agent swarms that understand enterprise context, execute multi-system operations, and collaborate with human teams under strict governance.
+            </p>
+            <div class="cta-row">
+                <a href="https://markova-os-client-dashboard.vercel.app/" target="_blank" rel="noopener" class="btn-live">
+                    <i class="fas fa-external-link-alt" style="margin-right: 8px;"></i> Open Client Dashboard
+                </a>
+                <a href="index.html#contact" class="btn-secondary-custom">
+                    Schedule Technical Briefing
+                </a>
+                <a href="workforce.html" class="btn-secondary-custom">
+                    Explore 5-Stage Lifecycle →
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-container">
+
+        <!-- Architecture Pillars -->
+        <section>
+            <div class="section-header" style="text-align: center; margin-bottom: 2rem;">
+                <h2 style="font-size: 2.2rem; font-weight: 700; color: #fff;">Built for High-Trust Enterprise Environments</h2>
+                <p style="color: #94a3b8; max-width: 650px; margin: 0.5rem auto 0;">Markova OS provides the orchestration, safety guardrails, and integrations needed to run autonomous operations safely.</p>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-brain"></i></div>
+                    <h3>Continuous Cognitive Reasoning</h3>
+                    <p>Agents decompose ambiguous high-level business directives into verifiable, atomic sub-tasks. Each agent dynamically selects tools and verifies results before advancing.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-users-gear"></i></div>
+                    <h3>Multi-Agent Swarm Orchestration</h3>
+                    <p>Instead of single-prompt chatbots, Markova OS coordinates specialized agent roles (Research, Data Synthesis, Execution, Auditing) working together like an experienced department.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-shield-halved"></i></div>
+                    <h3>Enterprise RBAC & Guardrails</h3>
+                    <p>Granular role-based access control, isolated sandboxed execution runtimes, and strict data egress firewalls ensure zero unauthorized access to sensitive proprietary records.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-plug-circle-bolt"></i></div>
+                    <h3>Direct Software Tool Calling</h3>
+                    <p>Execute real work directly within Salesforce, SAP, HubSpot, Postgres, Slack, and cloud APIs. No brittle screen-scraping; all actions run via secured protocols.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-user-check"></i></div>
+                    <h3>Human-in-the-Loop Governance</h3>
+                    <p>Configure approval thresholds for high-stakes workflows (financial transactions, public communications, data deletions). Humans stay in command at all times.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-language"></i></div>
+                    <h3>Multilingual & Localized AI</h3>
+                    <p>Native conversational execution in Amharic and English, bridging international enterprise standards with high-demand regional African market operations.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Table -->
+        <section class="comparison-section">
+            <div style="text-align: center;">
+                <h2 style="font-size: 2rem; font-weight: 700; color: #fff;">How Markova OS Compares</h2>
+                <p style="color: #94a3b8;">Why progressive organizations transition from legacy automation to Markova OS.</p>
+            </div>
+
+            <div class="table-wrap">
+                <table class="comp-table">
+                    <thead>
+                        <tr>
+                            <th>Capability</th>
+                            <th>Traditional RPA (UiPath, etc.)</th>
+                            <th>Generative Chatbots (ChatGPT wrappers)</th>
+                            <th>Markova OS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Execution Model</strong></td>
+                            <td>Rigid macro scripts</td>
+                            <td>Text-only suggestions</td>
+                            <td class="highlight">Autonomous multi-agent execution</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tool & API Calling</strong></td>
+                            <td>Brittle UI scraping</td>
+                            <td>None / Single prompt</td>
+                            <td class="highlight">Secure multi-system API tool calls</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Adaptability to Errors</strong></td>
+                            <td>Fails when UI changes</td>
+                            <td>Hallucinates responses</td>
+                            <td class="highlight">Self-correcting cognitive loops</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Collaboration</strong></td>
+                            <td>Siloed single-task bots</td>
+                            <td>Single conversation thread</td>
+                            <td class="highlight">Swarm-level inter-agent collaboration</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Multilingual Speech</strong></td>
+                            <td>None</td>
+                            <td>Generic TTS</td>
+                            <td class="highlight">Native Amharic & English voice agents</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- FAQs -->
+        <section class="faq-box">
+            <h2 style="font-size: 2rem; font-weight: 700; color: #fff; text-align: center; margin-bottom: 2rem;">Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h4>What is the difference between Markova OS and regular AI tools?</h4>
+                <p>Most AI software works as passive conversational assistants that produce text when queried. Markova OS is an operational platform where agents actively execute business processes across CRMs, ERPs, and databases under strict audit controls.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Can we test Markova OS before enterprise rollout?</h4>
+                <p>Yes. Markova offers pilot deployments tailored to specific departmental workflows (such as customer support automation or data harmonization) allowing organizations to measure ROI and accuracy before scaling.</p>
+            </div>
+            <div class="faq-item">
+                <h4>How do we integrate our existing internal systems?</h4>
+                <p>Markova Neural Fabric connectors interface directly with REST/GraphQL APIs, webhooks, SQL databases, and internal spreadsheets without requiring organizations to replace their established software infrastructure.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" style="margin-top: 5rem;">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="brand-logo">
+                        <span class="brand-text">MARKOVA</span>
+                    </div>
+                    <p class="brand-description">Building AI products, AI infrastructure, and autonomous workforces for modern businesses.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Solutions</h4>
+                        <a href="markova-os.html">Markova OS</a>
+                        <a href="workforce.html">Operating Model</a>
+                        <a href="voice-ai.html">Voice Intelligence</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <a href="about.html">About Markova</a>
+                        <a href="index.html#ecosystem">Ecosystem</a>
+                        <a href="index.html#contact">Contact Us</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Connect</h4>
+                        <a href="https://t.me/officialmarkova" target="_blank" rel="noopener">Telegram</a>
+                        <a href="https://x.com/0fficialmarkova" target="_blank" rel="noopener">X / Twitter</a>
+                        <a href="https://www.facebook.com/share/1H5nKXCg1V/" target="_blank" rel="noopener">Facebook</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2026 MARKOVA. All rights reserved.</p>
+                    <div class="footer-legal">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="work.js"></script>
+</body>
+</html>
